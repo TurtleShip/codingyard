@@ -23,10 +23,18 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test 'Username must be unique' do
+  test 'Username must be unique in a case insensitive way' do
     @user.save
-    duplicate_user = User.new(username: @user.username)
+    duplicate_user = @user.dup
+    duplicate_user.username.upcase!
     assert_not duplicate_user.valid?
+  end
+
+  test 'Username should be downcased when saved' do
+    original_username = 'HellOMyId-_-'
+    @user.username = original_username
+    @user.save
+    assert_equal original_username.downcase, @user.username, 'username should be downcased after being saved'
   end
 
   test 'username must be alphanumeric with hyphen and underscore' do
