@@ -3,7 +3,8 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = User.new(username: 'TurtleShip', email: 'awesome@coder.com', firstname: 'Seulgi')
+    @user = User.new(username: 'TurtleShip', email: 'awesome@coder.com',
+                     firstname: 'Seulgi', lastname: 'Kim')
   end
 
   test 'An example user should be valid' do
@@ -101,6 +102,35 @@ class UserTest < ActiveSupport::TestCase
     valid_names.each do |name|
       @user.firstname = name
       assert @user.valid?, "#{name} should be valid"
+    end
+  end
+
+  test 'firstname should reject invalid names' do
+    invalid_names = ['drop-database;', 'select *', 'the bangs!!!']
+    invalid_names.each do |name|
+      @user.firstname = name
+      assert_not @user.valid?, "#{name} should be invalid"
+    end
+  end
+
+  test 'lastname can be skipped' do
+    @user.lastname = nil
+    assert @user.valid?
+  end
+
+  test 'lastname should accept valid names' do
+    valid_names = ['Wassup', 'King George III', 'Mike-Ikerson', 'foreigner12']
+    valid_names.each do |name|
+      @user.lastname = name
+      assert @user.valid?, "#{name} should be valid"
+    end
+  end
+
+  test 'lastname should reject invalid names' do
+    invalid_names = ['drop-database;', 'select *', 'the bangs!!!']
+    invalid_names.each do |name|
+      @user.lastname = name
+      assert_not @user.valid?, "#{name} should be invalid"
     end
   end
 

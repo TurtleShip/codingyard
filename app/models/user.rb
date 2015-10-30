@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   validates :firstname, presence: false, allow_nil: true, uniqueness: false,
             format: {with: VALID_NAME_REGEX}, length: {in: 1..50}
 
+  validates :lastname, presence: false, allow_nil: true, uniqueness: false,
+            format: {with: VALID_NAME_REGEX}, length: {in: 1..50}
+
   before_save :downcase_email
   before_save :downcase_username
 
