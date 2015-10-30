@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = User.new(username: 'TurtleShip', email: 'awesome@coder.com')
+    @user = User.new(username: 'TurtleShip', email: 'awesome@coder.com', firstname: 'Seulgi')
   end
 
   test 'An example user should be valid' do
@@ -89,6 +89,19 @@ class UserTest < ActiveSupport::TestCase
     @user.email = original_email
     @user.save
     assert_equal original_email.downcase, @user.email, 'email should be downcased after being saved'
+  end
+
+  test 'firstname can be skipped' do
+    @user.firstname = nil
+    assert @user.valid?
+  end
+
+  test 'firstname should accept valid names' do
+    valid_names = ['Wassup', 'King George III', 'Mike-Ikerson', 'foreigner12']
+    valid_names.each do |name|
+      @user.firstname = name
+      assert @user.valid?, "#{name} should be valid"
+    end
   end
 
 end
