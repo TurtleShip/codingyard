@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_many :top_coder_srm_solutions
+  has_many :top_coder_srm_solutions, dependent: :destroy
 
   VALID_USERNAME_REGEX = /\A[A-Za-z0-9_-]+\z/i
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
