@@ -1,5 +1,4 @@
 class Contest < ActiveRecord::Base
-  /\A[\w\s-]+\z/
 
   validates :name, uniqueness: true, presence: true, length: {in: 1..50}
   validates :url, uniqueness: false, presence: false, url: {:no_local => true}
