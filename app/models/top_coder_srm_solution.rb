@@ -12,7 +12,7 @@ class TopCoderSrmSolution < ActiveRecord::Base
 
   private
     def downcase_difficulty
-      difficulty.downcase!
+      difficulty.downcase! unless difficulty.nil?
     end
 
 end
