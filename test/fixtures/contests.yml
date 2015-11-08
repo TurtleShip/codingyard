@@ -5,10 +5,9 @@
 # below each fixture, per the syntax in the comments below
 #
 
-#    @user = User.new(username: 'TurtleShip', email: 'awesome@coder.com',
-#                      firstname: 'Seulgi', lastname: 'Kim')
-Seulgi:
-  username: 'TurtleShip'
-  email: 'awesome@coder.com'
-  firstname: 'Seulgi'
-  lastname: 'Kim'
+#  @contest = Contest.new(name: 'TopCoder', url: 'http://www.topcoder.com',
+#                         description: 'A vendor-neutral coding competition site')
+TopCoder:
+  name: 'TopCoder'
+  url: 'http://www.topcoder.com'
+  description: 'A vendor-neutral coding competition site'

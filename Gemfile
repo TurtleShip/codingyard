@@ -24,6 +24,9 @@ gem 'jbuilder', '2.3.2'
 # rdoc generator html with javascript search index.
 gem 'sdoc', '0.4.1', group: :doc
 
+# Rails plugin that provides a validates_url_format_of method to ActiveRecord models. URLs are validated by regexp.
+gem 'validate_url', '1.0.2'
+
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine
   gem 'sqlite3', '1.3.11'

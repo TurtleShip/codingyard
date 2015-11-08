@@ -3,8 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = User.new(username: 'TurtleShip', email: 'awesome@coder.com',
-                     firstname: 'Seulgi', lastname: 'Kim')
+    @user = users(:Seulgi)
   end
 
   test 'An example user should be valid' do
@@ -132,6 +131,20 @@ class UserTest < ActiveSupport::TestCase
       @user.lastname = name
       assert_not @user.valid?, "#{name} should be invalid"
     end
+  end
+
+  test 'deleting user should delete topcoder srm solutions' do
+    num_solutions = 5
+    top_coder = contests(:TopCoder)
+
+    num_solutions.times do
+      @user.top_coder_srm_solutions.create(contest_id: top_coder.id, srm_number: 1, division_number: 1, difficulty: 'easy')
+    end
+
+    assert_equal num_solutions, TopCoderSrmSolution.count
+
+    @user.destroy
+    assert_equal 0, TopCoderSrmSolution.count, 'Deleting user should delete its solutions as well'
   end
 
 end
