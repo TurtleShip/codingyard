@@ -42,4 +42,19 @@ class ContestTest < ActiveSupport::TestCase
     end
   end
 
+  test 'deleting a contest should delete its topcoder srm solutions' do
+    num_solutions = 5
+    user = users(:Seulgi)
+    top_coder = contests(:TopCoder)
+
+    num_solutions.times do
+      user.top_coder_srm_solutions.create(contest_id: top_coder.id, srm_number: 1, division_number: 1, difficulty: 'easy')
+    end
+
+    assert_equal num_solutions, TopCoderSrmSolution.count
+
+    top_coder.destroy
+    assert_equal 0, TopCoderSrmSolution.count, 'Deleting user should delete its solutions as well'
+  end
+
 end
