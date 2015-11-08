@@ -144,7 +144,20 @@ class UserTest < ActiveSupport::TestCase
     assert_equal num_solutions, TopCoderSrmSolution.count
 
     @user.destroy
-    assert_equal 0, TopCoderSrmSolution.count, 'Deleting user should delete its solutions as well'
+    assert_equal 0, TopCoderSrmSolution.count, 'Deleting user should delete its Topcoder srm solutions as well'
   end
 
+  test 'deleting user should delete codeforces round solutions' do
+    num_solutions = 5
+    codeforces = contests(:Codeforces)
+
+    num_solutions.times do
+      @user.codeforces_round_solutions.create(contest_id: codeforces.id, round_number: 1, division_number: 1, level: 'A')
+    end
+
+    assert_equal num_solutions, CodeforcesRoundSolution.count
+
+    @user.destroy
+    assert_equal 0, CodeforcesRoundSolution.count, 'Deleting user should delete its Codeforces round solutions as well'
+  end
 end

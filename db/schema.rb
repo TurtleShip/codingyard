@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108185820) do
+ActiveRecord::Schema.define(version: 20151108195034) do
+
+  create_table "codeforces_round_solutions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "contest_id"
+    t.integer  "round_number",    null: false
+    t.integer  "division_number", null: false
+    t.string   "level",           null: false
+    t.string   "save_path"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "codeforces_round_solutions", ["contest_id"], name: "index_codeforces_round_solutions_on_contest_id"
+  add_index "codeforces_round_solutions", ["user_id"], name: "index_codeforces_round_solutions_on_user_id"
 
   create_table "contests", force: :cascade do |t|
     t.string   "name",        null: false
