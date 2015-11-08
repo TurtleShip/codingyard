@@ -77,5 +77,15 @@ class TopCoderSrmSolutionTest < ActiveSupport::TestCase
     end
   end
 
+  test 'srm solution difficulty should be downcased before validation' do
+
+    valid_difficulties = %w(EaSy eAsY EASY easy EasY eaSY)
+    valid_difficulties.each do |difficulty|
+      @solution.difficulty = difficulty
+      assert @solution.valid?
+      assert @solution.save
+      assert_equal 'easy', @solution.difficulty
+    end
+  end
 
 end

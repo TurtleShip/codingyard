@@ -8,4 +8,11 @@ class TopCoderSrmSolution < ActiveRecord::Base
   validates :division_number, presence: true, inclusion: 1..2
   validates :difficulty, presence: true, inclusion: %w(easy medium hard)
 
+  before_validation :downcase_difficulty
+
+  private
+    def downcase_difficulty
+      difficulty.downcase!
+    end
+
 end
