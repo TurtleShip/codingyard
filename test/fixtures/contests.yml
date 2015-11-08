@@ -4,8 +4,10 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-#one: {}
-## column: value
-##
-#two: {}
-#  column: value
+
+#  @contest = Contest.new(name: 'TopCoder', url: 'http://www.topcoder.com',
+#                         description: 'A vendor-neutral coding competition site')
+TopCoder:
+  name: 'TopCoder'
+  url: 'http://www.topcoder.com'
+  description: 'A vendor-neutral coding competition site'

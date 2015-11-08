@@ -3,8 +3,7 @@ require 'test_helper'
 class ContestTest < ActiveSupport::TestCase
 
   def setup
-    @contest = Contest.new(name: 'TopCoder', url: 'http://www.topcoder.com',
-                           description: 'A vendor-neutral coding competition site')
+    @contest = contests(:TopCoder)
   end
 
   test 'an example contest should be valid' do
