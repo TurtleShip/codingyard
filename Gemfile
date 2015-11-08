@@ -6,6 +6,9 @@ gem 'rails', '4.2.4'
 # Sass adapter for the Rails asset pipeline.
 gem 'sass-rails', '5.0.4'
 
+# Twitter's Bootstrap, converted to Sass and ready to drop into Rails or Compass
+gem 'bootstrap-sass', '3.3.5.1'
+
 # Uglifier minifies JavaScript files by wrapping UglifyJS to be accessible in Ruby
 gem 'uglifier', '2.7.2'
 
