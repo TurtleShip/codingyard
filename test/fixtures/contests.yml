@@ -11,3 +11,8 @@ TopCoder:
   name: 'TopCoder'
   url: 'http://www.topcoder.com'
   description: 'A vendor-neutral coding competition site'
+
+Codeforces:
+  name: 'Codeforces'
+  url: 'http://codeforces.com'
+  description: 'The only programming contests on Web 2.0 platform.'
