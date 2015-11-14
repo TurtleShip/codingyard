@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108195034) do
+ActiveRecord::Schema.define(version: 20151114003135) do
 
   create_table "codeforces_round_solutions", force: :cascade do |t|
     t.integer  "user_id"
@@ -52,12 +52,13 @@ ActiveRecord::Schema.define(version: 20151108195034) do
   add_index "top_coder_srm_solutions", ["user_id"], name: "index_top_coder_srm_solutions_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "email",      null: false
+    t.string   "username",        null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "email",           null: false
     t.string   "firstname"
     t.string   "lastname"
+    t.string   "password_digest"
   end
 
   add_index "users", ["email"], name: "index_users_on_email"

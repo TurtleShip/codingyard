@@ -21,8 +21,12 @@ class User < ActiveRecord::Base
   validates :lastname, presence: false, allow_nil: true, uniqueness: false,
             format: {with: VALID_NAME_REGEX}, length: {in: 1..50}
 
+  validates :password, presence: true, length: { minimum: 6 }
+
   before_save :downcase_email
   before_save :downcase_username
+
+  has_secure_password
 
   private
     def downcase_username
