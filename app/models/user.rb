@@ -16,10 +16,10 @@ class User < ActiveRecord::Base
             length: {in: 3..50}
 
   validates :firstname, presence: false, allow_nil: true, uniqueness: false,
-            format: {with: VALID_NAME_REGEX}, length: {in: 1..50}
+            format: {with: VALID_NAME_REGEX}
 
   validates :lastname, presence: false, allow_nil: true, uniqueness: false,
-            format: {with: VALID_NAME_REGEX}, length: {in: 1..50}
+            format: {with: VALID_NAME_REGEX}
 
   validates :password, presence: true, length: { minimum: 6 }
 
