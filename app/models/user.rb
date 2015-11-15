@@ -17,12 +17,18 @@ class User < ActiveRecord::Base
 
   validates :firstname, presence: false, uniqueness: false, format: {with: VALID_NAME_REGEX}
   validates :lastname, presence: false, uniqueness: false, format: {with: VALID_NAME_REGEX}
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   before_save :downcase_email
   before_save :downcase_username
 
   has_secure_password
+
+  # Returns the hash digest of the given string.
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 
   private
     def downcase_username

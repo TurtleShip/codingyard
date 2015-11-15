@@ -3,7 +3,7 @@ require 'test_helper'
 class TopCoderSrmSolutionTest < ActiveSupport::TestCase
 
   def setup
-    @user = valid_user
+    @user = users(:Seulgi)
     @contest = contests(:TopCoder)
     @solution = @user.top_coder_srm_solutions.create(contest_id: @contest.id,
                                                      srm_number: 256, division_number: 1,

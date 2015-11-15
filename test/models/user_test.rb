@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = valid_user
+    @user = users(:Seulgi)
   end
 
   test 'An example user should be valid' do
