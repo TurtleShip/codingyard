@@ -7,4 +7,10 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def valid_user
+    user = users(:Seulgi)
+    user.password =  'safePassword!'
+    user.password_confirmation = 'safePassword!'
+    user
+  end
 end
