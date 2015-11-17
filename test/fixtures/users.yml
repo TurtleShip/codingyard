@@ -12,4 +12,4 @@ Seulgi:
   email: 'awesome@coder.com'
   firstname: 'Seulgi'
   lastname: 'Kim'
-  password_digest: <%= User.digest('safePassword!') %>
+  password_digest: <%= User.digest('password') %>
