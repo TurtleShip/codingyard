@@ -22,7 +22,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_empty flash, 'flash message should not persist when a user moves out of a login page'
   end
 
-  test 'login with valid information' do
+  test 'login with valid information followed by logout' do
     get login_path
     assert_template 'sessions/new', 'login path should display sessions/new template'
 
@@ -31,6 +31,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
                        password: 'password'
                    }
 
+    assert is_logged_in?, 'User should be logged in with its correct credential'
     assert_redirected_to @user, 'Valid login should redirect the user to its profile page'
     follow_redirect!
 
@@ -39,5 +40,16 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', login_path, count: 0
     assert_select 'a[href=?]', logout_path
     assert_select 'a[href=?]', user_path(@user)
+
+    # Logging out
+    delete logout_path
+    assert_not is_logged_in?, 'Logout path should log the current user out'
+    assert_redirected_to root_url, 'logging out should redirect to the root url'
+    follow_redirect!
+
+    assert_select 'a[href=?]', login_path, {}, 'root url with no signed in user should show login path'
+    assert_select 'a[href=?]', logout_path, {count: 0}, 'root url with no signed in user should not show logout path'
+    assert_select 'a[href=?]', user_path(@user), {count: 0}, 'root url with no signed in user should not show link to profile page'
   end
+
 end
