@@ -59,4 +59,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', user_path(@user), {count: 0}, 'root url with no signed in user should not show link to profile page'
   end
 
+  test 'login with "remember me" checked' do
+    log_in_as(@user, remember_me: '1')
+    assert_not_nil cookies['remember_token']
+  end
+
+  test 'login with "remember me" NOT checked' do
+    log_in_as(@user, remember_me: '0')
+    assert_nil cookies['remember_token']
+  end
+
 end
