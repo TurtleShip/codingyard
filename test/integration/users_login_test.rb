@@ -45,6 +45,13 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     assert_not is_logged_in?, 'Logout path should log the current user out'
     assert_redirected_to root_url, 'logging out should redirect to the root url'
+
+    # Simulate a user clicking logout in a second window
+    # so that we catch any regression for a scenario where a user has two browsers open,
+    # logs out in the first browser, and tries to log out in the second browser.
+    # Our app should NOT throw any errors (i.e. gracefully handle ) in this scenario.
+    delete logout_path
+
     follow_redirect!
 
     assert_select 'a[href=?]', login_path, {}, 'root url with no signed in user should show login path'
