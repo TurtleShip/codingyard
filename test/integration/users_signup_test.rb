@@ -32,6 +32,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_template 'users/show', 'successful signup should direct a user to its profile page'
     assert_not_empty flash, 'success flash should be displayed on successful signup'
+    assert is_logged_in?, 'user should be automatically logged in after signing up'
   end
 
 end

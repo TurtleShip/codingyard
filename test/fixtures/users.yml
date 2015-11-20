@@ -12,3 +12,4 @@ Seulgi:
   email: 'awesome@coder.com'
   firstname: 'Seulgi'
   lastname: 'Kim'
+  password_digest: <%= User.digest('password') %>

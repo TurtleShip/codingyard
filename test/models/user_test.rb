@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = valid_user
+    @user = users(:Seulgi)
   end
 
   test 'An example user should be valid' do
@@ -169,4 +169,9 @@ class UserTest < ActiveSupport::TestCase
     @user.destroy
     assert_equal 0, CodeforcesRoundSolution.count, 'Deleting user should delete its Codeforces round solutions as well'
   end
+
+  test 'authenticated? should return false for a user with nil digest' do
+    assert_not @user.authenticated?('')
+  end
+
 end
