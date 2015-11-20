@@ -5,12 +5,12 @@ class SessionsController < ApplicationController
 
   def create
     params = login_params
-    user = User.find_by_username(params[:username])
+    @user = User.find_by_username(params[:username])
 
-    if user && user.authenticate(params[:password])
-      log_in user
-      params[:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+    if @user && @user.authenticate(params[:password])
+      log_in @user
+      params[:remember_me] == '1' ? remember(@user) : forget(@user)
+      redirect_to @user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
