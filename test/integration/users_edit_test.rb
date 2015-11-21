@@ -19,8 +19,13 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit', 'unsuccessful edit should redirect the user back to edit page'
   end
 
-  test 'successful edit' do
+  test 'successful edit with friendly forwarding' do
+    get edit_user_path(@user)
+    assert_redirected_to login_path, 'a guest trying to access unauthorized edit page should be redirected to log in page'
+
     log_in_as(@user)
+    assert_redirected_to edit_user_path(@user), 'user should return to edit page after logging in'
+
     get edit_user_path(@user)
     assert_template 'users/edit'
     username = 'remember_yolo'
