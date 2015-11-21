@@ -13,3 +13,10 @@ Seulgi:
   firstname: 'Seulgi'
   lastname: 'Kim'
   password_digest: <%= User.digest('password') %>
+
+Taejung:
+  username: 'Iris'
+  email: 'iris@coder.com'
+  firstname: 'Taejung'
+  lastname: 'Kim'
+  password_digest: <%= User.digest('password') %>
