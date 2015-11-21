@@ -20,3 +20,12 @@ Taejung:
   firstname: 'Taejung'
   lastname: 'Kim'
   password_digest: <%= User.digest('password') %>
+
+<% 30.times do |id| %>
+user_<%= id %>:
+  username: <%= "User_#{id}" %>
+  email: <%= "user-#{id}@coder.com" %>
+  firstname: <%= "firstname_#{id}" %>
+  lastname: <%= "lastname_#{id}" %>
+  password_digest: <%= User.digest('password') %>
+<% end %>
