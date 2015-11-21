@@ -33,6 +33,9 @@ gem 'validate_url', '1.0.2'
 # Encryption library.
 gem 'bcrypt', '3.1.10'
 
+# Faker is used to easily generate fake data: names, addresses, phone numbers, etc.
+gem 'faker', '1.5.0'
+
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine
   gem 'sqlite3', '1.3.11'
