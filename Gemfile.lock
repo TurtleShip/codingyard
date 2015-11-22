@@ -47,6 +47,8 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    bootstrap-will_paginate (0.0.10)
+      will_paginate
     builder (3.2.2)
     byebug (6.0.2)
     coffee-rails (4.1.0)
@@ -59,6 +61,8 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
+    faker (1.5.0)
+      i18n (~> 0.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -146,6 +150,7 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    will_paginate (3.0.7)
 
 PLATFORMS
   ruby
@@ -153,8 +158,10 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (= 3.1.10)
   bootstrap-sass (= 3.3.5.1)
+  bootstrap-will_paginate (= 0.0.10)
   byebug (= 6.0.2)
   coffee-rails (= 4.1.0)
+  faker (= 1.5.0)
   jbuilder (= 2.3.2)
   jquery-rails (= 4.0.5)
   pg (= 0.18.3)
@@ -167,6 +174,7 @@ DEPENDENCIES
   uglifier (= 2.7.2)
   validate_url (= 1.0.2)
   web-console (= 2.2.1)
+  will_paginate (= 3.0.7)
 
 BUNDLED WITH
    1.10.6

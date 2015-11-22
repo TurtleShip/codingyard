@@ -33,6 +33,16 @@ gem 'validate_url', '1.0.2'
 # Encryption library.
 gem 'bcrypt', '3.1.10'
 
+# Faker is used to easily generate fake data: names, addresses, phone numbers, etc.
+gem 'faker', '1.5.0'
+
+# Simple API to perform paginated queries
+gem 'will_paginate', '3.0.7'
+
+# Hooks into will_paginate to format the html to match Twitter Bootstrap styling.
+gem 'bootstrap-will_paginate', '0.0.10'
+
+
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine
   gem 'sqlite3', '1.3.11'
