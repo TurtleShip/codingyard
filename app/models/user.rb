@@ -1,13 +1,15 @@
 class User < ActiveRecord::Base
 
+  PER_PAGE = 10 # Number of users to display per page during pagination
+
+  VALID_USERNAME_REGEX = /\A[A-Za-z0-9_-]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  VALID_NAME_REGEX = /\A['\w\s-]*\z/
+
   attr_accessor :remember_token
 
   has_many :top_coder_srm_solutions, dependent: :destroy
   has_many :codeforces_round_solutions, dependent: :destroy
-
-  VALID_USERNAME_REGEX = /\A[A-Za-z0-9_-]+\z/i
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  VALID_NAME_REGEX = /\A[\w\s-]*\z/
 
   validates :username, presence: true, uniqueness: {case_sensitive: false},
             format: {with: VALID_USERNAME_REGEX},
