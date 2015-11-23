@@ -14,6 +14,8 @@ Seulgi:
   lastname: 'Kim'
   password_digest: <%= User.digest('password') %>
   admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 Taejung:
   username: 'Iris'
@@ -21,6 +23,8 @@ Taejung:
   firstname: 'Taejung'
   lastname: 'Kim'
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 Hansol:
   username: 'OneSound'
@@ -28,6 +32,8 @@ Hansol:
   firstname: 'Hansol'
   lastname: 'Kim'
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 <% 30.times do |id| %>
 user_<%= id %>:
@@ -36,4 +42,6 @@ user_<%= id %>:
   firstname: <%= "firstname_#{id}" %>
   lastname: <%= "lastname_#{id}" %>
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 <% end %>
