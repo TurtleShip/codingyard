@@ -11,7 +11,8 @@ User.create!(username: 'TurtleShip',
              firstname: 'Seulgi',
              lastname: 'Kim',
              password: 'password',
-             password_confirmation: 'password')
+             password_confirmation: 'password',
+             admin: true)
 
 100.times do |id|
   username = "#{Faker::Internet.user_name(specifier=nil, separators = %w(-_))[0..10]}_#{id}"

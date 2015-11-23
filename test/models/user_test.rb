@@ -97,7 +97,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'firstname should accept valid names' do
-    valid_names = ['Wassup', 'King George III', 'Mike-Ikerson', 'foreigner12']
+    valid_names = ['Wassup', 'King George III', 'Mike-Ikerson', 'foreigner12', "O'reily"]
     valid_names.each do |name|
       @user.firstname = name
       assert @user.valid?, "#{name} should be valid"
