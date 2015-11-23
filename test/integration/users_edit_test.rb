@@ -4,6 +4,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:Seulgi)
+    @member = users(:Taejung)
   end
 
   test 'unsuccessful edit' do
@@ -62,6 +63,16 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
     assert_not @user.authenticate(empty_password)
     assert @user.authenticate(original_password)
+  end
+
+  test 'admin param should not be edited by anyone' do
+    log_in_as(@member)
+    get edit_user_path(@member)
+    patch user_path(@member), user: {
+              admin: true
+                          }
+    @member.reload
+    assert_not @member.admin?
   end
 
 end

@@ -13,6 +13,7 @@ Seulgi:
   firstname: 'Seulgi'
   lastname: 'Kim'
   password_digest: <%= User.digest('password') %>
+  admin: true
 
 Taejung:
   username: 'Iris'
