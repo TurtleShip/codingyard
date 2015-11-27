@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
     @user = User.find_by_username(params[:username])
 
     if @user && @user.authenticate(params[:password])
-      if user.activated?
-        log_in user
+      if @user.activated?
+        log_in @user
         params[:remember_me] == '1' ? remember(@user) : forget(@user)
         redirect_back_or @user
       else

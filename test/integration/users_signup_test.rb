@@ -2,6 +2,10 @@ require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
+  def setup
+    ActionMailer::Base.deliveries.clear
+  end
+
   test 'invalid signup' do
     get signup_path
 
@@ -18,21 +22,40 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template({partial: 'shared/_error_messages'}, 'The new signup page should show error messages')
   end
 
-  test 'valid signup' do
+  test 'valid signup with account activation' do
     get signup_path
 
     assert_difference 'User.count', 1, 'valid form submission should create a new user' do
-      post_via_redirect users_path, user: {
-                                      username: 'valid_username',
-                                      email: 'valid@email.com',
-                                      password: 'safe_password_123_!@$',
-                                      password_confirmation: 'safe_password_123_!@$'
-                                  }
-
+      post users_path, user: {
+                         username: 'valid_username',
+                         email: 'valid@email.com',
+                         password: 'safe_password_123_!@$',
+                         password_confirmation: 'safe_password_123_!@$'
+                     }
     end
-    # assert_template 'users/show', 'successful signup should direct a user to its profile page'
-    # assert_not_empty flash, 'success flash should be displayed on successful signup'
-    # assert is_logged_in?, 'user should be automatically logged in after signing up'
+
+    assert_equal 1, ActionMailer::Base.deliveries.size, 'A new user should get an activation email'
+
+    user = assigns(:user)
+    assert_not user.activated?, 'A new user should not be in "activated" state'
+
+    log_in_as(user)
+    assert_not is_logged_in?, 'A new user should not be able to login without activating its account first'
+
+    get edit_account_activation_path('Invalid token')
+    assert_not is_logged_in?, 'A new user should not be able to activate its account with invalid token'
+
+    # Valid token, wrong email
+    get edit_account_activation_path(user.activation_token, email: 'invalid')
+    assert_not is_logged_in?, 'A new user with valid activation token and invalid email' +
+                                'should not be able to activate its account'
+
+    # Valid activation token
+    get edit_account_activation_path(user.activation_token, email: user.email)
+    assert user.reload.activated?, 'A new user can activate its account with valid activation token and valid email'
+    follow_redirect!
+    assert_template 'users/show', 'Successful activation should redirect the current user to profile page'
+    assert is_logged_in?, 'Successful activation should log the user in'
   end
 
 end
