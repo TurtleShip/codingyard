@@ -26,6 +26,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     get login_path
     assert_template 'sessions/new', 'login path should display sessions/new template'
 
+    # "Reset password" option should be visible
+    assert_select 'a[href=?]', new_password_reset_path
+
     post login_path, session: {
                        username: @user.username,
                        password: 'password'
