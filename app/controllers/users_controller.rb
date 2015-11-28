@@ -12,6 +12,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     redirect_to root_url unless @user.activated?
+    @user_basic_info = {
+        email: @user.email,
+        firstname: @user.firstname,
+        lastname: @user.lastname
+    }
   end
 
   def new
