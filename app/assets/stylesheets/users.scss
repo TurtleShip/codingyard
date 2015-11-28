@@ -6,25 +6,21 @@
 /* user profile */
 .profile {
   margin: auto;
-  //background-color: $gray-light;
 }
 
 #username {
-  font-family: 'Kaushan Script', Consolas, monospace;
+  font-family: $font_kaushan_script;
   font-size: 3em;
-  text-align: center;
 }
 
 #user_avatar {
   text-align: right;
   margin: auto;
-  //background-color: #1b6d85;
 }
 
 #user_info {
   text-align: left;
   padding: 20px;
-  //background-color: $alert-danger-bg;
 }
 
 /* Users index */

@@ -1,4 +1,6 @@
+@import 'application';
+
 #intro {
-  font-family: "Indie Flower", Consolas, monospace;
+  font-family: $font_indie_flower;
   font-size: 1.5em;
 }

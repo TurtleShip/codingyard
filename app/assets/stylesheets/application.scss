@@ -27,6 +27,11 @@
   box-sizing: border-box;
 }
 
+// Font variables
+$font_default: Helvatica, Consolas, monospace;
+$font_indie_flower: "Indie Flower", $font_default;
+$font_kaushan_script: "Kaushan Script", $font_default;
+
 /* display debug info in a more visually pleasing way */
 .debug_dump {
   clear: both;
