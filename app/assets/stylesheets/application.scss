@@ -31,15 +31,8 @@
 $font_default: Helvatica, Consolas, monospace;
 $font_indie_flower: "Indie Flower", $font_default;
 $font_kaushan_script: "Kaushan Script", $font_default;
-
-/* display debug info in a more visually pleasing way */
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
-}
+$font_architects_daughter: "Architects Daughter", $font_default;
+$font_shadows_into_light: "Shadows Into Light", $font_default;
 
 /* forms */
 #error_explanation {
@@ -57,34 +50,16 @@ $font_kaushan_script: "Kaushan Script", $font_default;
   }
 }
 
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
-}
-
-input {
-  height: auto !important;
-}
-
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 10px;
-    span {
-      margin-left: 20px;
-      font-weight: normal;
-    }
-  }
-}
-
 .gravatar {
   float: left;
   margin-right: 10px;
 }
 
-.gravatar_edit {
-  margin-top: 15px;
+/* display debug info in a more visually pleasing way */
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
 }
