@@ -42,6 +42,21 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     log_in_as(user)
     assert_not is_logged_in?, 'A new user should not be able to login without activating its account first'
 
+    # Index page
+    # Log in as valid user.
+    log_in_as(users(:Seulgi))
+
+    # There are 33 users, with 10 per page. So if new user shows up, it will be on 4th page.
+    get users_path, page: 4
+    assert_no_match user.username, response.body, 'Unactivated user should not show up on user idnex page'
+
+    # Profile page
+    get user_path(user)
+    assert_redirected_to root_url, 'Unactivated user should not have profile page'
+
+    # Log out valid user.
+    delete logout_path
+
     get edit_account_activation_path('Invalid token')
     assert_not is_logged_in?, 'A new user should not be able to activate its account with invalid token'
 
