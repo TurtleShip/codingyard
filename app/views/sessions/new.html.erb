@@ -8,6 +8,7 @@
         <%= form.text_field :username, class: 'form-control' %>
 
         <%= form.label :password %>
+        <%= link_to '(forgot password)', new_password_reset_path %>
         <%= form.password_field :password, class: 'form-control' %>
 
         <%= form.label :remember_me, class: 'checkbox inline' do %>

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   VALID_NAME_REGEX = /\A['\w\s-]*\z/
 
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
 
   has_many :top_coder_srm_solutions, dependent: :destroy
   has_many :codeforces_round_solutions, dependent: :destroy
@@ -69,6 +69,24 @@ class User < ActiveRecord::Base
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # Creates reset digest
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest, self.reset_digest = User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  # Sends password reset email.
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  # Returns true if a password reset has expired.
+  def password_reset_expired?
+    # Is password reset sent EARLIER than two ours ago?
+    reset_sent_at < 2.hours.ago
   end
 
   private
