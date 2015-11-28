@@ -30,13 +30,6 @@ class UserTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
   end
 
-  test 'Username should be downcased when saved' do
-    original_username = 'HellOMyId-_-'
-    @user.username = original_username
-    @user.save
-    assert_equal original_username.downcase, @user.username, 'username should be downcased after being saved'
-  end
-
   test 'username must be alphanumeric with hyphen and underscore' do
     @user.username = '!@#$%^&*()+'
     assert_not @user.valid?
@@ -82,13 +75,6 @@ class UserTest < ActiveSupport::TestCase
     duplicate_user.email = @user.email.upcase
     @user.save
     assert_not duplicate_user.valid?
-  end
-
-  test 'email addresses should be downcased when saved' do
-    original_email = 'HeLLo@wasSuP.CoM'
-    @user.email = original_email
-    @user.save
-    assert_equal original_email.downcase, @user.email, 'email should be downcased after being saved'
   end
 
   test 'firstname can be skipped' do
