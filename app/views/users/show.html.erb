@@ -1,19 +1,29 @@
-Hi, <%= @user.username %><br/>
-Email : <%= @user.email %><br/>
-firstname : <%= @user.firstname %><br/>
-lastname : <%= @user.lastname %><br/>
+<div class="profile row">
 
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.username %>
-      </h1>
-    </section>
+  <p class="col-md-12 text-center" id="username">
+    <%= @user.username %>
+  </p>
+  <aside class="col-md-4" id="user_avatar">
+
+    <%= gravatar_for @user, {size: 150} %>
   </aside>
-</div>
 
+  <section class="col-md-8" id="user_info">
+
+    <% @user_basic_info.each do |attr_name, value| %>
+
+        <div class="row">
+          <div class="col-md-2 text-right">
+            <%= attr_name %>
+          </div>
+          <div class="text-left">
+            <%= value %>
+          </div>
+        </div>
+    <% end %>
+  </section>
+
+</div>
 
 <!--TODO: Display number of solutions uploaded-->
 <!--TODO: and links to them-->

@@ -24,8 +24,6 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   before_create :create_activation_digest
-  before_save :downcase_email
-  before_save :downcase_username
 
   has_secure_password
 
@@ -89,13 +87,6 @@ class User < ActiveRecord::Base
   end
 
   private
-    def downcase_username
-      username.downcase!
-    end
-
-    def downcase_email
-      email.downcase!
-    end
 
     # Creates and assigns the activation token and digest.
     def create_activation_digest

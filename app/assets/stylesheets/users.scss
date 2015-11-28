@@ -3,44 +3,37 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'application';
 
-/* sidebar */
-
-aside {
-  section.user_info {
-    margin-top: 20px;
-  }
-
-  section {
-    padding: 10px 0;
-    margin-top: 20px;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
+/* user profile */
+.profile {
+  margin: auto;
 }
 
-.gravatar {
-  float: left;
-  margin-right: 10px;
+#username {
+  font-family: $font_kaushan_script;
+  font-size: 3em;
 }
 
-.gravatar_edit {
-  margin-top: 15px;
+#user_avatar {
+  text-align: right;
+  margin: auto;
+}
+
+#user_info {
+  text-align: left;
+  padding: 20px;
+}
+
+
+/* user edit */
+#update_profile_header {
+  font-family: $font_kaushan_script;
+  margin-bottom: 1.5em;
+}
+
+/* user signup */
+#signup_header {
+  font-family: $font_kaushan_script;
+  margin-bottom: 1.5em;
 }
 
 /* Users index */
@@ -52,4 +45,30 @@ aside {
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
   }
+}
+
+
+/* User form for both signup and edit */
+.form_label {
+  font-family: $font_kaushan_script;
+  font-size: 1.4em;
+  width: 15%;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+}
+
+.form_value {
+  font-family: $font_architects_daughter;
+  font-size: 1.4em;
+}
+
+.form_submit {
+  margin-top: 1em;
+  font-family: $font_kaushan_script;
+  font-size: 1.4em !important;
+}
+
+.gravatar_edit {
+  font-family: $font_kaushan_script;
+  padding-bottom: 1em;
 }

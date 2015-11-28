@@ -42,6 +42,8 @@ gem 'will_paginate', '3.0.7'
 # Hooks into will_paginate to format the html to match Twitter Bootstrap styling.
 gem 'bootstrap-will_paginate', '0.0.10'
 
+# Get Google fonts easily
+gem 'google-webfonts-rails', '0.0.4'
 
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine

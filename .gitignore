@@ -15,3 +15,7 @@
 
 # Ignore local gemset
 .ruby-gemset
+
+# Ignore precompiled assets.
+public/assets
+
