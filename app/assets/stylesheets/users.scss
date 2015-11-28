@@ -22,6 +22,14 @@
   text-align: left;
   padding: 20px;
 }
+/* end of user profile */
+
+
+/* user edit */
+#update_profile_header {
+  font-family: $font_kaushan_script;
+}
+
 
 /* Users index */
 .users {
@@ -33,3 +41,4 @@
     border-bottom: 1px solid $gray-lighter;
   }
 }
+/* end of user index */
