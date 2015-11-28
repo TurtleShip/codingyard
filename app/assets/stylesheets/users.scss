@@ -30,6 +30,11 @@
   margin-bottom: 1.5em;
 }
 
+/* user signup */
+#signup_header {
+  font-family: $font_kaushan_script;
+  margin-bottom: 1.5em;
+}
 
 /* Users index */
 .users {
@@ -58,7 +63,9 @@
 }
 
 .form_submit {
+  margin-top: 1em;
   font-family: $font_kaushan_script;
+  font-size: 1.4em !important;
 }
 
 .gravatar_edit {
