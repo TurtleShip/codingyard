@@ -20,6 +20,13 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 
+/* Font variables */
+$font_default: Helvatica, Consolas, monospace;
+$font_indie_flower: "Indie Flower", $font_default;
+$font_kaushan_script: "Kaushan Script", $font_default;
+$font_architects_daughter: "Architects Daughter", $font_default;
+$font_shadows_into_light: "Shadows Into Light", $font_default;
+
 /* mixins, variables, etc. */
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -27,13 +34,12 @@
   box-sizing: border-box;
 }
 
-// Font variables
-$font_default: Helvatica, Consolas, monospace;
-$font_indie_flower: "Indie Flower", $font_default;
-$font_kaushan_script: "Kaushan Script", $font_default;
-$font_architects_daughter: "Architects Daughter", $font_default;
-$font_shadows_into_light: "Shadows Into Light", $font_default;
+@mixin main_header {
+  font-family: $font_kaushan_script;
+  text-align: center;
+}
 
+/* font class */
 .font_kaushan_script {
   font-family: $font_kaushan_script;
 }
@@ -65,6 +71,27 @@ $font_shadows_into_light: "Shadows Into Light", $font_default;
     color: $state-danger-text;
   }
 }
+
+/* Form for user signup / edit, password forgot/reset */
+.form_label {
+  font-family: $font_kaushan_script;
+  font-size: 1.4em;
+  width: 15%;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+}
+
+.form_value {
+  font-family: $font_architects_daughter;
+  font-size: 1.4em;
+}
+
+.form_submit {
+  margin-top: 1em;
+  font-family: $font_kaushan_script;
+  font-size: 1.4em !important;
+}
+
 
 .gravatar {
   float: left;
