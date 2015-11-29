@@ -63,5 +63,11 @@ end
 group :production do
   # Pg is the Ruby interface to the PostgreSQL RDBMS
   gem 'pg', '0.18.3'
+
+  # an HTTP server for Rack applications designed to only serve fast clients
+  gem 'unicorn', '5.0.1'
+
+  # RailsConf suggests installing mysql2 instead of pg
+  # if pg craps out, do gem 'mysql2'
 end
 
