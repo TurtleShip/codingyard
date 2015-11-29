@@ -1,6 +1,24 @@
 @import 'application';
 
-#intro {
+#welcome_title {
+  font-family: $font_kaushan_script;
+}
+
+#welcome_subtitle {
+  font-family: $font_indie_flower;
+  margin-top: 1em;
+}
+
+#fork_me {
+  font-family: $font_architects_daughter;
+}
+
+#about {
   font-family: $font_indie_flower;
   font-size: 1.5em;
+}
+
+.nav_custom {
+  font-family: $font_kaushan_script;
+  font-size: 1.2em;
 }
