@@ -45,6 +45,9 @@ gem 'bootstrap-will_paginate', '0.0.10'
 # Get Google fonts easily
 gem 'google-webfonts-rails', '0.0.4'
 
+# AWS SDK for Ruby on Rails Plugin
+gem 'aws-sdk-rails', '1.0.0'
+
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine
   gem 'sqlite3', '1.3.11'
