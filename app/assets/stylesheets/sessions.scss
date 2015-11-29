@@ -1,7 +1,23 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'application';
+
 #session_remember_me {
   width: auto;
   margin-left: 0;
+}
+
+#welcome_title {
+  font-family: $font_kaushan_script;
+}
+
+#welcome_subtitle {
+  font-family: $font_indie_flower;
+  margin-top: 1em;
+}
+
+#fork_me {
+  font-family: $font_architects_daughter;
+
 }

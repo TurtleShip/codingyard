@@ -34,6 +34,22 @@ $font_kaushan_script: "Kaushan Script", $font_default;
 $font_architects_daughter: "Architects Daughter", $font_default;
 $font_shadows_into_light: "Shadows Into Light", $font_default;
 
+.font_kaushan_script {
+  font-family: $font_kaushan_script;
+}
+
+.font_indie_flower {
+  font-family: $font_indie_flower;
+}
+
+.font_architects_daughter {
+  font-family: $font_architects_daughter;
+}
+
+.font_shadows_into_light {
+  font-family: $font_shadows_into_light;
+}
+
 /* forms */
 #error_explanation {
   color: red;
