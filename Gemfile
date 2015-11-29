@@ -67,7 +67,7 @@ group :production do
   # an HTTP server for Rack applications designed to only serve fast clients
   gem 'unicorn', '5.0.1'
 
-  # RailsConf suggests installing mysql2 instead of pg
-  # if pg craps out, do gem 'mysql2'
+  # An attempt to Make the damn OpsWork happy
+  gem 'therubyracer', '0.12.2'
 end
 
