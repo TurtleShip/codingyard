@@ -1,4 +1,6 @@
 class CodeforcesRoundSolutionsController < ApplicationController
+
+  before_action :can_upload, only: [:new, :create]
   before_action :find_solution, only: [:show, :edit, :update, :destroy]
   
   def index
