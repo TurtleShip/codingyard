@@ -1,17 +1,5 @@
-<%= form_for(@codeforces_round_solution) do |f| %>
-  <% if @codeforces_round_solution.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@codeforces_round_solution.errors.count, "error") %> prohibited this codeforces_round_solution from being saved:</h2>
+<%= form_for(@solution) do |form| %>
+  <%= render 'shared/error_messages', object: form.object %>
 
-      <ul>
-      <% @codeforces_round_solution.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= form.submit yield(:button_text), class: 'btn btn-success' %>=
 <% end %>
