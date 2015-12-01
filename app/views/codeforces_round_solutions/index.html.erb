@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Codeforces Round Solutions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @codeforces_round_solutions.each do |codeforces_round_solution| %>
+      <tr>
+        <td><%= link_to 'Show', codeforces_round_solution %></td>
+        <td><%= link_to 'Edit', edit_codeforces_round_solution_path(codeforces_round_solution) %></td>
+        <td><%= link_to 'Destroy', codeforces_round_solution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Codeforces round solution', new_codeforces_round_solution_path %>

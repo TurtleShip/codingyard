@@ -1,0 +1,2 @@
+module CodeforcesRoundSolutionsHelper
+end
