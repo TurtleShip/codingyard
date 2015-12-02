@@ -2,7 +2,7 @@ class CodeforcesRoundSolutionsController < ApplicationController
 
   before_action :can_upload, only: [:new, :create]
   before_action :find_solution, only: [:show, :edit, :update, :destroy]
-  
+
   def index
     @solutions = CodeforcesRoundSolution.all
   end
@@ -13,24 +13,25 @@ class CodeforcesRoundSolutionsController < ApplicationController
   def new
     @solution = CodeforcesRoundSolution.new
   end
-  
+
   def edit
   end
-  
-  def create
-    @solution = CodeforcesRoundSolution.new(solution_params)
 
-    respond_to do |format|
-      if @solution.save
-        format.html { redirect_to @solution, notice: 'Codeforces round solution was successfully created.' }
-        format.json { render :show, status: :created, location: @solution }
-      else
-        format.html { render :new }
-        format.json { render json: @solution.errors, status: :unprocessable_entity }
-      end
+  def create
+    final_params = {contest_id: 1} # TODO: don't hard code this. Find the actual one programmatically instaed.
+    final_params.merge! solution_params
+    @solution = current_user.codeforces_round_solutions.create(final_params)
+
+    if @solution.save
+      flash[:success] = 'Solutions has been successfully saved.'
+      redirect_to @solution
+    else
+      render :edit
     end
+
+
   end
-  
+
   def update
     respond_to do |format|
       if @solution.update(solution_params)
@@ -58,9 +59,9 @@ class CodeforcesRoundSolutionsController < ApplicationController
     end
 
     def solution_params
-      params[:codeforces_round_solution]
+      params.require(:codeforces_round_solution)
+          .permit(:round_number, :division_number, :level, :language)
     end
-
 
 
 end
