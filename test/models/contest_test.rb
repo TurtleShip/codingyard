@@ -63,8 +63,8 @@ class ContestTest < ActiveSupport::TestCase
 
 
     num_solutions.times do
-      CodeforcesRoundSolution.new_with_relations!({round_number: 1, division_number: 1, level: 'A'},
-                                                  user, languages(:Java))
+      CodeforcesRoundSolution.new_with_relations({round_number: 1, division_number: 1, level: 'A'},
+                                                  user, languages(:Java)).save!
     end
 
     assert_equal num_solutions, CodeforcesRoundSolution.count

@@ -16,16 +16,21 @@
 
             <div class="form-group solution_add_margin">
               <%= form.label :division_number, 'Division number :', class: 'solution_form_label' %>
-              <%= form.select(:level, {'1' => 1, '2' => 2}, class: 'form-control solution_form_value') %>
+              <%= form.select(:division_number, {'1' => 1, '2' => 2}, {}, class: 'form-control solution_form_value') %>
             </div>
 
             <div class="form-group solution_add_margin">
               <%= form.label :level, 'Level :', class: 'solution_form_label' %>
-              <%= form.select(:level, {A: 'A', B: 'B', C: 'C', D: 'D', E: 'E'}, class: 'form-control solution_form_value') %>
+              <%= form.select(:level, {A: 'A', B: 'B', C: 'C', D: 'D', E: 'E'}, {},
+                              class: 'form-control solution_form_value') %>
             </div>
 
-
-            <!-- TODO: Offer Language choice -->
+            <div class="form-group solution_add_margin">
+              <%= form.label :language, 'Language :', class: 'solution_form_label' %>
+              <%= select_tag(:language,
+                              options_from_collection_for_select(@languages, :id, :name),
+                              class: 'form-control solution_form_value') %>
+            </div>
 
             <%= file_field(:attachment, :file, class: 'font_architects_daughter') %>
           </div>

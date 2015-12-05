@@ -2,6 +2,7 @@ class CodeforcesRoundSolutionsController < ApplicationController
 
   before_action :can_upload, only: [:new, :create]
   before_action :find_solution, only: [:show, :edit, :update, :destroy]
+  before_action :languages, only: [:new, :create, :show, :edit, :update]
 
   def index
     @solutions = CodeforcesRoundSolution.all
@@ -18,14 +19,12 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def create
-    @solution = CodeforcesRoundSolution.new(solution_params)
-    @solution.contest = Contest.codeforces
-    @solution.user = current_user
+    @solution = CodeforcesRoundSolution.new_with_relations(solution_params, current_user, Language.find(params[:language]))
     if @solution.save
       flash[:success] = 'Solutions has been successfully saved.'
       redirect_to @solution
     else
-      render :edit
+      render :new
     end
 
 
@@ -59,8 +58,11 @@ class CodeforcesRoundSolutionsController < ApplicationController
 
     def solution_params
       params.require(:codeforces_round_solution)
-          .permit(:round_number, :division_number, :level, :language)
+          .permit(:round_number, :division_number, :level)
     end
 
+    def languages
+      @languages ||= Language.all
+    end
 
 end

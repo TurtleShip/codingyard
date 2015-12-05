@@ -12,20 +12,7 @@ class CodeforcesRoundSolution < ActiveRecord::Base
 
   before_validation :upcase_level
 
-  def CodeforcesRoundSolution.new_with_relations!(params, user, language)
-    solution = init_relations params, user, language
-    solution.save!
-    solution
-  end
-
   def CodeforcesRoundSolution.new_with_relations(params, user, language)
-    solution = init_relations params, user, language
-    solution.save
-  end
-
-
-  private
-  def CodeforcesRoundSolution.init_relations(params, user, language)
     solution = new(params)
     solution.user = user
     solution.contest = Contest.codeforces
@@ -34,7 +21,7 @@ class CodeforcesRoundSolution < ActiveRecord::Base
   end
 
 
-
+  private
   def upcase_level
     level.upcase! unless level.nil?
   end
