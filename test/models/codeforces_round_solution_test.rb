@@ -4,9 +4,10 @@ class CodeforcesRoundSolutionTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:Seulgi)
-    @codefores = contests(:Codeforces)
-    @solution = @user.codeforces_round_solutions.create(contest_id: @codefores.id,
-                                                        round_number: 1, division_number: 1, level: 'A')
+    @codeforces = contests(:Codeforces)
+    @solution = CodeforcesRoundSolution.new(round_number: 1, division_number: 1, level: 'A')
+    @solution.contest = @codeforces
+    @solution.user = @user
   end
 
   test 'am example solution should be valid' do

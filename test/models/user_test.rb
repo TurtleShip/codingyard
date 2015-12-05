@@ -147,7 +147,7 @@ class UserTest < ActiveSupport::TestCase
     codeforces = contests(:Codeforces)
 
     num_solutions.times do
-      @user.codeforces_round_solutions.create(contest_id: codeforces.id, round_number: 1, division_number: 1, level: 'A')
+      CodeforcesRoundSolution.new_with_relations({round_number: 1, division_number: 1, level: 'A'}, @user, codeforces)
     end
 
     assert_equal num_solutions, CodeforcesRoundSolution.count

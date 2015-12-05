@@ -8,6 +8,10 @@ class Contest < ActiveRecord::Base
 
   before_save :downcase_name
 
+  def Contest.codeforces
+    @codeforces ||= find_by_name('Codeforces')
+  end
+
   private
   def downcase_name
     name.downcase!

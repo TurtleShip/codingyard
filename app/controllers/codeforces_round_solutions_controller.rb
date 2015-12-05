@@ -18,10 +18,9 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def create
-    final_params = {contest_id: 1} # TODO: don't hard code this. Find the actual one programmatically instaed.
-    final_params.merge! solution_params
-    @solution = current_user.codeforces_round_solutions.create(final_params)
-
+    @solution = CodeforcesRoundSolution.new(solution_params)
+    @solution.contest = Contest.codeforces
+    @solution.user = current_user
     if @solution.save
       flash[:success] = 'Solutions has been successfully saved.'
       redirect_to @solution
