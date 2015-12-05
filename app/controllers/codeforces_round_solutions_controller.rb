@@ -9,6 +9,12 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def show
+    @solution_info = {
+        Round: @solution.round_number,
+        Division: @solution.division_number,
+        Level: @solution.level,
+        Language: @solution.language.name
+    }
   end
 
   def new
