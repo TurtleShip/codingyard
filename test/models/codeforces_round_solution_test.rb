@@ -4,10 +4,9 @@ class CodeforcesRoundSolutionTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:Seulgi)
-    @codeforces = contests(:Codeforces)
-    @solution = CodeforcesRoundSolution.new(round_number: 1, division_number: 1, level: 'A')
-    @solution.contest = @codeforces
-    @solution.user = @user
+    language = languages(:Java)
+    params = {round_number: 1, division_number: 1, level: 'A'}
+    @solution = CodeforcesRoundSolution.new_with_relations!(params, @user, language)
   end
 
   test 'am example solution should be valid' do

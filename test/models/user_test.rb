@@ -144,10 +144,8 @@ class UserTest < ActiveSupport::TestCase
 
   test 'deleting user should delete codeforces round solutions' do
     num_solutions = 5
-    codeforces = contests(:Codeforces)
-
     num_solutions.times do
-      CodeforcesRoundSolution.new_with_relations({round_number: 1, division_number: 1, level: 'A'}, @user, codeforces)
+      CodeforcesRoundSolution.new_with_relations({round_number: 1, division_number: 1, level: 'A'}, @user, languages(:Java))
     end
 
     assert_equal num_solutions, CodeforcesRoundSolution.count

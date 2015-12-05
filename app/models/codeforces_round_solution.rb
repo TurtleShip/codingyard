@@ -1,34 +1,39 @@
 class CodeforcesRoundSolution < ActiveRecord::Base
   belongs_to :user
   belongs_to :contest
+  belongs_to :language
 
   validates :user_id, presence: true
   validates :contest_id, presence: true
+  validates :language_id, presence: true
   validates :round_number, presence: true, numericality: {greater_than: 0}
   validates :division_number, presence: true, inclusion: {in: 1..2}
   validates :level, presence: true, inclusion: %w(A B C D E)
 
   before_validation :upcase_level
 
-  def CodeforcesRoundSolution.new_with_relations!(params, user, contest)
-    solution = init_relations params, user, contest
+  def CodeforcesRoundSolution.new_with_relations!(params, user, language)
+    solution = init_relations params, user, language
     solution.save!
     solution
   end
 
-  def CodeforcesRoundSolution.new_with_relations(params, user, contest)
-    solution = init_relations params, user, contest
+  def CodeforcesRoundSolution.new_with_relations(params, user, language)
+    solution = init_relations params, user, language
     solution.save
   end
 
 
   private
-  def CodeforcesRoundSolution.init_relations(params, user, contest)
+  def CodeforcesRoundSolution.init_relations(params, user, language)
     solution = new(params)
     solution.user = user
-    solution.contest = contest
+    solution.contest = Contest.codeforces
+    solution.language = language
     solution
   end
+
+
 
   def upcase_level
     level.upcase! unless level.nil?

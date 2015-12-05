@@ -60,15 +60,16 @@ class ContestTest < ActiveSupport::TestCase
   test 'deleting a contest should delete its codeforces round solutions' do
     num_solutions = 5
     user = users(:Seulgi)
-    codeforces = contests(:Codeforces)
+
 
     num_solutions.times do
-      user.codeforces_round_solutions.create(contest_id: codeforces.id, round_number: 1, division_number: 1, level: 'A')
+      CodeforcesRoundSolution.new_with_relations!({round_number: 1, division_number: 1, level: 'A'},
+                                                  user, languages(:Java))
     end
 
     assert_equal num_solutions, CodeforcesRoundSolution.count
 
-    codeforces.destroy
+    Contest.codeforces.destroy
     assert_equal 0, CodeforcesRoundSolution.count, 'Deleting user should delete its Codeforces round solutions as well'
   end
 
