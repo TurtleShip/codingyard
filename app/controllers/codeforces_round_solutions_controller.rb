@@ -33,7 +33,16 @@ class CodeforcesRoundSolutionsController < ApplicationController
 
   def create
     @solution = CodeforcesRoundSolution.new_with_relations(solution_params, current_user, Language.find(params[:language]))
-    file = params[:codeforces_round_solution][:attachment].read
+
+    # Check for attachment
+    attachment = params[:codeforces_round_solution][:attachment]
+
+    unless attachment
+      flash[:warning] = 'Please attach a solution.'
+      render :new
+    end
+
+    file = attachment.read
     path = @solution.create_save_path(file)
     upload_success = upload_solution path, file
     @solution.save_path = path

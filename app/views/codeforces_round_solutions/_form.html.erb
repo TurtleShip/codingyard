@@ -11,17 +11,17 @@
           <div class="panel-body">
             <div class="form-group">
               <%= form.label :round_number, 'Round number :', class: 'solution_form_label' %>
-              <%= form.number_field :round_number, class: 'form-control solution_form_value solution_number_input' %>
+              <%= form.number_field :round_number, required: true, class: 'form-control solution_form_value solution_number_input' %>
             </div>
 
             <div class="form-group solution_add_margin">
               <%= form.label :division_number, 'Division number :', class: 'solution_form_label' %>
-              <%= form.select(:division_number, {'1' => 1, '2' => 2}, {}, class: 'form-control solution_form_value') %>
+              <%= form.select(:division_number, {'1' => 1, '2' => 2}, {required: true}, class: 'form-control solution_form_value') %>
             </div>
 
             <div class="form-group solution_add_margin">
               <%= form.label :level, 'Level :', class: 'solution_form_label' %>
-              <%= form.select(:level, {A: 'A', B: 'B', C: 'C', D: 'D', E: 'E'}, {},
+              <%= form.select(:level, {A: 'A', B: 'B', C: 'C', D: 'D', E: 'E'}, {required: true},
                               class: 'form-control solution_form_value') %>
             </div>
 
@@ -29,13 +29,12 @@
               <%= form.label :language, 'Language :', class: 'solution_form_label' %>
               <%= select_tag(:language,
                              options_from_collection_for_select(@languages, :id, :name),
-                             class: 'form-control solution_form_value') %>
+                             required: true, class: 'form-control solution_form_value') %>
             </div>
 
-            <%= form.file_field :attachment, class: 'font_architects_daughter' %>
+            <%= form.file_field :attachment, required: true, class: 'font_architects_daughter' %>
 
           </div>
-
         </div>
       </div>
 
