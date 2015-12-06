@@ -68,14 +68,11 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @solution.update(solution_params)
-        format.html { redirect_to @solution, notice: 'Codeforces round solution was successfully updated.' }
-        format.json { render :show, status: :ok, location: @solution }
-      else
-        format.html { render :edit }
-        format.json { render json: @solution.errors, status: :unprocessable_entity }
-      end
+    if @solution.update(solution_params)
+      flash[:success] = "Solution ##{@solution.id} has been successfully updated."
+      redirect_to @solution
+    else
+      render :edit
     end
   end
 
