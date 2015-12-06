@@ -19,3 +19,5 @@
 # Ignore precompiled assets.
 public/assets
 
+# Ignore environmental variables.
+.env

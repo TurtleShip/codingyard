@@ -23,6 +23,7 @@
 
   <div class="panel-body">
     <div id="editor" style="height: 500px">
+      <%= @content %>
     </div>
   </div>
 </div>
@@ -35,6 +36,11 @@
 <script>
     var editor = ace.edit('editor');
     editor.setTheme('ace/theme/twilight');
-    editor.getSession().setMode("ace/mode/java"); // TODO: make me change depending on the language
+    <% if @solution.language.name == 'cpp' %>
+    editor.getSession().setMode("ace/mode/c_cpp"); // TODO: make me change depending on the language
+    <% else %>
+    editor.getSession().setMode('ace/mode/<%="#{@solution.language.extension}"%>'); // TODO: make me change depending on the language
+    <% end %>
+
     editor.setReadOnly(true);
 </script>

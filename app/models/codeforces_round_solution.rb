@@ -1,4 +1,5 @@
 class CodeforcesRoundSolution < ActiveRecord::Base
+
   belongs_to :user
   belongs_to :contest
   belongs_to :language
@@ -20,9 +21,15 @@ class CodeforcesRoundSolution < ActiveRecord::Base
     solution
   end
 
+  def create_save_path(file)
+    digest = Digest::MD5.hexdigest(file)
+    path = "codeforces/round/#{round_number}/div#{division_number}/#{user.username}"
+    path += "/#{Time.now.to_i}-#{digest}.#{language.extension}"
+    path
+  end
 
   private
-  def upcase_level
-    level.upcase! unless level.nil?
-  end
+    def upcase_level
+      level.upcase! unless level.nil?
+    end
 end

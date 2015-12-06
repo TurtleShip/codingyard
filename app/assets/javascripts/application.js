@@ -16,5 +16,8 @@
 //= require turbolinks
 //= require ace-rails-ap
 //= require ace/theme-twilight
+
+// list of available modes : https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
 //= require ace/mode-java
+//= require ace/mode-c_cpp
 //= require_tree .

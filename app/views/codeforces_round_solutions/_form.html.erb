@@ -28,11 +28,12 @@
             <div class="form-group solution_add_margin">
               <%= form.label :language, 'Language :', class: 'solution_form_label' %>
               <%= select_tag(:language,
-                              options_from_collection_for_select(@languages, :id, :name),
-                              class: 'form-control solution_form_value') %>
+                             options_from_collection_for_select(@languages, :id, :name),
+                             class: 'form-control solution_form_value') %>
             </div>
 
-            <%= file_field(:attachment, :file, class: 'font_architects_daughter') %>
+            <%= form.file_field :attachment, class: 'font_architects_daughter' %>
+
           </div>
 
         </div>
@@ -54,26 +55,6 @@
         </div>
       </div>
 
-
-
       <%= form.submit yield(:button_text), class: 'btn btn-success' %>
-
-
-      <p id="type_your_solution">.. or type your solution!</p>
-      <!-- TODO: Gray out manual text input when attachment is chosen -->
-
-      <div id="editor" style="height: 500px;" class="text-left font_architects_daughter">
-      </div>
-
     </div>
-
 <% end %>
-
-
-<script>
-    var editor = ace.edit('editor');
-    editor.setTheme('ace/theme/twilight');
-    editor.getSession().setMode("ace/mode/java");
-    editor.setReadOnly(false); // make this thing editable
-</script>
-

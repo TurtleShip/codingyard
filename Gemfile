@@ -54,6 +54,9 @@ gem 'ace-rails-ap', '4.0.1'
 # Let each environment have it's own seeds.
 gem 'seedbank', '0.3.0'
 
+# Loads environment variables from `.env`.
+gem 'dotenv-rails', '2.0.2'
+
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine
   gem 'sqlite3', '1.3.11'

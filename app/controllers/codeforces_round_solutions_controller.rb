@@ -15,10 +15,17 @@ class CodeforcesRoundSolutionsController < ApplicationController
         Level: @solution.level,
         Language: @solution.language.name
     }
+    content = solution_content(@solution.save_path)
+    if content
+      @content = content
+    else
+      flash[:danger] = 'Sorry, we are having trouble loading your solution. Please try again later.'
+    end
   end
 
   def new
     @solution = CodeforcesRoundSolution.new
+
   end
 
   def edit
@@ -26,10 +33,17 @@ class CodeforcesRoundSolutionsController < ApplicationController
 
   def create
     @solution = CodeforcesRoundSolution.new_with_relations(solution_params, current_user, Language.find(params[:language]))
-    if @solution.save
-      flash[:success] = 'Solutions has been successfully saved.'
+    file = params[:codeforces_round_solution][:attachment].read
+    path = @solution.create_save_path(file)
+    upload_success = upload_solution path, file
+    @solution.save_path = path
+
+
+    if upload_success && @solution.save
+      flash[:success] = 'Solutions has been successfully uploaded!'
       redirect_to @solution
     else
+      flash[:warning] = 'Sorry, we are having trouble uploading your solution. Please try again later.' unless upload_success
       render :new
     end
 
