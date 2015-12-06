@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151205221526) do
+ActiveRecord::Schema.define(version: 20151206083002) do
 
   create_table "codeforces_round_solutions", force: :cascade do |t|
     t.integer  "user_id",         null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20151205221526) do
     t.string   "extension",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "ace_mode",   null: false
   end
 
   create_table "top_coder_srm_solutions", force: :cascade do |t|
