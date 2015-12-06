@@ -20,14 +20,15 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 
-/* Font variables */
+/* Variables */
 $font_default: Helvatica, Consolas, monospace;
 $font_indie_flower: "Indie Flower", $font_default;
 $font_kaushan_script: "Kaushan Script", $font_default;
 $font_architects_daughter: "Architects Daughter", $font_default;
 $font_shadows_into_light: "Shadows Into Light", $font_default;
+$footer_height: 3em;
 
-/* mixins, variables, etc. */
+/* Mixins */
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -37,6 +38,35 @@ $font_shadows_into_light: "Shadows Into Light", $font_default;
 @mixin main_header {
   font-family: $font_kaushan_script;
   text-align: center;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: $footer_height;
+}
+/* Sticky footer */
+.footer {
+  //font-family: $font_kaushan_script;
+  font-size: 1.2em;
+  position: absolute;
+  padding-top: 0.9em;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: $footer_height;
+  background-color: #f5f5f5;
+  color: #777;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
 }
 
 /* font class */
