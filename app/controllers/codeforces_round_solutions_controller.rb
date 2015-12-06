@@ -5,7 +5,8 @@ class CodeforcesRoundSolutionsController < ApplicationController
   before_action :languages, only: [:new, :create, :show, :edit, :update]
 
   def index
-    @solutions = CodeforcesRoundSolution.all
+    @codeforces_round_solutions = CodeforcesRoundSolution.paginate(page: params[:page], :per_page => CodeforcesRoundSolution::PER_PAGE)
+    @total = CodeforcesRoundSolution.all.count
   end
 
   def show

@@ -1,25 +1,28 @@
-<p id="notice"><%= notice %></p>
+<h1 class="solution_header">Codeforces Round Solutions</h1>
 
-<h1>Listing Codeforces Round Solutions</h1>
+<%= will_paginate %>
 
-<table>
+<table class="table table-striped">
   <thead>
-    <tr>
-      <th colspan="3"></th>
+    <tr class="solution_index_header">
+      <th>Author</th>
+      <th>Language</th>
+      <th>Round</th>
+      <th>Division</th>
+      <th>Level</th>
+      <th>Upload time</th>
+      <th>Last modified</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Destroy</th>
     </tr>
   </thead>
-
   <tbody>
-    <% @codeforces_round_solutions.each do |codeforces_round_solution| %>
-      <tr>
-        <td><%= link_to 'Show', codeforces_round_solution %></td>
-        <td><%= link_to 'Edit', edit_codeforces_round_solution_path(codeforces_round_solution) %></td>
-        <td><%= link_to 'Destroy', codeforces_round_solution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <%= render @codeforces_round_solutions %>
   </tbody>
+
+
+
 </table>
 
-<br>
-
-<%= link_to 'New Codeforces round solution', new_codeforces_round_solution_path %>
+<%= will_paginate %>

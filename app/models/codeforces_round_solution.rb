@@ -1,5 +1,7 @@
 class CodeforcesRoundSolution < ActiveRecord::Base
 
+  PER_PAGE = 30 # Number of solutions to display per page during pagination
+
   belongs_to :user
   belongs_to :contest
   belongs_to :language

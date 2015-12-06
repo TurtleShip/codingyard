@@ -1,11 +1,11 @@
 @import 'application';
 
-.solution_upload_header {
+.solution_header {
   @include main_header;
   margin-bottom: 1em;
 }
 
-.solution_upload_sub_header {
+.solution_sub_header {
   @include main_header;
   font-size: 1.2em;
 }
@@ -19,6 +19,17 @@
   font-family: $font_architects_daughter;
   font-size: 1.2em;
   margin-right: 1em;
+}
+
+.solution_index_header {
+  font-family: $font_kaushan_script;
+  font-size: 1.2em;
+}
+
+.solution_index_value {
+  font-family: $font_architects_daughter;
+  //font-size: 1.2em;
+
 }
 
 .solution_number_input {
