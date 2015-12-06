@@ -80,11 +80,10 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def destroy
+    solution_id = @solution.id
     @solution.destroy
-    respond_to do |format|
-      format.html { redirect_to codeforces_round_solutions_url, notice: 'Codeforces round solution was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:success] = "Solution ##{solution_id} was successfully deleted."
+    redirect_to codeforces_round_solutions_url
   end
 
   private
