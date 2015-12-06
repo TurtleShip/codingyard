@@ -36,11 +36,6 @@
 <script>
     var editor = ace.edit('editor');
     editor.setTheme('ace/theme/twilight');
-    <% if @solution.language.name == 'cpp' %>
-    editor.getSession().setMode("ace/mode/c_cpp"); // TODO: make me change depending on the language
-    <% else %>
-    editor.getSession().setMode('ace/mode/<%="#{@solution.language.extension}"%>'); // TODO: make me change depending on the language
-    <% end %>
-
+    editor.getSession().setMode('ace/mode/<%="#{@solution.language.ace_mode}"%>');
     editor.setReadOnly(true);
 </script>

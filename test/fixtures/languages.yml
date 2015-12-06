@@ -1,12 +1,15 @@
 Java:
   name: Java
   extension: java
+  ace_mode: java
 
 cpp:
   name: cpp
   extension: cpp
+  ace_mode: c_cpp
 
 Python:
   name: Python
   extension: py
+  ace_mode: python
 
