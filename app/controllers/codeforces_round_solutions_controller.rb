@@ -40,6 +40,13 @@ class CodeforcesRoundSolutionsController < ApplicationController
     unless attachment
       flash[:warning] = 'Please attach a solution.'
       render :new
+      return
+    end
+
+    if attachment.size > 1.megabytes
+      flash[:danger] = 'File cannot be bigger than 1 MB (megabytes).'
+      render :new
+      return
     end
 
     file = attachment.read
