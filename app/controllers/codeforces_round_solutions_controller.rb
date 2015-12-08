@@ -1,8 +1,9 @@
 class CodeforcesRoundSolutionsController < ApplicationController
 
-  before_action :can_upload, only: [:new, :create]
   before_action :find_solution, only: [:show, :edit, :update, :destroy]
   before_action :languages, only: [:new, :create, :show, :edit, :update]
+  before_action :can_upload, only: [:new, :create]
+  before_action :can_delete, only: [:destroy]
 
   def index
     @codeforces_round_solutions = CodeforcesRoundSolution.paginate(page: params[:page], :per_page => CodeforcesRoundSolution::PER_PAGE)
