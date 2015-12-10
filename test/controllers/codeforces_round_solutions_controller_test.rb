@@ -18,34 +18,34 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
   test 'a user must login to upload a solution' do
     get :new
     assert_redirected_to login_path
-    assert_not_empty flash, 'redirected page should explain why the user got there'
+    assert_not_nil flash[:danger], 'redirected page should explain why the user got there'
   end
 
   test 'a guest cannot delete a solution' do
     delete :destroy, id: @solution.id
     assert_redirected_to root_url
-    assert_not_empty flash
+    assert_not_nil flash[:danger]
   end
 
   test 'a user cannot delete another users solution' do
     log_in_as @other_member
     delete :destroy, id: @solution.id
     assert_redirected_to root_url
-    assert_not_empty flash
+    assert_not_nil flash[:danger]
   end
 
   test 'the author can delete its solution' do
     log_in_as @member
     delete :destroy, id: @solution.id
     assert_redirected_to codeforces_round_solutions_url
-    assert_not_empty flash
+    assert_not_nil flash[:success]
   end
 
   test 'An admin can delete member\'s solution' do
     log_in_as @admin
     delete :destroy, id: @solution.id
     assert_redirected_to codeforces_round_solutions_url
-    assert_not_empty flash
+    assert_not_nil flash[:success]
   end
 
   test 'anyone can view a solution' do
