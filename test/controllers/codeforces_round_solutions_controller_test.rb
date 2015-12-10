@@ -21,6 +21,18 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_not_nil flash[:danger], 'redirected page should explain why the user got there'
   end
 
+  test 'a member can upload a solution' do
+    log_in_as @member
+    get :new
+    assert_response :success
+  end
+
+  test 'an admin can upload a solution' do
+    log_in_as @admin
+    get :new
+    assert_response :success
+  end
+
   test 'a guest cannot delete a solution' do
     delete :destroy, id: @solution.id
     assert_redirected_to root_url
@@ -47,6 +59,32 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_redirected_to codeforces_round_solutions_url
     assert_not_nil flash[:success]
   end
+
+  test 'a guest cannot edit solution' do
+    get :edit, id: @solution.id
+    assert_redirected_to root_url
+    assert_not_nil flash[:danger]
+  end
+
+  test 'non-author cannot edit solution' do
+    log_in_as @other_member
+    get :edit, id: @solution.id
+    assert_redirected_to root_url
+    assert_not_nil flash[:danger]
+  end
+
+  test 'the author can edit solution' do
+    log_in_as @member
+    get :edit, id: @solution.id
+    assert_response :success
+  end
+
+  test 'an admin can edit solution' do
+    log_in_as @admin
+    get :edit, id: @solution.id
+    assert_response :success
+  end
+
 
   test 'anyone can view a solution' do
     get :show, id: @solution.id

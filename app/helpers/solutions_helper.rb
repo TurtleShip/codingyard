@@ -16,6 +16,15 @@ module SolutionsHelper
     end
   end
 
+  def can_edit
+    unless logged_in? && (@solution.user == current_user || current_user.admin?)
+      store_location
+      flash[:danger] = 'You don\'t have permission to edit the solution.'
+      redirect_to (request.referer || root_url)
+    end
+  end
+
+
   # Uploads the given file to the given path.
   # Returns true if upload wa successful. False otherwise.
   def upload_solution(path, file)
