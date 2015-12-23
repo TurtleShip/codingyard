@@ -86,6 +86,11 @@ body {
   font-family: $font_shadows_into_light;
 }
 
+/* font size class */
+.one_point_two_em {
+  font-size: 1.2em;
+}
+
 /* forms */
 #error_explanation {
   color: red;

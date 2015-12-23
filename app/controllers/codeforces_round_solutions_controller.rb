@@ -35,6 +35,13 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def edit
+    @is_edit = true
+    content = solution_content(@solution.save_path)
+    if content
+      @content = content
+    else
+      flash[:danger] = 'Sorry, we are having trouble loading your solution. Please try again later.'
+    end
   end
 
   def create
@@ -44,13 +51,13 @@ class CodeforcesRoundSolutionsController < ApplicationController
     attachment = params[:codeforces_round_solution][:attachment]
 
     if attachment.blank?
-      flash[:danger] = 'Please attach a solution.'
+      flash.now[:danger] = 'Please attach a solution.'
       render :new
       return
     end
 
     if attachment.size > UPLOAD_SIZE_LIMIT
-      flash[:danger] = 'File cannot be bigger than 1 MB (megabytes).'
+      flash.now[:danger] = 'File cannot be bigger than 1 MB (megabytes).'
       render :new
       return
     end
@@ -65,7 +72,7 @@ class CodeforcesRoundSolutionsController < ApplicationController
       flash[:success] = 'Solutions has been successfully uploaded!'
       redirect_to @solution
     else
-      flash[:danger] = 'Sorry, we are having trouble uploading your solution. Please try again later.' unless upload_success
+      flash.now[:danger] = 'Sorry, we are having trouble uploading your solution. Please try again later.' unless upload_success
       render :new
     end
 
@@ -73,12 +80,8 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def update
-    if @solution.update(solution_params)
-      flash[:success] = "Solution ##{@solution.id} has been successfully updated."
-      redirect_to @solution
-    else
-      render :edit
-    end
+    flash.now[:success] = "Solution ##{@solution.id} has been successfully updated." if @solution.update(solution_params)
+    render :edit
   end
 
   def destroy
