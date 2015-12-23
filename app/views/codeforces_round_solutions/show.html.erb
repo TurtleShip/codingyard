@@ -20,6 +20,7 @@
   <div class="panel-heading solution_sub_header">
     Solution
   </div>
+  <%= link_to 'Download', download_codeforces_round_solution_path(@solution) %>
 
   <div class="panel-body">
     <div id="editor" style="height: 500px"><%= @content %></div>

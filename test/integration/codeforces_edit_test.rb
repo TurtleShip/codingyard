@@ -29,11 +29,6 @@ class CodeforcesEditTest < ActionDispatch::IntegrationTest
              language: @language.name
          }
 
-    tmp = assigns[:solution]
-    tmp.errors.full_messages.each do |msg|
-      puts "msg : #{msg}"
-    end
-
     # There should be only one solution. Let's edit it
     solution = CodeforcesRoundSolution.all.first
     get edit_codeforces_round_solution_path(solution.id)

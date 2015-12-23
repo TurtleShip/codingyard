@@ -2,7 +2,7 @@ class CodeforcesRoundSolutionsController < ApplicationController
 
   UPLOAD_SIZE_LIMIT = 1.megabytes
 
-  before_action :find_solution, only: [:show, :edit, :update, :destroy]
+  before_action :find_solution, only: [:show, :edit, :update, :destroy, :download]
   before_action :languages, only: [:new, :create, :show, :edit, :update]
   before_action :has_required_params, only: [:create]
   before_action :find_language, only: [:create]
@@ -23,6 +23,10 @@ class CodeforcesRoundSolutionsController < ApplicationController
         Language: @solution.language.name
     }
     fill_content
+  end
+
+  def download
+    send_data solution_content(@solution.save_path), disposition: 'attachment', filename: @solution.save_path.split('/').last
   end
 
   def new
