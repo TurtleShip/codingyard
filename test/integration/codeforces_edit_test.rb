@@ -13,6 +13,10 @@ class CodeforcesEditTest < ActionDispatch::IntegrationTest
   end
 
   test 'edit an uploaded solution' do
+
+    # login as someone who can upload
+    log_in_as @member
+
     # upload a solution first
     post codeforces_round_solutions_path,
          {
@@ -25,12 +29,16 @@ class CodeforcesEditTest < ActionDispatch::IntegrationTest
              language: @language.name
          }
 
+    tmp = assigns[:solution]
+    tmp.errors.full_messages.each do |msg|
+      puts "msg : #{msg}"
+    end
 
     # There should be only one solution. Let's edit it
     solution = CodeforcesRoundSolution.all.first
     get edit_codeforces_round_solution_path(solution.id)
 
-    assert_template('codeforces_round_solution/edit')
+    assert_template('codeforces_round_solutions/edit')
 
     # Site should contain proper links
     assert_select 'a[href=?]', codeforces_round_solutions_path
@@ -38,7 +46,7 @@ class CodeforcesEditTest < ActionDispatch::IntegrationTest
 
     # Send edit request
     new_round_number = 999
-    post edit_codeforces_round_solution_path,
+    patch codeforces_round_solution_path(solution),
          {
              codeforces_round_solution: {
                  round_number: new_round_number,
@@ -49,10 +57,11 @@ class CodeforcesEditTest < ActionDispatch::IntegrationTest
          }
 
     # Check that solution has been properly updated
+    solution.reload
     assert_equal new_round_number, solution.round_number
 
     # We should be directed back to edit with success message
-    assert_template('codeforces_round_solution/edit')
+    assert_template('codeforces_round_solutions/edit')
     assert_not_nil flash[:success]
   end
 

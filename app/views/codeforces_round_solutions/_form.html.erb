@@ -32,9 +32,9 @@
                              required: true, class: 'form-control solution_form_value') %>
             </div>
 
-            <% unless @is_edit %>
+            <% if @is_new %>
                 <div class="form-group">
-                  <%= form.file_field :attachment, required: true, class: 'font_architects_daughter' %>
+                  <%= form.file_field :attachment, required: true, accept: @supported_file_types, class: 'font_architects_daughter' %>
                 </div>
             <% end %>
           </div>

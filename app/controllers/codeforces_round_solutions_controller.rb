@@ -32,10 +32,11 @@ class CodeforcesRoundSolutionsController < ApplicationController
 
   def new
     @solution = CodeforcesRoundSolution.new
+    @is_new = true
+    @supported_file_types = Language.get_all_extensions_concat
   end
 
   def edit
-    @is_edit = true
     content = solution_content(@solution.save_path)
     if content
       @content = content
@@ -80,7 +81,9 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def update
-    flash.now[:success] = "Solution ##{@solution.id} has been successfully updated." if @solution.update(solution_params)
+    if @solution.update_attributes(solution_params)
+      flash.now[:success] = "Solution ##{@solution.id} has been successfully updated."
+    end
     render :edit
   end
 
