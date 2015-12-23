@@ -5,8 +5,8 @@
   <td><%= codeforces_round_solution.division_number %></td>
   <td><%= codeforces_round_solution.level %></td>
   <td><%= codeforces_round_solution.created_at %></td>
-  <td><%= codeforces_round_solution.updated_at %></td>
   <td><%= link_to 'Show', codeforces_round_solution %></td>
+  <td><%= link_to 'Download', download_codeforces_round_solution_path(codeforces_round_solution) %></td>
   <td><%= link_to 'Edit', edit_codeforces_round_solution_path(codeforces_round_solution) %></td>
   <td><%= link_to 'Destroy', codeforces_round_solution, method: :delete, data: {confirm: 'Are you sure?'} %></td>
 </tr>

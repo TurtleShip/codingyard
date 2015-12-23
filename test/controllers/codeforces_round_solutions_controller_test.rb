@@ -94,6 +94,7 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_select 'div.solution_display_value', @solution.division_number.to_s
     assert_select 'div.solution_display_value', @solution.level
     assert_select 'div.solution_display_value', @solution.language.name
+    assert_select 'a[href=?]', download_codeforces_round_solution_path(@solution)
   end
 
   test 'anyone can view all solutions' do
@@ -106,6 +107,7 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_select 'td', @solution.division_number.to_s
     assert_select 'td', @solution.level
     assert_select 'a[href=?]', codeforces_round_solution_path(@solution)
+    assert_select 'a[href=?]', download_codeforces_round_solution_path(@solution)
     assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@solution)
 
     assert_select 'td', @other_member.username
@@ -114,6 +116,7 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_select 'td', @other_solution.division_number.to_s
     assert_select 'td', @other_solution.level
     assert_select 'a[href=?]', codeforces_round_solution_path(@other_solution)
+    assert_select 'a[href=?]', download_codeforces_round_solution_path(@other_solution)
     assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@other_solution)
   end
 
