@@ -28,7 +28,7 @@
             <div class="form-group solution_add_margin">
               <%= form.label :language, 'Language :', class: 'solution_form_label' %>
               <%= select_tag(:language,
-                             options_from_collection_for_select(@languages, :id, :name),
+                             options_from_collection_for_select(@languages, :name, :name),
                              required: true, class: 'form-control solution_form_value') %>
             </div>
 
