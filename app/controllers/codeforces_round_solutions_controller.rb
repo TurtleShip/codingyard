@@ -22,12 +22,7 @@ class CodeforcesRoundSolutionsController < ApplicationController
         Level: @solution.level,
         Language: @solution.language.name
     }
-    content = solution_content(@solution.save_path)
-    if content
-      @content = content
-    else
-      flash[:danger] = 'Sorry, we are having trouble loading your solution. Please try again later.'
-    end
+    fill_content
   end
 
   def new
@@ -37,12 +32,7 @@ class CodeforcesRoundSolutionsController < ApplicationController
   end
 
   def edit
-    content = solution_content(@solution.save_path)
-    if content
-      @content = content
-    else
-      flash[:danger] = 'Sorry, we are having trouble loading your solution. Please try again later.'
-    end
+    fill_content
   end
 
   def create
@@ -136,5 +126,17 @@ class CodeforcesRoundSolutionsController < ApplicationController
       end
 
       render :new unless @solution.errors.empty?
+    end
+
+    def fill_content
+      @content = solution_content(@solution.save_path)
+
+      if @content
+
+      end
+      flash[:danger] = 'Sorry, we are having trouble loading your solution. Please try again later.' unless @content
+
+      # Content could be a zip file in which case we can't properly show content as text file.
+      @content = 'Content is not properly encoded (likely a binary/zip file) and therefore cannot be displayed.' if @content && !@content.valid_encoding?
     end
 end
