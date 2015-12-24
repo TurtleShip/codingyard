@@ -2,7 +2,7 @@
 
 # Overview
 
-This is source code for [Codingyard website](www.codingyard.com). The website is built to share solutions to coding competitions. Feel free to fork this repo and create your own Codingyard for your programming team.
+This is source code for [Codingyard website](http://codingyard.com). The website is built to share solutions to coding competitions. Feel free to fork this repo and create your own Codingyard for your programming team.
 
 # Dependencies
 
