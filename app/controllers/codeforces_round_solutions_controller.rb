@@ -35,7 +35,8 @@ class CodeforcesRoundSolutionsController < ApplicationController
         Round: @solution.round_number,
         Division: @solution.division_number,
         Level: @solution.level,
-        Language: @solution.language.name
+        Language: @solution.language.name,
+        'Original problem': @solution.original_link
     }
     fill_content
   end
@@ -123,7 +124,7 @@ class CodeforcesRoundSolutionsController < ApplicationController
 
     def solution_params
       params.required(:codeforces_round_solution)
-          .permit(:round_number, :division_number, :level)
+          .permit(:round_number, :division_number, :level, :original_link)
     end
 
     def languages

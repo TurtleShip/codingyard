@@ -49,8 +49,8 @@
 
           <div class="panel-body">
             <div class="form-group">
-              <%= form.label :link, 'Link to the problem : ', class: 'solution_form_label' %>
-              <%= url_field(:link, :findme, class: 'form-control') %>
+              <%= form.label :original_link, 'Link to the problem : ', class: 'solution_form_label' %>
+              <%= form.url_field(:original_link, class: 'form-control', size: 50) %>
             </div>
           </div>
 

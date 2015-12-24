@@ -97,20 +97,33 @@ class CodeforcesUploadTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_codeforces_round_solution_path
 
     # Successful upload
+    round_number = 115
+    division_number = 1
+    level = 'A'
+    attachment = fixture_file_upload('/files/codeforces/C.java', 'text/plain')
+    original_link = 'http://codingyard.com/cool-problem'
     assert_difference 'CodeforcesRoundSolution.count', 1, 'valid upload should create a solution' do
       post codeforces_round_solutions_path,
            {
                codeforces_round_solution: {
-                   round_number: 115,
-                   division_number: 1,
-                   level: 'A',
-                   attachment: fixture_file_upload('/files/codeforces/C.java', 'text/plain')
+                   round_number: round_number,
+                   division_number: division_number,
+                   level: level,
+                   attachment: attachment,
+                   original_link: original_link
                },
                language: @language.name
            }
     end
     solution = assigns[:solution]
+
     assert_redirected_to codeforces_round_solution_path(solution.id)
+
+    assert_equal round_number, solution.round_number
+    assert_equal division_number, solution.division_number
+    assert_equal level, solution.level
+    assert_equal original_link, solution.original_link
+
     assert_not_nil flash[:success]
   end
 end

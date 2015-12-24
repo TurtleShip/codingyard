@@ -12,6 +12,7 @@ class CodeforcesRoundSolution < ActiveRecord::Base
   validates :round_number, presence: true, numericality: {greater_than: 0}
   validates :division_number, presence: true, inclusion: {in: 1..2}
   validates :level, presence: true, inclusion: %w(A B C D E)
+  validates :original_link, length: {maximum: 100}
 
   before_validation :upcase_level
 
