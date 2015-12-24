@@ -108,7 +108,8 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_select 'td', @solution.level
     assert_select 'a[href=?]', codeforces_round_solution_path(@solution)
     assert_select 'a[href=?]', download_codeforces_round_solution_path(@solution)
-    assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@solution)
+    assert_select 'a[href=?]', edit_codeforces_round_solution_path(@solution), count: 0
+    assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@solution), count: 0
 
     assert_select 'td', @other_member.username
     assert_select 'td', @other_solution.language.name
@@ -117,7 +118,8 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_select 'td', @other_solution.level
     assert_select 'a[href=?]', codeforces_round_solution_path(@other_solution)
     assert_select 'a[href=?]', download_codeforces_round_solution_path(@other_solution)
-    assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@other_solution)
+    assert_select 'a[href=?]', edit_codeforces_round_solution_path(@other_solution), count: 0
+    assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@other_solution), count: 0
   end
 
   test 'search should return correct results' do
