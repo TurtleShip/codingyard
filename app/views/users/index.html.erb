@@ -2,8 +2,21 @@
 
 <%= will_paginate %>
 
-<ul class="users">
+<table class="table table-striped">
+  <thead>
+  <tr class="user_index_header">
+    <th>Pic</th>
+    <th>Username</th>
+    <th>Admin?</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+
+  <tbody>
   <%= render @users %>
-</ul>
+  </tbody>
+</table>
 
 <%= will_paginate %>
