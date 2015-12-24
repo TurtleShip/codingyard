@@ -120,4 +120,64 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@other_solution)
   end
 
+  test 'search should return correct results' do
+    user = users(:Soyeon)
+    java = languages(:Java)
+    cpp = languages(:cpp)
+    python = languages(:Python)
+
+    CodeforcesRoundSolution.new_with_relations({round_number:1, division_number: 1, level: 'A'}, user, java).save
+    CodeforcesRoundSolution.new_with_relations({round_number:1, division_number: 1, level: 'B'}, user, java).save
+    CodeforcesRoundSolution.new_with_relations({round_number:1, division_number: 1, level: 'C'}, user, java).save
+    CodeforcesRoundSolution.new_with_relations({round_number:1, division_number: 1, level: 'D'}, user, java).save
+    CodeforcesRoundSolution.new_with_relations({round_number:1, division_number: 1, level: 'E'}, user, java).save
+
+    CodeforcesRoundSolution.new_with_relations({round_number:500, division_number: 2, level: 'A'}, user, cpp).save
+    CodeforcesRoundSolution.new_with_relations({round_number:500, division_number: 2, level: 'A'}, user, cpp).save
+    CodeforcesRoundSolution.new_with_relations({round_number:999, division_number: 2, level: 'A'}, user, cpp).save
+    CodeforcesRoundSolution.new_with_relations({round_number:500, division_number: 2, level: 'A'}, user, python).save
+    CodeforcesRoundSolution.new_with_relations({round_number:999, division_number: 2, level: 'A'}, user, python).save
+
+    # total of 10 solutions for Soyeon
+    get :index, {author: user.username}
+    assert_equal 10, assigns[:codeforces_round_solutions].count
+
+    # total of 5 Java solutions by Soyeon
+    get :index, {author: user.username, language: java.name}
+    assert_equal 5, assigns[:codeforces_round_solutions].count
+
+    # total of 3 cpp solutions by Soyoen
+    get :index, {author: user.username, language: cpp.name}
+    assert_equal 3, assigns[:codeforces_round_solutions].count
+
+    # total of 2 python solutions by Soyeon
+    get :index, {author: user.username, language: python.name}
+    assert_equal 2, assigns[:codeforces_round_solutions].count
+
+    # total of 5 round #1 solutions by Soyeon
+    get :index, {author: user.username, round_number: 1}
+    assert_equal 5, assigns[:codeforces_round_solutions].count
+
+    # total of 5 division #2 solutions by Soyeon
+    get :index, {author: user.username, division_number: 2}
+    assert_equal 5, assigns[:codeforces_round_solutions].count
+
+    # total of 6 level A solutions by Soyoen
+    get :index, {author: user.username, level: 'A'}
+    assert_equal 6, assigns[:codeforces_round_solutions].count
+
+    # total of 2 round_number #500, division #2, level 'A' solutions by Soyeon
+    get :index, {author: user.username, round_number: 500, division_number: 2}
+    assert_equal 3, assigns[:codeforces_round_solutions].count
+
+    # total of 0 solutions for round 1234.
+    get :index, {round_number: 1234}
+    assert_equal 0, assigns[:codeforces_round_solutions].count
+
+    # All solutions will be displayed for an invalid user because invalid field will be ignored.
+    get :index, {author: 'I do not exist'}
+    assert_equal CodeforcesRoundSolution.paginate(page:1, :per_page => CodeforcesRoundSolution::PER_PAGE).count,
+                 assigns[:codeforces_round_solutions].count
+  end
+
 end

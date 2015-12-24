@@ -35,6 +35,15 @@ Hansol:
   activated: true
   activated_at: <%= Time.zone.now %>
 
+Soyeon:
+  username: 'Tiffany'
+  email: 'tiffany@coder.com'
+  firstname: 'Soyeon'
+  lastname: 'Huh'
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
 <% 30.times do |id| %>
 user_<%= id %>:
   username: <%= "User_#{id}" %>

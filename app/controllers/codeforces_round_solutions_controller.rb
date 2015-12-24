@@ -3,7 +3,7 @@ class CodeforcesRoundSolutionsController < ApplicationController
   UPLOAD_SIZE_LIMIT = 1.megabytes
 
   before_action :find_solution, only: [:show, :edit, :update, :destroy, :download]
-  before_action :languages, only: [:new, :create, :show, :edit, :update]
+  before_action :languages, only: [:new, :create, :show, :edit, :update, :index]
   before_action :has_required_params, only: [:create]
   before_action :find_language, only: [:create]
   before_action :can_upload, only: [:new, :create]
@@ -11,8 +11,23 @@ class CodeforcesRoundSolutionsController < ApplicationController
   before_action :can_edit, only: [:edit, :update]
 
   def index
-    @codeforces_round_solutions = CodeforcesRoundSolution.paginate(page: params[:page], :per_page => CodeforcesRoundSolution::PER_PAGE)
-    @total = CodeforcesRoundSolution.all.count
+    filtered_params = params.permit(:round_number, :division_number, :level, :author, :language)
+    filtered_params.reject! { |key,value| value.blank? }
+
+    @warnings = []
+    author_username = filtered_params[:author]
+    if author_username.present? && !filter_author(filtered_params, author_username)
+      @warnings << "No user found by name '#{author_username}', so the author field is ignored."
+    end
+
+    language_name = filtered_params[:language]
+    if language_name.present? && !filter_language(filtered_params, language_name)
+      @warnings << "#{language_name} is not registered yet, so the language field is ignored."
+    end
+
+    @codeforces_round_solutions = CodeforcesRoundSolution
+    .where(filtered_params)
+    .paginate(page: params[:page], :per_page => CodeforcesRoundSolution::PER_PAGE)
   end
 
   def show
@@ -135,12 +150,23 @@ class CodeforcesRoundSolutionsController < ApplicationController
     def fill_content
       @content = solution_content(@solution.save_path)
 
-      if @content
-
-      end
       flash[:danger] = 'Sorry, we are having trouble loading your solution. Please try again later.' unless @content
 
       # Content could be a zip file in which case we can't properly show content as text file.
       @content = 'Content is not properly encoded (likely a binary/zip file) and therefore cannot be displayed.' if @content && !@content.valid_encoding?
     end
+
+    def filter_author(filtered_params, author_username)
+      author = User.find_by_username(author_username)
+      filtered_params[:user_id] = author.id if author
+      filtered_params.delete(:author)
+      author
+    end
+
+    def filter_language(filtered_params, language_name)
+      language = Language.find_by_name(language_name)
+      filtered_params[:language_id] = language if language
+      filtered_params.delete(:language)
+    end
+
 end
