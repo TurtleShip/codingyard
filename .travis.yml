@@ -6,3 +6,7 @@ env:
 
 script:
   - bundle exec rake db:test:prepare
+  - bundle exec rake test
+
+before_script:
+  - psql -c 'create database codingyard_test' -U postgres
