@@ -6,9 +6,9 @@ class CodeforcesRoundSolutionsController < ApplicationController
   before_action :languages, only: [:new, :create, :show, :edit, :update, :index]
   before_action :has_required_params, only: [:create]
   before_action :find_language, only: [:create]
-  before_action :can_upload_solution, only: [:new, :create]
-  before_action :can_delete_solution, only: [:destroy]
-  before_action :can_edit_solution, only: [:edit, :update]
+  before_action :check_upload_perm, only: [:new, :create]
+  before_action :check_delete_perm, only: [:destroy]
+  before_action :check_edit_perm, only: [:edit, :update]
 
   def index
     filtered_params = params.permit(:round_number, :division_number, :level, :author, :language)
@@ -107,11 +107,12 @@ class CodeforcesRoundSolutionsController < ApplicationController
   private
 
     def find_solution
-      @solution = CodeforcesRoundSolution.find(params[:id])
+      @solution ||= CodeforcesRoundSolution.find(params[:id])
       if @solution.nil?
         flash[:danger] = "There is no solution #{params[:id]}"
         redirect_back_or(codeforces_round_solutions_path)
       end
+      @solution
     end
 
     def find_language
@@ -119,6 +120,30 @@ class CodeforcesRoundSolutionsController < ApplicationController
       if @language.nil?
         flash[:danger] = "There is no language #{params[:language]}"
         redirect_back_or(new_codeforces_round_solution_path)
+      end
+    end
+
+    def check_upload_perm
+      unless can_upload_solution
+        store_location
+        flash[:danger] = 'Please login to upload a solution.'
+        redirect_to login_path
+      end
+    end
+
+    def check_delete_perm
+      unless can_delete_solution(find_solution)
+        store_location
+        flash[:danger] = 'You don\'t have permission to delete the solution.'
+        redirect_to request.referer || codeforces_round_solutions_path
+      end
+    end
+
+    def check_edit_perm
+      unless can_edit_solution(find_solution)
+        store_location
+        flash[:danger] = 'You don\'t have permission to edit the solution.'
+        redirect_to request.referer || codeforces_round_solutions_path
       end
     end
 

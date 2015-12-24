@@ -35,14 +35,14 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
 
   test 'a guest cannot delete a solution' do
     delete :destroy, id: @solution.id
-    assert_redirected_to root_url
+    assert_redirected_to codeforces_round_solutions_path
     assert_not_nil flash[:danger]
   end
 
   test 'a user cannot delete another users solution' do
     log_in_as @other_member
     delete :destroy, id: @solution.id
-    assert_redirected_to root_url
+    assert_redirected_to codeforces_round_solutions_path
     assert_not_nil flash[:danger]
   end
 
@@ -62,14 +62,14 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
 
   test 'a guest cannot edit solution' do
     get :edit, id: @solution.id
-    assert_redirected_to root_url
+    assert_redirected_to codeforces_round_solutions_path
     assert_not_nil flash[:danger]
   end
 
   test 'non-author cannot edit solution' do
     log_in_as @other_member
     get :edit, id: @solution.id
-    assert_redirected_to root_url
+    assert_redirected_to codeforces_round_solutions_path
     assert_not_nil flash[:danger]
   end
 
