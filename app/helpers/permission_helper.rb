@@ -13,4 +13,28 @@ module PermissionHelper
     current_user.admin? # only admin can delete members
   end
 
+  def can_upload_solution
+    unless logged_in?
+      store_location
+      flash[:danger] = 'Please login to upload a solution.'
+      redirect_to login_url
+    end
+  end
+
+  def can_delete_solution
+    unless logged_in? && (@solution.user == current_user || current_user.admin?)
+      store_location
+      flash[:danger] = 'You don\'t have permission to delete the solution.'
+      redirect_to (request.referer || root_url)
+    end
+  end
+
+  def can_edit_solution
+    unless logged_in? && (@solution.user == current_user || current_user.admin?)
+      store_location
+      flash[:danger] = 'You don\'t have permission to edit the solution.'
+      redirect_to (request.referer || root_url)
+    end
+  end
+
 end
