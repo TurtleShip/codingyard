@@ -1,0 +1,79 @@
+@import 'application';
+
+.solution_header {
+  @include main_header;
+  margin-bottom: 1em;
+}
+
+.solution_sub_header {
+  @include main_header;
+  font-size: 1.2em;
+}
+
+.solution_form_label {
+  font-family: $font_shadows_into_light;
+  font-size: 1.2em;
+}
+
+.solution_form_value {
+  font-family: $font_architects_daughter;
+  font-size: 1.2em;
+  margin-right: 1em;
+}
+
+.solution_index_header {
+  font-family: $font_kaushan_script;
+  font-size: 1.2em;
+}
+
+.solution_index_value {
+}
+
+.solution_number_input {
+  width: 5em !important;
+}
+
+.solution_add_margin {
+  margin-right: 1.2em;
+}
+
+.solution_display_label {
+  font-family: $font_shadows_into_light;
+  font-size: 1.2em;
+}
+
+.solution_display_value {
+  font-family: $font_architects_daughter;
+  font-size: 1.2em;
+}
+
+.solution_search_label {
+  font-family: $font_kaushan_script;
+  font-size: 1.2em;
+}
+
+#link_to_the_problem {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#type_your_solution {
+  font-family: $font_indie_flower;
+  font-size: 1.5em;
+}
+
+#note_on_edit {
+  font-family: $font_architects_daughter;
+  color: red;
+}
+
+#cf_index_warning {
+  margin-top: 1em;
+  color: red;
+}
+/*
+$font_indie_flower: "Indie Flower", $font_default;
+$font_kaushan_script: "Kaushan Script", $font_default;
+$font_architects_daughter: "Architects Daughter", $font_default;
+$font_shadows_into_light: "Shadows Into Light", $font_default;
+*/

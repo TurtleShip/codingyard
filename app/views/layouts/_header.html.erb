@@ -5,7 +5,10 @@
     <%= link_to 'Codingyard', root_path, class: 'navbar-brand' %>
 
     <ul class="nav navbar-nav">
-      <li><%= link_to 'About', about_path %></li>
+      <li><%= link_to 'Solutions', codeforces_round_solutions_path %></li>
+      <% if logged_in? %>
+        <li><%= link_to 'Upload', new_codeforces_round_solution_path %></li>
+      <% end %>
     </ul>
 
 
