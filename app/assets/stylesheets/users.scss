@@ -38,14 +38,9 @@
 
 
 /* users index */
-.users {
-  list-style: none;
-  margin: 0;
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-  }
+.users_header {
+  @include main_header;
+  margin-bottom: 1em;
 }
 
 .gravatar_edit {
