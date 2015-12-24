@@ -1,1 +1,8 @@
 language: ruby
+
+env:
+  - DB=sqlite
+  - DB=postgresql
+
+script:
+  - bundle exec rake db:test:prepare
