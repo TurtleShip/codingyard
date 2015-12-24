@@ -35,14 +35,14 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
 
   test 'a guest cannot delete a solution' do
     delete :destroy, id: @solution.id
-    assert_redirected_to root_url
+    assert_redirected_to codeforces_round_solutions_path
     assert_not_nil flash[:danger]
   end
 
   test 'a user cannot delete another users solution' do
     log_in_as @other_member
     delete :destroy, id: @solution.id
-    assert_redirected_to root_url
+    assert_redirected_to codeforces_round_solutions_path
     assert_not_nil flash[:danger]
   end
 
@@ -62,14 +62,14 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
 
   test 'a guest cannot edit solution' do
     get :edit, id: @solution.id
-    assert_redirected_to root_url
+    assert_redirected_to codeforces_round_solutions_path
     assert_not_nil flash[:danger]
   end
 
   test 'non-author cannot edit solution' do
     log_in_as @other_member
     get :edit, id: @solution.id
-    assert_redirected_to root_url
+    assert_redirected_to codeforces_round_solutions_path
     assert_not_nil flash[:danger]
   end
 
@@ -108,7 +108,8 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_select 'td', @solution.level
     assert_select 'a[href=?]', codeforces_round_solution_path(@solution)
     assert_select 'a[href=?]', download_codeforces_round_solution_path(@solution)
-    assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@solution)
+    assert_select 'a[href=?]', edit_codeforces_round_solution_path(@solution), count: 0
+    assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@solution), count: 0
 
     assert_select 'td', @other_member.username
     assert_select 'td', @other_solution.language.name
@@ -117,7 +118,8 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     assert_select 'td', @other_solution.level
     assert_select 'a[href=?]', codeforces_round_solution_path(@other_solution)
     assert_select 'a[href=?]', download_codeforces_round_solution_path(@other_solution)
-    assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@other_solution)
+    assert_select 'a[href=?]', edit_codeforces_round_solution_path(@other_solution), count: 0
+    assert_select 'a[data-method="delete"]', :href => codeforces_round_solution_path(@other_solution), count: 0
   end
 
   test 'search should return correct results' do
