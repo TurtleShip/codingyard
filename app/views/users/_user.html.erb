@@ -2,11 +2,7 @@
   <td><%= gravatar_for user, size: 50, class: 'gravatar' %></td>
   <td><%= user.username %></td>
   <td><%= user.admin? ? 'Admin' : 'Member' %></td>
-  <td><%= link_to 'Show', user %></td>
-  <td><%= link_to 'Edit', edit_user_path(user) %></td>
-  <td>
-    <% if current_user.admin? && !user.admin? %>
-        <%= link_to 'delete', user, method: :delete, data: {confirm: 'You sure?'} %>
-    <% end %>
-  </td>
+  <td><%= link_to 'show', user %></td>
+  <td><%= (link_to 'edit', edit_user_path(user)) if can_edit_user user %></td>
+  <td><%= (link_to 'delete', user_path(user), method: :delete, data: {confirm: 'You sure?'}) if can_delete_user user %></td>
 </tr>
