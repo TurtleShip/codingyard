@@ -13,6 +13,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     # Headers
     assert_select 'a[href=?]', root_path
     assert_select 'a[href=?]', codeforces_round_solutions_path
+    assert_select 'a[href=?]', users_path # Users
     assert_select 'a[href=?]', login_path
     assert_select 'a[href=?]', signup_path
 
