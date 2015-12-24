@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/TurtleShip/codingyard.svg?branch=master)](https://travis-ci.org/TurtleShip/codingyard)
+
 # Overview
 
 This is source code for [Codingyard website](www.codingyard.com). The website is built to share solutions to coding competitions. Feel free to fork this repo and create your own Codingyard for your programming team.
