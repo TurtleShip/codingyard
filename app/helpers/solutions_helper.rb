@@ -1,30 +1,5 @@
 module SolutionsHelper
 
-  def can_upload
-    unless logged_in?
-      store_location
-      flash[:danger] = 'Please login to upload a solution.'
-      redirect_to login_url
-    end
-  end
-
-  def can_delete
-    unless logged_in? && (@solution.user == current_user || current_user.admin?)
-      store_location
-      flash[:danger] = 'You don\'t have permission to delete the solution.'
-      redirect_to (request.referer || root_url)
-    end
-  end
-
-  def can_edit
-    unless logged_in? && (@solution.user == current_user || current_user.admin?)
-      store_location
-      flash[:danger] = 'You don\'t have permission to edit the solution.'
-      redirect_to (request.referer || root_url)
-    end
-  end
-
-
   # Uploads the given file to the given path.
   # Returns true if upload was successful. False otherwise.
   def upload_solution(path, file)

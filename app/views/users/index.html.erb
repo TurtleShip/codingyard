@@ -1,9 +1,21 @@
-<h1>All users</h1>
+<h1 class="users_header">All users</h1>
 
 <%= will_paginate %>
 
-<ul class="users">
+<table class="table table-striped">
+  <thead>
+  <tr class="user_index_header">
+    <th>Pic</th>
+    <th>Username</th>
+    <th>Admin?</th>
+    <!-- Place holder for Show/Edit/delete -->
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
   <%= render @users %>
-</ul>
+  </tbody>
+</table>
 
 <%= will_paginate %>

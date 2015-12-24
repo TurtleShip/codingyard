@@ -1,7 +1,8 @@
-<li>
-  <%= gravatar_for user, size: 50, class: 'gravatar' %>
-  <%= link_to user.username, user %>
-  <% if current_user.admin? && !current_user?(user) %>
-      | <%= link_to 'delete', user, method: :delete, data: {confirm: 'You sure?'} %>
-  <% end %>
-</li>
+<tr>
+  <td><%= gravatar_for user, size: 50, class: 'gravatar' %></td>
+  <td><%= user.username %></td>
+  <td><%= user.admin? ? 'Admin' : 'Member' %></td>
+  <td><%= link_to 'show', user %></td>
+  <td><%= (link_to 'edit', edit_user_path(user)) if can_edit_user user %></td>
+  <td><%= (link_to 'delete', user_path(user), method: :delete, data: {confirm: 'You sure?'}) if can_delete_user user %></td>
+</tr>

@@ -6,9 +6,9 @@ class CodeforcesRoundSolutionsController < ApplicationController
   before_action :languages, only: [:new, :create, :show, :edit, :update, :index]
   before_action :has_required_params, only: [:create]
   before_action :find_language, only: [:create]
-  before_action :can_upload, only: [:new, :create]
-  before_action :can_delete, only: [:destroy]
-  before_action :can_edit, only: [:edit, :update]
+  before_action :can_upload_solution, only: [:new, :create]
+  before_action :can_delete_solution, only: [:destroy]
+  before_action :can_edit_solution, only: [:edit, :update]
 
   def index
     filtered_params = params.permit(:round_number, :division_number, :level, :author, :language)
