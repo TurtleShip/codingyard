@@ -9,4 +9,9 @@ class Contest < ActiveRecord::Base
   def Contest.codeforces
     @codeforces ||= find_by_name('Codeforces')
   end
+
+  def Contest.topcoder
+    @topcoder ||= find_by_name('TopCoder')
+  end
+
 end

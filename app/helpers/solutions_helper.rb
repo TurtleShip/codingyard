@@ -1,5 +1,7 @@
 module SolutionsHelper
 
+  PER_PAGE = 30 # Number of solutions to display per page during pagination
+
   # Uploads the given file to the given path.
   # Returns true if upload was successful. False otherwise.
   def upload_solution(path, file)
