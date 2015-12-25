@@ -50,10 +50,18 @@ module SessionsHelper
     @current_user = nil
   end
 
-  # Redirects to stored location, previous location, (or to the default).
+  # Redirects to stored location, or to the default.
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
+  end
+
+  # Redirects back to the page that made the request, or the default.
+  # Be careful not to use this method on endpoint that could make a request to itself, such as
+  # index page that issues a search request with params. Using this method on such endpoints will
+  # result in self-loop.
+  def redirect_to_referer_or(default)
+    redirect_to request.referer || default
   end
 
   # Stores the URL trying to be accessed.

@@ -81,7 +81,7 @@ class SolutionsController < ApplicationController
     unless can_upload_solution
       if current_user
         flash[:danger] = 'You don\'t have permission to upload a solution.'
-        redirect_to request.referrer || codeforces_round_solutions_path
+        redirect_to_referer_or codeforces_round_solutions_path
       else
         store_location
         flash[:danger] = 'Please login to upload a solution.'
@@ -95,7 +95,7 @@ class SolutionsController < ApplicationController
     unless can_delete_solution(find_solution)
       store_location
       flash[:danger] = 'You don\'t have permission to delete the solution.'
-      redirect_to request.referer || codeforces_round_solutions_path
+      redirect_to_referer_or codeforces_round_solutions_path
     end
   end
 
@@ -103,7 +103,7 @@ class SolutionsController < ApplicationController
     unless can_edit_solution(find_solution)
       store_location
       flash[:danger] = 'You don\'t have permission to edit the solution.'
-      redirect_to request.referer || codeforces_round_solutions_path
+      redirect_to_referer_or codeforces_round_solutions_path
     end
   end
 
