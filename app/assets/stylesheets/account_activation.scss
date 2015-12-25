@@ -1,0 +1,11 @@
+@import 'application';
+
+#send_activation_header {
+  @include main_header;
+  margin-bottom: 1.0em;
+}
+
+#send_me_activation_link {
+  font-family: $font_architects_daughter;
+  margin-top: 1.0em;
+}

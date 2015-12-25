@@ -29,6 +29,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     # "Reset password" option should be visible
     assert_select 'a[href=?]', new_password_reset_path
 
+    # "Resend activation link" option should be visible
+    assert_select 'a[href=?]', new_account_activation_path
+
     post login_path, session: {
                        username: @user.username,
                        password: 'password'

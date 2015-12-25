@@ -13,7 +13,8 @@
         <%= form.label :password, class: 'form_label text-right' %>
         <%= form.password_field :password, class: 'form-control form_value' %>
       </div>
-      <%= link_to '(forgot password)', new_password_reset_path, class: 'font_architects_daughter' %>
+      <%= link_to '(forgot password)', new_password_reset_path, class: 'font_architects_daughter' %> <br/>
+      <%= link_to '(resend activation link)', new_account_activation_path, class: 'font_architects_daughter' %>
       <br/>
 
       <%= form.submit 'Log in', class: 'btn btn-success', id: 'login_button' %>

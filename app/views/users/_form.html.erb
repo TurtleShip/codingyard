@@ -31,5 +31,7 @@
       <%= form.password_field :password_confirmation, class: 'form-control form_value' %>
     </div>
 
+    <%= link_to '(resend activation link)', new_account_activation_path, class: 'font_architects_daughter' %><br/>
+
     <%= form.submit yield(:button_text), class: 'btn btn-success form_submit' %>
 <% end %>

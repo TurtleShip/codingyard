@@ -25,6 +25,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test 'valid signup with account activation' do
     get signup_path
 
+    # "Resend activation link" option should be visible
+    assert_select 'a[href=?]', new_account_activation_path
+
     assert_difference 'User.count', 1, 'valid form submission should create a new user' do
       post users_path, user: {
                          username: 'valid_username',

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :users
-  resources :account_activations, only: [:edit]
+  resources :account_activations, only: [:new, :create, :edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :codeforces_round_solutions do get :download, on: :member end
 
