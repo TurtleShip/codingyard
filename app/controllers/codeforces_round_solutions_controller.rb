@@ -1,11 +1,9 @@
 class CodeforcesRoundSolutionsController < SolutionsController
 
-  UPLOAD_SIZE_LIMIT = 1.megabytes
-
   before_action :find_solution, only: [:show, :edit, :update, :destroy, :download]
   before_action :languages, only: [:new, :create, :show, :edit, :update, :index]
   before_action :has_required_params, only: [:create]
-  before_action :find_language, only: [:create]
+  # before_action :find_language, only: [:create]
   before_action :check_upload_perm, only: [:new, :create]
   before_action :check_delete_perm, only: [:destroy]
   before_action :check_edit_perm, only: [:edit, :update]
@@ -55,41 +53,6 @@ class CodeforcesRoundSolutionsController < SolutionsController
     fill_content
   end
 
-  def create
-    @solution = CodeforcesRoundSolution.new_with_relations(solution_params, current_user, Language.find_by_name(params[:language]))
-
-    # Check for attachment
-    attachment = params[:codeforces_round_solution][:attachment]
-
-    if attachment.blank?
-      flash.now[:danger] = 'Please attach a solution.'
-      render :new
-      return
-    end
-
-    if attachment.size > UPLOAD_SIZE_LIMIT
-      flash.now[:danger] = 'File cannot be bigger than 1 MB (megabytes).'
-      render :new
-      return
-    end
-
-    file = attachment.read
-    path = @solution.create_save_path(file)
-    upload_success = upload_solution path, file
-    @solution.save_path = path
-
-
-    if upload_success && @solution.save
-      flash[:success] = 'Solutions has been successfully uploaded!'
-      redirect_to @solution
-    else
-      flash.now[:danger] = 'Sorry, we are having trouble uploading your solution. Please try again later.' unless upload_success
-      render :new
-    end
-
-
-  end
-
   def update
     if @solution.update_attributes(solution_params)
       flash.now[:success] = "Solution ##{@solution.id} has been successfully updated."
@@ -111,13 +74,26 @@ class CodeforcesRoundSolutionsController < SolutionsController
       if @solution.nil?
         flash[:danger] = "There is no solution #{params[:id]}"
         redirect_back_or(codeforces_round_solutions_path)
+      else
+        @solution
       end
-      @solution
+    end
+
+    def new_solution
+      @solution = CodeforcesRoundSolution.new
+    end
+
+    def new_solution_with_relations
+      @solution = CodeforcesRoundSolution.new_with_relations(solution_params, current_user, @language)
     end
 
     def solution_params
       params.required(:codeforces_round_solution)
           .permit(:round_number, :division_number, :level, :original_link)
+    end
+
+    def attachment_param
+      params[:codeforces_round_solution][:attachment]
     end
 
     def has_required_params
