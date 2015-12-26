@@ -5,10 +5,16 @@ class SolutionsController < ApplicationController
   PER_PAGE = 30 # Number of solutions to display per page during pagination
   UPLOAD_SIZE_LIMIT = 1.megabytes
 
-  before_filter :find_language, only: [:create]
+  before_action :find_solution, only: [:show, :edit, :update, :destroy, :download]
+  before_action :languages, only: [:new, :create, :show, :edit, :update, :index]
+  before_action :find_language, only: [:create]
+  before_action :has_required_params_for_create, only: [:create]
+  before_action :check_upload_perm, only: [:new, :create]
+  before_action :check_delete_perm, only: [:destroy]
+  before_action :check_edit_perm, only: [:edit, :update]
 
   def index
-    filtered_params = search_params.reject { |key,value| value.blank? }
+    filtered_params = search_params.reject { |key, value| value.blank? }
 
     @warnings = []
     author_username = filtered_params[:author]
@@ -21,18 +27,24 @@ class SolutionsController < ApplicationController
       @warnings << "#{language_name} is not registered yet, so the language field is ignored."
     end
 
-    @codeforces_round_solutions = filter_solution(filtered_params)
+    @codeforces_round_solutions = solution_class
+                                      .where(filtered_params)
                                       .paginate(page: params[:page], :per_page => PER_PAGE)
   end
 
+  def show
+    @solution_info = solution_info
+    fill_content # Content of the solution will be available as @content
+  end
+
   def new
-    @solution = new_solution
+    @solution = solution_class.new
     @is_new = true
     @supported_file_types = Language.get_all_extensions_concat
   end
 
   def create
-    @solution = new_solution_with_relations
+    @solution = solution_class.new_with_relations(solution_params, current_user, @language)
 
     # Check for attachment
     attachment = attachment_param
@@ -66,19 +78,7 @@ class SolutionsController < ApplicationController
 
   protected
 
-  def filter_solution(search_params)
-    raise NotImplementedError
-  end
-
-  def find_solution
-    raise NotImplementedError
-  end
-
-  def new_solution
-    raise NotImplementedError
-  end
-
-  def new_solution_with_relations
+  def solution_class
     raise NotImplementedError
   end
 
@@ -88,6 +88,7 @@ class SolutionsController < ApplicationController
   end
 
   # params that will be used to search solutions.
+  # Note that search params keys with nil or '' will be ignored.
   # Search param can include 'author' (the username of the user who wrote a solution)
   # and 'language' (the name of the language in which a solution is written)
   def search_params
@@ -96,6 +97,25 @@ class SolutionsController < ApplicationController
 
   def attachment_param
     raise NotImplementedError
+  end
+
+  # A hash map containing <key,value> = <attribute_name, attribute_value> that you want
+  # to show to users for a specific solution.
+  # The caller of this method can assume that the solution to be displayed is available in scope
+  # as @solution.
+  # The hash map will be available in view as @solution_info
+  def solution_info
+    raise NotImplementedError
+  end
+
+  def find_solution
+    @solution ||= solution_class.find_by_id(params[:id])
+    if @solution.nil?
+      flash[:danger] = "There is no solution #{params[:id]}"
+      redirect_back_or(codeforces_round_solutions_path)
+    else
+      @solution
+    end
   end
 
   def find_language
@@ -160,6 +180,23 @@ class SolutionsController < ApplicationController
 
     # Content could be a zip file in which case we can't properly show content as text file.
     @content = 'Content is not properly encoded (likely a binary/zip file) and therefore cannot be displayed.' if @content && !@content.valid_encoding?
+  end
+
+  def has_required_params_for_create
+    @solution = solution_class.new
+    if params.blank?
+      @solution.errors.add(:parameters, 'must be provided')
+    else
+      tmp_params = params[solution_class.to_s.underscore]
+      if tmp_params.blank?
+        @solution.errors.add(:parameters, "missing values for #{solution_class.to_s.underscore}")
+      else
+        @solution.errors.add(:attachment, 'must be provided') unless tmp_params[:attachment].present?
+      end
+      @solution.errors.add(:language, 'must be specified') unless params[:language].present?
+    end
+
+    render :new unless @solution.errors.empty?
   end
 
 end
