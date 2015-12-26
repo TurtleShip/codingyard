@@ -7,6 +7,24 @@ class SolutionsController < ApplicationController
 
   before_filter :find_language, only: [:create]
 
+  def index
+    filtered_params = search_params.reject { |key,value| value.blank? }
+
+    @warnings = []
+    author_username = filtered_params[:author]
+    if author_username.present? && !filter_author(filtered_params, author_username)
+      @warnings << "No user found by name '#{author_username}', so the author field is ignored."
+    end
+
+    language_name = filtered_params[:language]
+    if language_name.present? && !filter_language(filtered_params, language_name)
+      @warnings << "#{language_name} is not registered yet, so the language field is ignored."
+    end
+
+    @codeforces_round_solutions = filter_solution(filtered_params)
+                                      .paginate(page: params[:page], :per_page => PER_PAGE)
+  end
+
   def new
     @solution = new_solution
     @is_new = true
@@ -48,6 +66,10 @@ class SolutionsController < ApplicationController
 
   protected
 
+  def filter_solution(search_params)
+    raise NotImplementedError
+  end
+
   def find_solution
     raise NotImplementedError
   end
@@ -62,6 +84,13 @@ class SolutionsController < ApplicationController
 
   # filter parameters required/permitted for the solution this controller is handling.
   def solution_params
+    raise NotImplementedError
+  end
+
+  # params that will be used to search solutions.
+  # Search param can include 'author' (the username of the user who wrote a solution)
+  # and 'language' (the name of the language in which a solution is written)
+  def search_params
     raise NotImplementedError
   end
 

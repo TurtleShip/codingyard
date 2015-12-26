@@ -3,30 +3,9 @@ class CodeforcesRoundSolutionsController < SolutionsController
   before_action :find_solution, only: [:show, :edit, :update, :destroy, :download]
   before_action :languages, only: [:new, :create, :show, :edit, :update, :index]
   before_action :has_required_params, only: [:create]
-  # before_action :find_language, only: [:create]
   before_action :check_upload_perm, only: [:new, :create]
   before_action :check_delete_perm, only: [:destroy]
   before_action :check_edit_perm, only: [:edit, :update]
-
-  def index
-    filtered_params = params.permit(:round_number, :division_number, :level, :author, :language)
-    filtered_params.reject! { |key,value| value.blank? }
-
-    @warnings = []
-    author_username = filtered_params[:author]
-    if author_username.present? && !filter_author(filtered_params, author_username)
-      @warnings << "No user found by name '#{author_username}', so the author field is ignored."
-    end
-
-    language_name = filtered_params[:language]
-    if language_name.present? && !filter_language(filtered_params, language_name)
-      @warnings << "#{language_name} is not registered yet, so the language field is ignored."
-    end
-
-    @codeforces_round_solutions = CodeforcesRoundSolution
-    .where(filtered_params)
-    .paginate(page: params[:page], :per_page => PER_PAGE)
-  end
 
   def show
     @solution_info = {
@@ -69,6 +48,10 @@ class CodeforcesRoundSolutionsController < SolutionsController
 
   private
 
+    def filter_solution(search_params)
+      CodeforcesRoundSolution.where(search_params)
+    end
+
     def find_solution
       @solution ||= CodeforcesRoundSolution.find_by_id(params[:id])
       if @solution.nil?
@@ -90,6 +73,10 @@ class CodeforcesRoundSolutionsController < SolutionsController
     def solution_params
       params.required(:codeforces_round_solution)
           .permit(:round_number, :division_number, :level, :original_link)
+    end
+
+    def search_params
+      params.permit(:round_number, :division_number, :level, :author, :language)
     end
 
     def attachment_param
