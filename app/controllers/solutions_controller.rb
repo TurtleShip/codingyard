@@ -76,6 +76,27 @@ class SolutionsController < ApplicationController
     end
   end
 
+  def edit
+    fill_content
+  end
+
+  def update
+    if @solution.update_attributes(solution_params)
+      flash.now[:success] = "Solution ##{@solution.id} has been successfully updated."
+    end
+    render :edit
+  end
+
+  def destroy
+    solution_id = @solution.id
+    @solution.destroy
+    flash[:success] = "Solution ##{solution_id} was successfully deleted."
+    redirect_to action: :index
+  end
+
+  def download
+    send_data solution_content(@solution.save_path), disposition: 'attachment', filename: @solution.save_path.split('/').last
+  end
   protected
 
   def solution_class
