@@ -1,0 +1,12 @@
+<tr class="solution_index_value">
+  <td><%= top_coder_srm_solution.srm_number %></td>
+  <td><%= top_coder_srm_solution.division_number %></td>
+  <td><%= top_coder_srm_solution.difficulty %></td>
+  <td><%= top_coder_srm_solution.user.username %></td>
+  <td><%= top_coder_srm_solution.language.name %></td>
+  <td><%= top_coder_srm_solution.created_at %></td>
+  <td><%= link_to 'Show', top_coder_srm_solution %></td>
+  <td><%= link_to 'Download', download_top_coder_srm_solution_path(top_coder_srm_solution) %></td>
+  <td><%= (link_to 'Edit', edit_top_coder_srm_solution_path(top_coder_srm_solution)) if can_edit_solution(top_coder_srm_solution) %></td>
+  <td><%= (link_to 'Destroy', top_coder_srm_solution, method: :delete, data: {confirm: 'Are you sure?'}) if can_delete_solution(top_coder_srm_solution) %></td>
+</tr>

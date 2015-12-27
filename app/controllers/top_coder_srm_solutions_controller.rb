@@ -27,4 +27,8 @@ class TopCoderSrmSolutionsController < SolutionsController
           'Original problem': @solution.original_link
       }
     end
+
+    def assign_to_index_variable(solutions)
+      @top_coder_srm_solutions = solutions
+    end
 end

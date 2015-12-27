@@ -27,9 +27,9 @@ class SolutionsController < ApplicationController
       @warnings << "#{language_name} is not registered yet, so the language field is ignored."
     end
 
-    @codeforces_round_solutions = solution_class
-                                      .where(filtered_params)
-                                      .paginate(page: params[:page], :per_page => PER_PAGE)
+    assign_to_index_variable solution_class
+                     .where(filtered_params)
+                     .paginate(page: params[:page], :per_page => PER_PAGE)
   end
 
   def show
@@ -97,6 +97,7 @@ class SolutionsController < ApplicationController
   def download
     send_data solution_content(@solution.save_path), disposition: 'attachment', filename: @solution.save_path.split('/').last
   end
+
   protected
 
   def solution_class
@@ -126,6 +127,13 @@ class SolutionsController < ApplicationController
   # as @solution.
   # The hash map will be available in view as @solution_info
   def solution_info
+    raise NotImplementedError
+  end
+
+  # Assign given solutions to an instance variable to be used in index view.
+  # will_paginate gem requires to name an instance variable as plural of the current solutions.
+  # ex> @codeforces_round_solutions, @top_coder_srm_solutions
+  def assign_to_index_variable(solutions)
     raise NotImplementedError
   end
 

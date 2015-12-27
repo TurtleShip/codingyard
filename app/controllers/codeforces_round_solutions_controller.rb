@@ -28,4 +28,8 @@ class CodeforcesRoundSolutionsController < SolutionsController
       }
     end
 
+    def assign_to_index_variable(solutions)
+      @codeforces_round_solutions = solutions
+    end
+
 end
