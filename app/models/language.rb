@@ -1,6 +1,8 @@
 class Language < ActiveRecord::Base
 
   has_many :codeforces_round_solutions
+  has_many :top_coder_srm_solutions
+  has_many :uva_solutions
 
   validates :name, presence: true
   validates :extension, presence: true

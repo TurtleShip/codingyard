@@ -13,18 +13,34 @@
     <% @user_basic_info.each do |attr_name, value| %>
 
         <div class="row">
-          <div class="col-md-2 text-right">
+          <div class="col-md-3 text-right user_info_label">
             <%= attr_name %>
           </div>
-          <div class="text-left">
+          <div class="text-left user_info_value">
             <%= value %>
           </div>
         </div>
+
     <% end %>
+
+    <div class="row">
+      <div class="col-md-3 text-right user_info_label">
+        <%= link_to 'Codeforces solutions', codeforces_round_solutions_path({author: @user.username}), target: '_blank' %></div>
+      <div class="text-left user_info_value"><%= @user.codeforces_round_solutions.count %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 text-right user_info_label">
+        <%= link_to 'TopCoder solutions', top_coder_srm_solutions_path({author: @user.username}), target: '_blank' %></div>
+      <div class="text-left user_info_value"><%= @user.top_coder_srm_solutions.count %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 text-right user_info_label">
+        <%= link_to 'UVa solutions', uva_solutions_path({author: @user.username}), target: '_blank' %></div>
+      <div class="text-left user_info_value"><%= @user.uva_solutions.count %></div>
+    </div>
+
   </section>
-
 </div>
-
-<!--TODO: Display number of solutions uploaded-->
-<!--TODO: and links to them-->
 

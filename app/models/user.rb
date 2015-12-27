@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :top_coder_srm_solutions, dependent: :destroy
   has_many :codeforces_round_solutions, dependent: :destroy
+  has_many :uva_solutions, dependent: :destroy
 
   validates :username, presence: true, uniqueness: {case_sensitive: false},
             format: {with: VALID_USERNAME_REGEX},
