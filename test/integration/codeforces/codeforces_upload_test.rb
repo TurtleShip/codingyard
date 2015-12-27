@@ -25,7 +25,7 @@ class CodeforcesUploadTest < ActionDispatch::IntegrationTest
                          'user should redirected back to solution upload page'
 
     follow_redirect!
-    assert_template 'codeforces_round_solutions/new', 'new.html.erb should be rendered when redirected back to upload page'
+    assert_template 'codeforces_round_solutions/new', '_new.html.erb should be rendered when redirected back to upload page'
 
     # Provide no data
     post_via_redirect codeforces_round_solutions_path

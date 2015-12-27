@@ -1,40 +1,4 @@
-<div class="panel panel-success">
-  <div class="panel-heading solution_sub_header">
-    Solution info
-  </div>
-  <div class="panel-body">
-    <% @solution_info.each do |attr_name, value| %>
-        <div class="row">
-          <div class="col-md-2 text-right solution_display_label">
-            <%= attr_name %>
-          </div>
-          <div class="text-left solution_display_value">
-            <%= value %>
-          </div>
-        </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="panel panel-info">
-  <div class="panel-heading solution_sub_header">
-    Solution
-  </div>
-  <%= link_to 'Download', download_codeforces_round_solution_path(@solution) %>
-
-  <div class="panel-body">
-    <div id="editor" style="height: 500px"><%= @content %></div>
-  </div>
-</div>
-
-
-<%= link_to 'Upload more solutions!', new_codeforces_round_solution_path %>
-<%= link_to 'See other solutions', codeforces_round_solutions_path %>
-
-
-<script>
-    var editor = ace.edit('editor');
-    editor.setTheme('ace/theme/twilight');
-    editor.getSession().setMode('ace/mode/<%="#{@solution.language.ace_mode}"%>');
-    editor.setReadOnly(true);
-</script>
+<% provide(:download_path, download_codeforces_round_solution_path) %>
+<% provide(:upload_path, new_codeforces_round_solution_path) %>
+<% provide(:index_path, codeforces_round_solutions_path) %>
+<%= render 'solutions/show' %>

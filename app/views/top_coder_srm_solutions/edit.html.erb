@@ -1,23 +1,5 @@
-<%= provide(:button_text, 'save') %>
-<h1 class="solution_header">Editing TopCoder SRM Solution</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @solution %> |
-<%= link_to 'See other solutions', top_coder_srm_solutions_path %>
-
-<div id="note_on_edit">
-Note that the content of the uploaded solution cannot be edited. Only its metadata can be edited.
-</div>
-
-<div id="editor" style="height: 500px">
-  <%= @content %>
-</div>
-
-<script>
-    var editor = ace.edit('editor');
-    editor.setTheme('ace/theme/twilight');
-    editor.getSession().setMode('ace/mode/<%="#{@solution.language.ace_mode}"%>');
-    editor.setReadOnly(true);
-</script>
-d
+<% provide(:button_text, 'save') %>
+<% provide(:header_text, 'Editing TopCoder SRM Solution') %>
+<% provide(:index_path, top_coder_srm_solutions_path) %>
+<% provide(:form_location, 'top_coder_srm_solutions/form') %>
+<%= render 'solutions/edit' %>
