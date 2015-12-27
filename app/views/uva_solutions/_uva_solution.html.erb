@@ -1,5 +1,8 @@
 <tr class="solution_index_value">
   <td><%= uva_solution.problem_number %></td>
+  <td><%= link_to uva_solution.user.username, uva_solution.user, target: '_blank' %></td>
+  <td><%= uva_solution.language.name %></td>
+  <td><%= uva_solution.created_at %></td>
   <td><%= link_to 'Show', uva_solution_path(uva_solution) %></td>
   <td><%= link_to 'Download', download_uva_solution_path(uva_solution) %></td>
   <td><%= (link_to 'Edit', edit_uva_solution_path(uva_solution)) if can_edit_solution(uva_solution) %></td>
