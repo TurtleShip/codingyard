@@ -12,7 +12,15 @@ This is source code for [Codingyard website](http://codingyard.com). The website
 
 # Environmental variables
 
-Please provide your AWS credentials to [.env](.env) file.
+Create ```.env``` file in root directory of codingyard, and provide your AWS credentials as below.
+
+```yml
+AWS_ACCESS_KEY_ID='key id to your AWS account'
+AWS_SECRET_ACCESS_KEY='Access key to your AWS account'
+AWS_REGION='your AWS region'
+MASTER_BUCKET='your AWS S3 bucket name where solutions will be stored.'
+```
+
 
 # Contribution guide
 1. Fork me.
