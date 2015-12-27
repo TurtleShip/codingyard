@@ -37,6 +37,11 @@
           <div class="panel-heading solution_sub_header">Optional</div>
 
           <div class="panel-body">
+            <div class="form-group solution_add_margin">
+              <%= form.label :title, 'Problem title : ', class: 'solution_form_label' %>
+              <%= form.text_field(:title, class: 'form-control', size: 30) %>
+            </div>
+
             <div class="form-group">
               <%= form.label :original_link, 'Link to the problem : ', class: 'solution_form_label' %>
               <%= form.url_field(:original_link, class: 'form-control', size: 50) %>

@@ -7,7 +7,7 @@ class UvaSolutionsController < SolutionsController
 
   def solution_params
     params.required(:uva_solution)
-        .permit(:problem_number, :original_link)
+        .permit(:problem_number, :original_link, :title)
   end
 
   def search_params
@@ -21,6 +21,7 @@ class UvaSolutionsController < SolutionsController
   def solution_info
     {
         'Problem number': @solution.problem_number,
+        Title: @solution.title,
         Language: @solution.language.name,
         'Original problem': @solution.original_link
     }

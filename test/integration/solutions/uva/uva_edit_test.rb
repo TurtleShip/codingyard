@@ -40,11 +40,13 @@ class UvaEditTest < ActionDispatch::IntegrationTest
     # Send edit request
     new_problem_number = 999
     problem_link = 'http://codingyard.com/good-prob'
+    title = 'Beautiful world!'
     patch uva_solution_path(solution),
           {
               uva_solution: {
                   problem_number: new_problem_number,
-                  original_link: problem_link
+                  original_link: problem_link,
+                  title: title
               },
               language: solution.language.name
 
@@ -54,6 +56,7 @@ class UvaEditTest < ActionDispatch::IntegrationTest
     solution.reload
     assert_equal new_problem_number, solution.problem_number
     assert_equal problem_link, solution.original_link
+    assert_equal title, solution.title
 
     # We should be directed back to edit with success message
     assert_template('uva_solutions/edit')

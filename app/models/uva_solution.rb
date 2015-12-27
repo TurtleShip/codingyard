@@ -9,6 +9,7 @@ class UvaSolution < ActiveRecord::Base
   validates :language_id, presence: true
   validates :problem_number, presence: true, numericality: {greater_than: 0}
   validates :original_link, length: {maximum: 255}
+  validates :title, length: {maximum: 255}
 
   acts_as_votable
 
