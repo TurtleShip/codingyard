@@ -13,6 +13,14 @@
           </div>
         </div>
     <% end %>
+    <div class="row">
+      <div class="col-md-2 text-right solution_display_label">
+        Author
+      </div>
+      <div class="text-left solution_display_value">
+        <%= link_to @solution.user.username, user_path(@solution.user), target: '_blank' %>
+      </div>
+    </div>
   </div>
 </div>
 
