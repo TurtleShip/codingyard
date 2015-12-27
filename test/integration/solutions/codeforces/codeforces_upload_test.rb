@@ -27,10 +27,11 @@ class CodeforcesUploadTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'codeforces_round_solutions/new', '_new.html.erb should be rendered when redirected back to upload page'
 
+    # Check links
+    assert_select 'a[href=?]', codeforces_round_solutions_path
+
     # Provide no data
     post_via_redirect codeforces_round_solutions_path
-    # assert_redirected_to new_codeforces_round_solution_path
-    # follow_redirect!
     assert_template 'codeforces_round_solutions/new', 'unsuccessful upload should redirect back to upload page'
     assert_template({partial: 'shared/_error_messages'}, 'unsuccessful upload should display errors')
     assert_not_nil flash[:danger]
