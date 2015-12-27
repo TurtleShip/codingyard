@@ -12,6 +12,7 @@ class AccountActivationsController < ApplicationController
         flash[:info] = "User with email #{email} is already activated."
         redirect_back_or(login_path)
       else
+        user.create_activation_digest
         user.send_activation_email
         flash[:success] = "Activation email was sent again to email #{email}"
         redirect_back_or(login_path)
