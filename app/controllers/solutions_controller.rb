@@ -5,13 +5,14 @@ class SolutionsController < ApplicationController
   PER_PAGE = 30 # Number of solutions to display per page during pagination
   UPLOAD_SIZE_LIMIT = 1.megabytes
 
-  before_action :find_solution, only: [:show, :edit, :update, :destroy, :download]
+  before_action :find_solution, only: [:show, :edit, :update, :destroy, :download, :like, :dislike, :cancel_vote]
   before_action :languages, only: [:new, :create, :show, :edit, :update, :index]
   before_action :find_language, only: [:create]
   before_action :has_required_params_for_create, only: [:create]
   before_action :check_upload_perm, only: [:new, :create]
   before_action :check_delete_perm, only: [:destroy]
   before_action :check_edit_perm, only: [:edit, :update]
+  before_action :check_vote_perm, only: [:like, :dislike, :cancel_vote]
 
   def index
     filtered_params = search_params.reject { |key, value| value.blank? }
@@ -98,6 +99,24 @@ class SolutionsController < ApplicationController
     send_data solution_content(@solution.save_path), disposition: 'attachment', filename: @solution.save_path.split('/').last
   end
 
+  def like
+    @solution.liked_by current_user
+    flash[:success] = "You liked solution #{@solution.id}"
+    redirect_back_or @solution
+  end
+
+  def dislike
+    @solution.disliked_by current_user
+    flash[:success] = "You disliked solution #{@solution.id}"
+    redirect_back_or @solution
+  end
+
+  def cancel_vote
+    @solution.unvote_by current_user
+    flash[:success] = "You canceled your vote for solution #{@solution.id}"
+    redirect_back_or @solution
+  end
+
   protected
 
   def solution_class
@@ -182,6 +201,14 @@ class SolutionsController < ApplicationController
       store_location
       flash[:danger] = 'You don\'t have permission to edit the solution.'
       redirect_to_referer_or codeforces_round_solutions_path
+    end
+  end
+
+  def check_vote_perm
+    unless can_vote
+      store_location
+      flash[:danger] = 'You don\'t have permission to vote a solution.'
+      redirect_to_referer_or @solution
     end
   end
 

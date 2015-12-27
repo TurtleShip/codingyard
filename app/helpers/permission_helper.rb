@@ -25,4 +25,8 @@ module PermissionHelper
     logged_in? && (solution.user == current_user || current_user.admin?)
   end
 
+  def can_vote
+    logged_in?
+  end
+
 end

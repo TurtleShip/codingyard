@@ -1,5 +1,7 @@
 class UvaSolution < ActiveRecord::Base
 
+  acts_as_votable
+
   belongs_to :user
   belongs_to :contest
   belongs_to :language

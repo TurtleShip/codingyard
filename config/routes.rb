@@ -18,7 +18,12 @@ Rails.application.routes.draw do
 
   resources :codeforces_round_solutions do get :download, on: :member end
   resources :top_coder_srm_solutions do get :download, on: :member end
-  resources :uva_solutions do get :download, on: :member end
+  resources :uva_solutions do
+    get :download, on: :member
+    post :like, on: :member
+    post :dislike, on: :member
+    post :cancel_vote, on: :member
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
