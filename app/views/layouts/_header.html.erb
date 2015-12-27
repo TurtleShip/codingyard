@@ -12,6 +12,7 @@
         <ul class="dropdown-menu">
           <li><%= link_to 'Codeforces', codeforces_round_solutions_path %></li>
           <li><%= link_to 'TopCoder SRM', top_coder_srm_solutions_path %></li>
+          <li><%= link_to 'UVa Online Judge', uva_solutions_path %></li>
         </ul>
       </li>
       <% if logged_in? %>
@@ -22,6 +23,7 @@
             <ul class="dropdown-menu">
               <li><%= link_to 'Codeforces', new_codeforces_round_solution_path %></li>
               <li><%= link_to 'TopCoder SRM', new_top_coder_srm_solution_path %></li>
+              <li><%= link_to 'UVa Online Judge', new_uva_solution_path %></li>
             </ul>
           </li>
       <% end %>
