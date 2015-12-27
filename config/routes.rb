@@ -16,8 +16,20 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:new, :create, :edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-  resources :codeforces_round_solutions do get :download, on: :member end
-  resources :top_coder_srm_solutions do get :download, on: :member end
+  resources :codeforces_round_solutions do
+    get :download, on: :member
+    post :like, on: :member
+    post :dislike, on: :member
+    post :cancel_vote, on: :member
+  end
+
+  resources :top_coder_srm_solutions do
+    get :download, on: :member
+    post :like, on: :member
+    post :dislike, on: :member
+    post :cancel_vote, on: :member
+  end
+
   resources :uva_solutions do
     get :download, on: :member
     post :like, on: :member

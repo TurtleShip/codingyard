@@ -14,6 +14,8 @@ class CodeforcesRoundSolution < ActiveRecord::Base
 
   before_validation :upcase_level
 
+  acts_as_votable
+
   def CodeforcesRoundSolution.new_with_relations(params, user, language)
     solution = new(params)
     solution.user = user
