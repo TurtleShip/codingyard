@@ -28,9 +28,9 @@
   <div class="panel-heading solution_sub_header">
     Solution
   </div>
-  <%= link_to 'Download', yield(:download_path) %>
 
   <div class="panel-body">
+    <%= link_to 'Download', yield(:download_path), id: 'solution_download_link' %>
     <div id="editor" style="height: 500px"><%= @content %></div>
   </div>
 </div>
