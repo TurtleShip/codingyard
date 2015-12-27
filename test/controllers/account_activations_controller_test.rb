@@ -20,15 +20,4 @@ class AccountActivationsControllerTest < ActionController::TestCase
     assert_redirected_to new_account_activation_path
   end
 
-  # Test for not activated user trying to send activation link is in integration test AccountActivationSendLinkTest.
-  test 'A not activated user should get an activation link' do
-    @member.activated = false
-    @member.save
-
-    post :create, {email: @member.email}
-    assert_equal 1, ActionMailer::Base.deliveries.size, 'A non activated user should get an activation email'
-
-    assert_redirected_to login_path
-  end
-
 end
