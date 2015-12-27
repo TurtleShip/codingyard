@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates :lastname, presence: false, uniqueness: false, format: {with: VALID_NAME_REGEX}
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  before_create :create_activation_digest
+  after_create :create_activation_digest
 
   has_secure_password
 
@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   # Creates and assigns the activation token and digest.
   def create_activation_digest
     self.activation_token = User.new_token
-    self.activation_digest = User.digest(activation_token)
+    self.update_attribute(:activation_digest, User.digest(activation_token))
   end
 
 end
