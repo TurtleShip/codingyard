@@ -14,6 +14,8 @@ class TopCoderSrmSolution < ActiveRecord::Base
 
   before_validation :downcase_difficulty
 
+  acts_as_votable
+
   def TopCoderSrmSolution.new_with_relations(params, user, language)
     solution = new(params)
     solution.user = user

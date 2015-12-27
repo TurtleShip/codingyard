@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   after_create :create_activation_digest
 
+  acts_as_voter
   has_secure_password
 
   # Returns the hash digest of the given string.

@@ -11,21 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227013934) do
+ActiveRecord::Schema.define(version: 20151227083103) do
 
   create_table "codeforces_round_solutions", force: :cascade do |t|
-    t.integer  "user_id",         null: false
-    t.integer  "contest_id",      null: false
-    t.integer  "round_number",    null: false
-    t.integer  "division_number", null: false
-    t.string   "level",           null: false
+    t.integer  "user_id",                               null: false
+    t.integer  "contest_id",                            null: false
+    t.integer  "round_number",                          null: false
+    t.integer  "division_number",                       null: false
+    t.string   "level",                                 null: false
     t.string   "save_path"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "language_id",     null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "language_id",                           null: false
     t.string   "original_link"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "codeforces_round_solutions", ["cached_votes_down"], name: "index_codeforces_round_solutions_on_cached_votes_down"
+  add_index "codeforces_round_solutions", ["cached_votes_score"], name: "index_codeforces_round_solutions_on_cached_votes_score"
+  add_index "codeforces_round_solutions", ["cached_votes_total"], name: "index_codeforces_round_solutions_on_cached_votes_total"
+  add_index "codeforces_round_solutions", ["cached_votes_up"], name: "index_codeforces_round_solutions_on_cached_votes_up"
+  add_index "codeforces_round_solutions", ["cached_weighted_average"], name: "index_codeforces_round_solutions_on_cached_weighted_average"
+  add_index "codeforces_round_solutions", ["cached_weighted_score"], name: "index_codeforces_round_solutions_on_cached_weighted_score"
+  add_index "codeforces_round_solutions", ["cached_weighted_total"], name: "index_codeforces_round_solutions_on_cached_weighted_total"
   add_index "codeforces_round_solutions", ["contest_id"], name: "index_codeforces_round_solutions_on_contest_id"
   add_index "codeforces_round_solutions", ["language_id"], name: "index_codeforces_round_solutions_on_language_id"
   add_index "codeforces_round_solutions", ["user_id"], name: "index_codeforces_round_solutions_on_user_id"
@@ -51,16 +65,30 @@ ActiveRecord::Schema.define(version: 20151227013934) do
   create_table "top_coder_srm_solutions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "contest_id"
-    t.integer  "srm_number",      null: false
-    t.integer  "division_number", null: false
+    t.integer  "srm_number",                            null: false
+    t.integer  "division_number",                       null: false
     t.string   "save_path"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "difficulty",      null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "difficulty",                            null: false
     t.integer  "language_id"
     t.string   "original_link"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "top_coder_srm_solutions", ["cached_votes_down"], name: "index_top_coder_srm_solutions_on_cached_votes_down"
+  add_index "top_coder_srm_solutions", ["cached_votes_score"], name: "index_top_coder_srm_solutions_on_cached_votes_score"
+  add_index "top_coder_srm_solutions", ["cached_votes_total"], name: "index_top_coder_srm_solutions_on_cached_votes_total"
+  add_index "top_coder_srm_solutions", ["cached_votes_up"], name: "index_top_coder_srm_solutions_on_cached_votes_up"
+  add_index "top_coder_srm_solutions", ["cached_weighted_average"], name: "index_top_coder_srm_solutions_on_cached_weighted_average"
+  add_index "top_coder_srm_solutions", ["cached_weighted_score"], name: "index_top_coder_srm_solutions_on_cached_weighted_score"
+  add_index "top_coder_srm_solutions", ["cached_weighted_total"], name: "index_top_coder_srm_solutions_on_cached_weighted_total"
   add_index "top_coder_srm_solutions", ["contest_id"], name: "index_top_coder_srm_solutions_on_contest_id"
   add_index "top_coder_srm_solutions", ["language_id"], name: "index_top_coder_srm_solutions_on_language_id"
   add_index "top_coder_srm_solutions", ["user_id"], name: "index_top_coder_srm_solutions_on_user_id"
@@ -89,15 +117,44 @@ ActiveRecord::Schema.define(version: 20151227013934) do
     t.integer  "user_id"
     t.integer  "contest_id"
     t.integer  "language_id"
-    t.integer  "problem_number", null: false
+    t.integer  "problem_number",                        null: false
     t.string   "save_path"
     t.string   "original_link"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "uva_solutions", ["cached_votes_down"], name: "index_uva_solutions_on_cached_votes_down"
+  add_index "uva_solutions", ["cached_votes_score"], name: "index_uva_solutions_on_cached_votes_score"
+  add_index "uva_solutions", ["cached_votes_total"], name: "index_uva_solutions_on_cached_votes_total"
+  add_index "uva_solutions", ["cached_votes_up"], name: "index_uva_solutions_on_cached_votes_up"
+  add_index "uva_solutions", ["cached_weighted_average"], name: "index_uva_solutions_on_cached_weighted_average"
+  add_index "uva_solutions", ["cached_weighted_score"], name: "index_uva_solutions_on_cached_weighted_score"
+  add_index "uva_solutions", ["cached_weighted_total"], name: "index_uva_solutions_on_cached_weighted_total"
   add_index "uva_solutions", ["contest_id"], name: "index_uva_solutions_on_contest_id"
   add_index "uva_solutions", ["language_id"], name: "index_uva_solutions_on_language_id"
   add_index "uva_solutions", ["user_id"], name: "index_uva_solutions_on_user_id"
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
 
 end

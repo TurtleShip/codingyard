@@ -1,4 +1,7 @@
 <% provide(:download_path, download_codeforces_round_solution_path) %>
 <% provide(:upload_path, new_codeforces_round_solution_path) %>
 <% provide(:index_path, codeforces_round_solutions_path) %>
+<% provide(:like_path, like_codeforces_round_solution_path) %>
+<% provide(:dislike_path, dislike_codeforces_round_solution_path) %>
+<% provide(:cancel_path, cancel_vote_codeforces_round_solution_path) %>
 <%= render 'solutions/show' %>

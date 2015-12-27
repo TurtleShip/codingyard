@@ -10,6 +10,8 @@ class UvaSolution < ActiveRecord::Base
   validates :problem_number, presence: true, numericality: {greater_than: 0}
   validates :original_link, length: {maximum: 255}
 
+  acts_as_votable
+
   def UvaSolution.new_with_relations(params, user, language)
     solution = new(params)
     solution.user = user

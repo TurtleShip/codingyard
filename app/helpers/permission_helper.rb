@@ -25,4 +25,20 @@ module PermissionHelper
     logged_in? && (solution.user == current_user || current_user.admin?)
   end
 
+  def can_vote
+    logged_in?
+  end
+
+  def can_like(solution)
+    logged_in? && !current_user.voted_up_on?(solution)
+  end
+
+  def can_dislike(solution)
+    logged_in? && !current_user.voted_down_on?(solution)
+  end
+
+  def can_cancel(solution)
+    logged_in? && current_user.voted_on?(solution)
+  end
+
 end
