@@ -8,7 +8,17 @@ This is source code for [Codingyard website](http://codingyard.com). The website
 
 - Ruby (2.2.3)
 - Rails (4.2.4)
-- AWS account
+- AWS account (S3, Simple Email Service)
+
+# Environmental variables
+
+Please provide your AWS credentials to [.env](.env) file.
+
+# Contribution guide
+1. Fork me.
+2. Create a feature branch in your forked repo.
+3. Submit a PR when you are ready ;)
+
 
 ## For those who remember the original Codingyard
 
