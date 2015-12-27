@@ -11,3 +11,10 @@ Contest.create!(
     description: 'A vendor-neutral coding competition site'
 )
 puts 'Added TopCoder!'
+
+Contest.create!(
+    name: 'UVa Online Judge',
+    url: 'https://uva.onlinejudge.org/',
+    description: 'UVa Online Judge.'
+)
+puts 'Added UVa Online Judge'

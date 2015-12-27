@@ -1,0 +1,51 @@
+<h1 class="solution_header">UVa Solutions</h1>
+
+<%= will_paginate %>
+
+<%= form_tag uva_solutions_path, method: :get, class: 'form-inline text-center' do %>
+    <div class="form-group">
+      <%= label_tag :problem_number, 'Problem number:', class: 'solution_search_label' %>&nbsp;
+      <%= number_field_tag :problem_number, nil, min: 1, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag :Language, 'Language: ', class: 'solution_search_label' %>&nbsp;
+      <%= select_tag(:language, options_for_select([['N/A', nil]]) +
+                                      options_from_collection_for_select(@languages, :name, :name),
+                     class: 'form-control') %>
+    </div>
+
+    <div class="form-group">
+      <%= submit_tag :search!, name: nil, class: 'btn btn-success' %>
+    </div>
+<% end %>
+
+<div id="cf_index_warning">
+<ul>
+  <% @warnings.each do |warning| %>
+      <li><%= warning %></li>
+  <% end %>
+</ul>
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr class="solution_index_header">
+    <th>Problem number</th>
+    <th>Author</th>
+    <th>Language</th>
+    <th>Upload time</th>
+    <th>Show</th>
+    <th>Download</th>
+    <th>Edit</th>
+    <th>Destroy</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= render @uva_solutions %>
+  </tbody>
+
+
+</table>
+
+<%= will_paginate %>

@@ -1,0 +1,51 @@
+<%= form_for(@solution) do |form| %>
+    <%= render 'shared/error_messages', object: form.object %>
+
+    <div class="text-center">
+
+      <div class="form-inline">
+        <div class="panel panel-success">
+
+          <div class="panel-heading solution_sub_header">Required</div>
+
+          <div class="panel-body">
+            <div class="form-group">
+              <%= form.label :problem_number, 'Problem number :', class: 'solution_form_label' %>
+              <%= form.number_field :problem_number, required: true, class: 'form-control solution_form_value solution_number_input' %>
+            </div>
+
+            <div class="form-group solution_add_margin">
+              <%= form.label :language, 'Language :', class: 'solution_form_label' %>
+              <%= select_tag(:language,
+                             options_from_collection_for_select(@languages, :name, :name),
+                             required: true, class: 'form-control solution_form_value') %>
+            </div>
+
+            <% if @is_new %>
+                <div class="form-group">
+                  <%= form.file_field :attachment, required: true, accept: @supported_file_types, class: 'font_architects_daughter' %>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-inline">
+        <div class="panel panel-warning">
+
+          <div class="panel-heading solution_sub_header">Optional</div>
+
+          <div class="panel-body">
+            <div class="form-group">
+              <%= form.label :original_link, 'Link to the problem : ', class: 'solution_form_label' %>
+              <%= form.url_field(:original_link, class: 'form-control', size: 50) %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <%= form.submit yield(:button_text), class: 'btn btn-success' %>
+    </div>
+<% end %>

@@ -1,0 +1,7 @@
+<tr class="solution_index_value">
+  <td><%= uva_solution.problem_number %></td>
+  <td><%= link_to 'Show', uva_solution_path(uva_solution) %></td>
+  <td><%= link_to 'Download', download_uva_solution_path(uva_solution) %></td>
+  <td><%= (link_to 'Edit', edit_uva_solution_path(uva_solution)) if can_edit_solution(uva_solution) %></td>
+  <td><%= (link_to 'Destroy', uva_solution, method: :delete, data: {confirm: 'Are you sure?'}) if can_delete_solution(uva_solution) %></td>
+</tr>

@@ -13,6 +13,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     # Headers
     assert_select 'a[href=?]', root_path
     assert_select 'a[href=?]', codeforces_round_solutions_path
+    assert_select 'a[href=?]', top_coder_srm_solutions_path
+    assert_select 'a[href=?]', uva_solutions_path
     assert_select 'a[href=?]', users_path # Users
     assert_select 'a[href=?]', login_path
     assert_select 'a[href=?]', signup_path
@@ -34,7 +36,13 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     # Headers
     assert_select 'a[href=?]', root_path # Codingyard
     assert_select 'a[href=?]', codeforces_round_solutions_path # Solutions
+    assert_select 'a[href=?]', top_coder_srm_solutions_path
+    assert_select 'a[href=?]', uva_solutions_path
+
     assert_select 'a[href=?]', new_codeforces_round_solution_path # Upload
+    assert_select 'a[href=?]', new_top_coder_srm_solution_path
+    assert_select 'a[href=?]', new_uva_solution_path
+
     assert_select 'a[href=?]', users_path # Users
     assert_select 'a[href=?]', user_path(@member) # Profile
     assert_select 'a[href=?]', edit_user_path(@member) # Settings

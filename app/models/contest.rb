@@ -14,4 +14,8 @@ class Contest < ActiveRecord::Base
     @topcoder ||= find_by_name('TopCoder')
   end
 
+  def Contest.uva
+    @uva ||= find_by_name('UVa Online Judge')
+  end
+
 end
