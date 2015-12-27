@@ -130,10 +130,9 @@ class UserTest < ActiveSupport::TestCase
 
   test 'deleting user should delete topcoder srm solutions' do
     num_solutions = 5
-    top_coder = contests(:TopCoder)
 
     num_solutions.times do
-      @user.top_coder_srm_solutions.create(contest_id: top_coder.id, srm_number: 1, division_number: 1, difficulty: 'easy')
+      TopCoderSrmSolution.new_with_relations({srm_number: 1, division_number: 1, difficulty: 'easy'}, @user, languages(:cpp)).save!
     end
 
     assert_equal num_solutions, TopCoderSrmSolution.count

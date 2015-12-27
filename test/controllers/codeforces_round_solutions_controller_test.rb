@@ -178,7 +178,7 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
 
     # All solutions will be displayed for an invalid user because invalid field will be ignored.
     get :index, {author: 'I do not exist'}
-    assert_equal CodeforcesRoundSolution.paginate(page:1, :per_page => CodeforcesRoundSolution::PER_PAGE).count,
+    assert_equal CodeforcesRoundSolution.paginate(page:1, :per_page => SolutionsController::PER_PAGE).count,
                  assigns[:codeforces_round_solutions].count
   end
 

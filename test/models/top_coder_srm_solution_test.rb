@@ -5,10 +5,9 @@ class TopCoderSrmSolutionTest < ActiveSupport::TestCase
   def setup
     @user = users(:Seulgi)
     @contest = contests(:TopCoder)
-    @solution = @user.top_coder_srm_solutions.create(contest_id: @contest.id,
-                                                     srm_number: 256, division_number: 1,
-                                                     save_path: '/topcoder/256/div1/mid.cpp',
-                                                     difficulty: 'hard')
+    language = languages(:cpp)
+    params = {srm_number: 256, division_number: 1, difficulty: 'hard'}
+    @solution = TopCoderSrmSolution.new_with_relations(params, @user, language)
   end
 
   test 'an example solution must be valid' do

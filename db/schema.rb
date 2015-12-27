@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224041858) do
+ActiveRecord::Schema.define(version: 20151227001848) do
 
   create_table "codeforces_round_solutions", force: :cascade do |t|
     t.integer  "user_id",         null: false
@@ -57,9 +57,12 @@ ActiveRecord::Schema.define(version: 20151224041858) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "difficulty",      null: false
+    t.integer  "language_id"
+    t.string   "original_link"
   end
 
   add_index "top_coder_srm_solutions", ["contest_id"], name: "index_top_coder_srm_solutions_on_contest_id"
+  add_index "top_coder_srm_solutions", ["language_id"], name: "index_top_coder_srm_solutions_on_language_id"
   add_index "top_coder_srm_solutions", ["user_id"], name: "index_top_coder_srm_solutions_on_user_id"
 
   create_table "users", force: :cascade do |t|

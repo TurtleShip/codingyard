@@ -28,19 +28,21 @@ class CodeforcesUploadTest < ActionDispatch::IntegrationTest
     assert_template 'codeforces_round_solutions/new', 'new.html.erb should be rendered when redirected back to upload page'
 
     # Provide no data
-    post codeforces_round_solutions_path
+    post_via_redirect codeforces_round_solutions_path
+    # assert_redirected_to new_codeforces_round_solution_path
+    # follow_redirect!
     assert_template 'codeforces_round_solutions/new', 'unsuccessful upload should redirect back to upload page'
     assert_template({partial: 'shared/_error_messages'}, 'unsuccessful upload should display errors')
-    assert_empty flash
+    assert_not_nil flash[:danger]
 
     # Provide codeforces_round_solution with no data
-    post codeforces_round_solutions_path, {codeforces_round_solution: {}}
+    post_via_redirect codeforces_round_solutions_path, {codeforces_round_solution: {}}
     assert_template 'codeforces_round_solutions/new', 'unsuccessful upload should redirect back to upload page'
     assert_template({partial: 'shared/_error_messages'}, 'unsuccessful upload should display errors')
-    assert_empty flash
+    assert_not_nil flash[:danger]
 
     # Correct codeforces_round_solution but missing language
-    post codeforces_round_solutions_path,
+    post_via_redirect codeforces_round_solutions_path,
          {
              codeforces_round_solution: {
                  round_number: 325,
@@ -51,10 +53,10 @@ class CodeforcesUploadTest < ActionDispatch::IntegrationTest
          }
     assert_template 'codeforces_round_solutions/new', 'unsuccessful upload should redirect back to upload page'
     assert_template({partial: 'shared/_error_messages'}, 'unsuccessful upload should display errors')
-    assert_empty flash
+    assert_not_nil flash[:danger]
 
     # Missing round_number
-    post codeforces_round_solutions_path,
+    post_via_redirect codeforces_round_solutions_path,
          {
              codeforces_round_solution: {
                  division_number: 1,
@@ -68,7 +70,7 @@ class CodeforcesUploadTest < ActionDispatch::IntegrationTest
     assert_empty flash
 
     # Incorrect division number
-    post codeforces_round_solutions_path,
+    post_via_redirect codeforces_round_solutions_path,
          {
              codeforces_round_solution: {
                  round_number: 115,
@@ -83,7 +85,7 @@ class CodeforcesUploadTest < ActionDispatch::IntegrationTest
     assert_empty flash
 
     # Incorrect language
-    post codeforces_round_solutions_path,
+    post_via_redirect codeforces_round_solutions_path,
          {
              codeforces_round_solution: {
                  round_number: 115,
@@ -93,8 +95,8 @@ class CodeforcesUploadTest < ActionDispatch::IntegrationTest
              },
              language: 'hello'
          }
+    assert_template 'codeforces_round_solutions/new', 'unsuccessful upload should redirect back to upload page'
     assert_not_nil flash[:danger]
-    assert_redirected_to new_codeforces_round_solution_path
 
     # Successful upload
     round_number = 115
