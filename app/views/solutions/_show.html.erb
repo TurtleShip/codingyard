@@ -21,6 +21,11 @@
         <%= link_to @solution.user.username, user_path(@solution.user), target: '_blank' %>
       </div>
     </div>
+
+    <%= link_to "#{@solution.get_likes.size} Like", yield(:like_path), method: :post, class: "btn btn-success vote_button #{'disabled' unless can_like(@solution)}" %>
+    <%= link_to "#{@solution.get_dislikes.size} Dislike", yield(:dislike_path), method: :post, class: "btn btn-danger vote_button #{'disabled' unless can_dislike(@solution)}" %>
+    <%= link_to 'Cancel my vote', yield(:cancel_path), method: :post, class: "btn btn-info vote_button #{'disabled' unless can_cancel(@solution)}" %>
+
   </div>
 </div>
 

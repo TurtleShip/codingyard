@@ -17,6 +17,14 @@ class UvaSolutionsControllerTest < ActionController::TestCase
     assert_redirected_to @solution
   end
 
+  test 'logged in user should see links to vote' do
+    log_in_as @member
+    get :show, id: @solution
+    assert_select 'a[href=?]', like_uva_solution_path
+    assert_select 'a[href=?]', dislike_uva_solution_path
+    assert_select 'a[href=?]', cancel_vote_uva_solution_path
+  end
+
   test 'user can like a solution' do
     log_in_as @member
     assert_difference '@solution.get_likes.size', 1, 'User can like' do
