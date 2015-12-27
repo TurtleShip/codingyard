@@ -21,6 +21,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
 
     # Content
     assert_select 'a[href=?]', 'https://github.com/TurtleShip/codingyard'
+    assert_select 'a[href=?]', 'https://github.com/TurtleShip/codingyard/issues'
 
     # Footer
     assert_select 'a[href=?]', about_path
@@ -46,6 +47,10 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', users_path # Users
     assert_select 'a[href=?]', user_path(@member) # Profile
     assert_select 'a[href=?]', edit_user_path(@member) # Settings
+
+    # Content
+    assert_select 'a[href=?]', 'https://github.com/TurtleShip/codingyard'
+    assert_select 'a[href=?]', 'https://github.com/TurtleShip/codingyard/issues'
 
     # Footer
     assert_select 'a[href=?]', about_path # About
