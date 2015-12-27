@@ -1,3 +1,6 @@
+<%= link_to 'Upload more solutions', yield(:upload_path), class: 'solution_nav_links' %><span class="solution_nav_divider">|</span>
+<%= link_to 'See other solutions', yield(:index_path), class: 'solution_nav_links' %>
+
 <div class="panel panel-success">
   <div class="panel-heading solution_sub_header">
     Solution info
@@ -39,11 +42,6 @@
     <div id="editor" style="height: 500px"><%= @content %></div>
   </div>
 </div>
-
-
-<%= link_to 'Upload more solutions!', yield(:upload_path) %>
-<%= link_to 'See other solutions', yield(:index_path) %>
-
 
 <script>
     var editor = ace.edit('editor');
