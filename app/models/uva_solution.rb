@@ -8,7 +8,7 @@ class UvaSolution < ActiveRecord::Base
   validates :contest_id, presence: true
   validates :language_id, presence: true
   validates :problem_number, presence: true, numericality: {greater_than: 0}
-  validates :original_link, length: {maximum: 100}
+  validates :original_link, length: {maximum: 255}
 
   def UvaSolution.new_with_relations(params, user, language)
     solution = new(params)

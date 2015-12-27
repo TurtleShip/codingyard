@@ -10,6 +10,7 @@ class TopCoderSrmSolution < ActiveRecord::Base
   validates :srm_number, presence: true, numericality: {greater_than: 0}
   validates :division_number, presence: true, inclusion: 1..2
   validates :difficulty, presence: true, inclusion: %w(easy medium hard)
+  validates :original_link, length: {maximum: 255}
 
   before_validation :downcase_difficulty
 
