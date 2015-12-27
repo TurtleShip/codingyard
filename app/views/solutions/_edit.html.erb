@@ -1,0 +1,22 @@
+<h1 class="solution_header"><%= yield(:header_text) %></h1>
+
+<%= render yield(:form_location) %>
+
+<%= link_to 'Show', @solution %> |
+<%= link_to 'See other solutions', yield(:index_path) %>
+
+<div id="note_on_edit">
+  Note that the content of the uploaded solution cannot be edited. Only its metadata can be edited.
+</div>
+
+<div id="editor" style="height: 500px">
+  <%= @content %>
+</div>
+
+<script>
+    var editor = ace.edit('editor');
+    editor.setTheme('ace/theme/twilight');
+    editor.getSession().setMode('ace/mode/<%="#{@solution.language.ace_mode}"%>');
+    editor.setReadOnly(true);
+</script>
+d
