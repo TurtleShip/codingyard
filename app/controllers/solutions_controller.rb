@@ -29,8 +29,10 @@ class SolutionsController < ApplicationController
     end
 
     assign_to_index_variable solution_class
-                     .where(filtered_params)
-                     .paginate(page: params[:page], :per_page => PER_PAGE)
+                                 .where(filtered_params)
+                                 .order(:cached_votes_up => :desc)
+                                 .order(:cached_votes_down => :asc)
+                                 .paginate(page: params[:page], :per_page => PER_PAGE)
   end
 
   def show
