@@ -3,9 +3,21 @@
 
   <p id="welcome_subtitle">Share your solutions to coding competitions! :)</p>
   <br/>
-  <a id="fork_me" href="https://github.com/TurtleShip/codingyard" target="_blank" class="btn btn-success">Fork me on Github</a>
-  <a id="report_issue" href="https://github.com/TurtleShip/codingyard/issues" target="_blank" class="btn btn-primary">Report an issue</a>
+  <a id="fork_me" href="https://github.com/TurtleShip/codingyard" target="_blank" class="btn btn-success">Fork me on
+    Github</a>
+  <a id="report_issue" href="https://github.com/TurtleShip/codingyard/issues" target="_blank" class="btn btn-primary">Report
+    an issue</a>
+
+
+
 </div>
 
-
+<div id="welcome_stats">
+  <h3>Currently hosting</h3>
+  <ul>
+    <li><%= link_to "#{@codeforces_total} Codeforces solutions", codeforces_round_solutions_path %></li>
+    <li><%= link_to "#{@topcoder_srm_total} TopCoder SRM solutions", top_coder_srm_solutions_path %></li>
+    <li><%= link_to "#{@uva_total} UVa solutions", uva_solutions_path %></li>
+  </ul>
+</div>
 
