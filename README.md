@@ -27,7 +27,7 @@ MASTER_BUCKET='your AWS S3 bucket name where solutions will be stored.'
 2. Create a feature branch in your forked repo.
 3. Submit a PR when you are ready ;)
 
-*** If you happen to be good at creating a favicon, please feel free to suggest one for Codingyard. I drew [the current favicon](app/assets/images/favicon.ico), and I am no artist. ***
+***If you happen to be good at creating a favicon, please feel free to suggest one for Codingyard. I drew [the current favicon](app/assets/images/favicon.ico), and I am no artist.***
 
 ## For those who remember the original Codingyard
 
