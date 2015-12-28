@@ -12,11 +12,18 @@ class UsersController < ApplicationController
   def show
     @user = target_user
     redirect_to root_url unless @user.activated?
-    @user_basic_info = {
-        email: @user.email,
+
+    @user_basic_info = {}
+
+    # A user's email will be only visible to itself and the admin for privacy reasons.
+    if logged_in? && (current_user?(@user) || current_user.admin?)
+      @user_basic_info[:email] = @user.email
+    end
+
+    @user_basic_info.merge!({
         firstname: @user.firstname,
         lastname: @user.lastname
-    }
+    })
   end
 
   def new
