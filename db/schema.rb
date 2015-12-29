@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227215140) do
+ActiveRecord::Schema.define(version: 20151229054133) do
 
   create_table "codeforces_round_solutions", force: :cascade do |t|
     t.integer  "user_id",                               null: false
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20151227215140) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.string   "codeforces_handle"
   end
 
   add_index "users", ["email"], name: "index_users_on_email"

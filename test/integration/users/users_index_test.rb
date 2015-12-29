@@ -15,7 +15,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
 
     first_page_of_users = User.paginate(page: 1, :per_page => User::PER_PAGE)
     first_page_of_users.each do |user|
-      assert_select 'a[href=?]', user_path(user), text: 'show'
+      assert_select 'a[href=?]', user_path(user), text: 'Details'
       assert_select 'a[href=?]',edit_user_path(user), text: 'edit' if user == @admin
       assert_select 'a[data-method="delete"]', :href => user_path(user) unless user == @admin
     end
@@ -33,7 +33,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
 
     first_page_of_users = User.paginate(page: 1, :per_page => User::PER_PAGE)
     first_page_of_users.each do |user|
-      assert_select 'a[href=?]', user_path(user), text: 'show'
+      assert_select 'a[href=?]', user_path(user), text: 'Details'
       assert_select 'a[href=?]',edit_user_path(user), text: 'edit', count: (user == @member ? 1 : 0)
     end
 

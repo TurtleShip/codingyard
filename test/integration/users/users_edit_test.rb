@@ -33,12 +33,14 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     username = 'remember_yolo'
     email = 'valid@email.com'
     password = 'safe_password_123_!@$'
+    codeforces_handle = 'TurtleShip'
 
     patch user_path(@user), user: {
                               username: username,
                               email: email,
                               password: password,
-                              password_confirmation: password
+                              password_confirmation: password,
+                              codeforces_handle: codeforces_handle
                           }
 
     assert_not_empty flash
@@ -48,7 +50,14 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_equal username, @user.username
     assert_equal email, @user.email
+    assert_equal codeforces_handle, @user.codeforces_handle
     assert @user.authenticate(password)
+
+    get user_path(@user)
+    assert_select 'p', text: username
+    assert_select 'div.user_info_value', text: email
+    assert_select 'div.user_info_value', text: codeforces_handle
+
   end
 
   test 'edit with no password change' do

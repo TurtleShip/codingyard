@@ -22,7 +22,8 @@ class UsersController < ApplicationController
 
     @user_basic_info.merge!({
         firstname: @user.firstname,
-        lastname: @user.lastname
+        lastname: @user.lastname,
+        'Codeforces Handle': @user.codeforces_handle
     })
   end
 
@@ -65,7 +66,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user)
           .permit(:username, :email, :firstname, :lastname,
-                  :password, :password_confirmation)
+                  :password, :password_confirmation, :codeforces_handle)
     end
 
     def check_edit_perm
