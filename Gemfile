@@ -60,6 +60,8 @@ gem 'dotenv-rails', '2.0.2'
 #
 gem 'acts_as_votable', '0.10.0'
 
+gem 'codeforces', '0.0.13'
+
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine
   gem 'sqlite3', '1.3.11'

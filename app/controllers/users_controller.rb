@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  before_action :required_fields, only: [:new]
+  before_action :optional_fields, only: [:new]
+  before_action :user_fields, only: [:edit]
   before_action :check_edit_perm, only: [:edit, :update]
   before_action :check_delete_perm, only: [:destroy]
 
@@ -23,7 +26,9 @@ class UsersController < ApplicationController
     @user_basic_info.merge!({
         firstname: @user.firstname,
         lastname: @user.lastname,
-        'Codeforces Handle': @user.codeforces_handle
+        'Codeforces Handle': @user.codeforces_handle,
+        'TopCoder Handle': @user.topcoder_handle,
+        'UVa Handle': @user.uva_handle
     })
   end
 
@@ -44,6 +49,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = target_user
+    @is_edit = true
   end
 
   def update
@@ -65,9 +71,20 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user)
-          .permit(:username, :email, :firstname, :lastname,
-                  :password, :password_confirmation, :codeforces_handle)
+          .permit(user_fields)
     end
+
+  def user_fields
+    @user_fields ||= required_fields + optional_fields
+  end
+
+  def required_fields
+    @required_fields ||= [:username, :email, :firstname, :lastname, :password, :password_confirmation]
+  end
+
+  def optional_fields
+    @optional_fields ||= [:codeforces_handle, :topcoder_handle, :uva_handle]
+  end
 
     def check_edit_perm
       unless can_edit_user target_user

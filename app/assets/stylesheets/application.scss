@@ -116,6 +116,23 @@ body {
   padding-bottom: 0.5em;
 }
 
+.user_new_form_label {
+  font-family: $font_kaushan_script;
+  font-size: 1.4em;
+  width: 40%;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+}
+
+.user_edit_form_label {
+  font-family: $font_kaushan_script;
+  font-size: 1.4em;
+  width: 20%;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+}
+
+
 .form_value {
   font-family: $font_architects_daughter;
   font-size: 1.4em;
@@ -125,6 +142,11 @@ body {
   margin-top: 1em;
   font-family: $font_kaushan_script;
   font-size: 1.4em !important;
+}
+
+.user_form_wrapper {
+  width: 60%;
+  margin: auto;
 }
 
 

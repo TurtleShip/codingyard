@@ -35,8 +35,10 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     first_page_of_users.each do |user|
       assert_select 'a[href=?]', user_path(user), text: 'Details'
       assert_select 'a[href=?]',edit_user_path(user), text: 'edit', count: (user == @member ? 1 : 0)
+      assert_select 'td', user.codeforces_handle
+      assert_select 'td', user.topcoder_handle
+      assert_select 'td', user.uva_handle
     end
 
   end
-
 end
