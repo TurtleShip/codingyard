@@ -16,6 +16,9 @@ Seulgi:
   admin: true
   activated: true
   activated_at: <%= Time.zone.now %>
+  codeforces_handle: 'CF_TurtleShip'
+  topcoder_handle: 'TC_TurtleShip'
+  uva_handle: 'uva_TurtleShip'
 
 Taejung:
   username: 'Iris'
@@ -25,6 +28,9 @@ Taejung:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+  codeforces_handle: 'cf_tj'
+  topcoder_handle: 'th_tj'
+  uva_handle: 'uva_tj'
 
 Hansol:
   username: 'OneSound'
@@ -34,6 +40,9 @@ Hansol:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+  codeforces_handle: 'cf_hs'
+  topcoder_handle: 'tc_hs'
+  uva_handle: 'uva_hs'
 
 Soyeon:
   username: 'Tiffany'
@@ -43,6 +52,9 @@ Soyeon:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+  codeforces_handle: 'cf_sy'
+  topcoder_handle: 'tc_sy'
+  uva_handle: 'uva_sy'
 
 <% 30.times do |id| %>
 user_<%= id %>:
@@ -53,4 +65,7 @@ user_<%= id %>:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+  codeforces_handle: <%= "cf_#{id}" %>
+  topcoder_handle: <%= "tc_#{id}" %>
+  uva_handle: <%= "uva_#{id}" %>
 <% end %>
