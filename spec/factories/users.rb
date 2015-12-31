@@ -1,7 +1,5 @@
 FactoryGirl.define do
 
-  num_admin = 0
-
   factory :user do
     username { "#{Faker::Internet.user_name(specifier=nil, separators = %w(-_))[0..10]}_#{id}" }
     firstname { Faker::Name.first_name }
@@ -13,8 +11,8 @@ FactoryGirl.define do
     activated_at Time.zone.now
 
     trait :admin do
-      username "admin_#{num_admin += 1}"
-      email "admin_#{num_admin}@codingyard.com"
+      sequence(:username) { |id| "admin_#{id}" }
+      sequence(:email) { |id| "admin_#{id}@codingyard.com" }
       admin true
     end
 
