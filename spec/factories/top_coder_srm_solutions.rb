@@ -1,15 +1,16 @@
 FactoryGirl.define do
 
+  difficulties = %w(easy medium hard)
+
   factory :top_coder_srm_solution do
     user
     language
-    srm_number Faker::Number.number(3)
-    division_number Faker::Number.between(1, 2)
-    difficulty %w(easy medium hard)[Faker::Number.between(0, 2)]
+    sequence(:srm_number) { |n| n }
+    sequence(:division_number) { |n| (n % 2) + 1 }
+    sequence(:difficulty) { |idx| difficulties[idx % 3] }
 
-    before(:create) do |solution|
-      @topcoder ||= FactoryGirl.create(:topcoder)
-      solution.contest = @topcoder
+    callback(:after_build, :before_create) do |solution|
+      solution.contest = find_or_create(:topcoder)
     end
   end
 
