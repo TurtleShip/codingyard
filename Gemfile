@@ -84,7 +84,7 @@ group :development, :test do
   gem 'factory_girl_rails', '4.5.0'
 
   # Making tests easy on the fingers and eyes
-  gem 'shoulda', '3.5.0'
+  gem 'shoulda-matchers', '3.0.1'
 
   # an integration testing tool for rack based web applications.
   # It simulates how a user would interact with a website
