@@ -83,3 +83,23 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+# TODO: Put this in a better place once I get an answer from the below
+# https://gist.github.com/renius/9af62ff8d68a932a8895
+module FactoryGirl
+  module Syntax
+    module Methods
+      def find_or_create(name, attributes = {}, &block)
+        attributes = FactoryGirl.attributes_for(name).merge(attributes)
+
+        result =
+            FactoryGirl.
+                factory_by_name(name).
+                build_class.
+                find_by(attributes, &block)
+
+        result || FactoryGirl.create(name, attributes, &block)
+      end
+    end
+  end
+end

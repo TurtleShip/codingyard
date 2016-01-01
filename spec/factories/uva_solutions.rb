@@ -3,12 +3,12 @@ FactoryGirl.define do
   factory :uva_solution do
     user
     language
-    problem_number Faker::Number.number(5)
+    sequence(:problem_number) { |n| n }
 
-    before(:create) do |solution|
-      @uva ||= FactoryGirl.create(:uva)
+    callback(:after_build, :before_create) do |solution|
+      @uva = find_or_create(:uva)
       solution.contest = @uva
     end
-  end
 
+  end
 end

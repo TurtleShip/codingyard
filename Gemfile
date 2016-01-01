@@ -83,6 +83,9 @@ group :development, :test do
   # provides integration between factory_girl and rails 3
   gem 'factory_girl_rails', '4.5.0'
 
+  # Making tests easy on the fingers and eyes
+  gem 'shoulda', '3.5.0'
+
   # an integration testing tool for rack based web applications.
   # It simulates how a user would interact with a website
   gem 'capybara', '2.5.0'
