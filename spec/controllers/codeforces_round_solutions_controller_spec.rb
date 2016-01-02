@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'support/solutions_controller'
+
 RSpec.describe CodeforcesRoundSolutionsController, type: :controller do
 
   it_behaves_like 'SolutionsController',

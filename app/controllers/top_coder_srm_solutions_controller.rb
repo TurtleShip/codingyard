@@ -31,4 +31,8 @@ class TopCoderSrmSolutionsController < SolutionsController
     def assign_to_index_variable(solutions)
       @top_coder_srm_solutions = solutions
     end
+
+    def index_path
+      top_coder_srm_solutions_path
+    end
 end

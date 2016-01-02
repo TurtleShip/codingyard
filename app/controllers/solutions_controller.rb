@@ -158,11 +158,17 @@ class SolutionsController < ApplicationController
     raise NotImplementedError
   end
 
+  # Path to #index  ex> codeforces_round_solutions_path
+  def index_path
+    raise NotImplementedError
+  end
+
+
   def find_solution
     @solution ||= solution_class.find_by_id(params[:id])
     if @solution.nil?
       flash[:danger] = "There is no solution #{params[:id]}"
-      redirect_back_or(codeforces_round_solutions_path)
+      redirect_back_or index_path
     else
       @solution
     end
@@ -172,7 +178,7 @@ class SolutionsController < ApplicationController
     @language ||=Language.find_by_name(params[:language])
     if @language.nil?
       flash[:danger] = "There is no language #{params[:language]}"
-      redirect_back_or new_codeforces_round_solution_path
+      redirect_back_or index_path
     end
   end
 
@@ -180,7 +186,7 @@ class SolutionsController < ApplicationController
     unless can_upload_solution
       if current_user
         flash[:danger] = 'You don\'t have permission to upload a solution.'
-        redirect_to_referer_or codeforces_round_solutions_path
+        redirect_to_referer_or index_path
       else
         store_location
         flash[:danger] = 'Please login to upload a solution.'
@@ -194,7 +200,8 @@ class SolutionsController < ApplicationController
     unless can_delete_solution(find_solution)
       store_location
       flash[:danger] = 'You don\'t have permission to delete the solution.'
-      redirect_to_referer_or codeforces_round_solutions_path
+      # redirect_to_referer_or codeforces_round_solutions_path
+      redirect_to_referer_or index_path
     end
   end
 
@@ -202,7 +209,7 @@ class SolutionsController < ApplicationController
     unless can_edit_solution(find_solution)
       store_location
       flash[:danger] = 'You don\'t have permission to edit the solution.'
-      redirect_to_referer_or codeforces_round_solutions_path
+      redirect_to_referer_or index_path
     end
   end
 
