@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/solutions_controller'
+require 'support/shared_examples/solutions_controller'
 
 RSpec.describe UvaSolutionsController, type: :controller do
 

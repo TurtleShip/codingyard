@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/solution'
+require 'support/shared_examples/solution'
 
 RSpec.describe CodeforcesRoundSolution, type: :model do
 
