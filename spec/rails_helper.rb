@@ -125,3 +125,9 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+# It probably is best to move these to a separate file.
+# But I don't know the best place to put these.... :(
+def log_in_as(user)
+  allow(controller).to receive(:current_user).and_return(user)
+end
