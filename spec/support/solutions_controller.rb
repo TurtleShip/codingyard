@@ -17,13 +17,13 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
     it 'should let a member upload solution' do
       log_in_as(member)
       get :new
-      expect_success_response
+      expect(response.status).to eq(200)
     end
 
     it 'should let an admin upload solution' do
       log_in_as(admin)
       get :new
-      expect_success_response
+      expect(response.status).to eq(200)
     end
   end
 
@@ -77,32 +77,32 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
     it 'should let the author its solution' do
       log_in_as(member)
       get :edit, id: solution.id
-      expect_success_response
+      expect(response.status).to eq(200)
     end
 
     it 'should let the admin edit solution' do
       log_in_as(admin)
       get :edit, id: solution.id
-      expect_success_response
+      expect(response.status).to eq(200)
     end
   end
 
   describe '#show' do
     it 'should let anyone view a solution' do
       get :show, id: solution.id
-      expect_success_response
+      expect(response.status).to eq(200)
 
       log_in_as(member)
       get :show, id: solution.id
-      expect_success_response
+      expect(response.status).to eq(200)
 
       log_in_as(other_member)
       get :show, id: solution.id
-      expect_success_response
+      expect(response.status).to eq(200)
 
       log_in_as(admin)
       get :show, id: solution.id
-      expect_success_response
+      expect(response.status).to eq(200)
     end
   end
 
@@ -233,15 +233,6 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
         expect(response).to redirect_to solution
       end
     end
-  end
-
-
-  def log_in_as(user)
-    allow(controller).to receive(:current_user).and_return(user)
-  end
-
-  def expect_success_response
-    expect(response).to have_http_status(:success)
   end
 
 end
