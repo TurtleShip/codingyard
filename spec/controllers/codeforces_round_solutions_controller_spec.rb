@@ -1,8 +1,8 @@
 require 'rails_helper'
-require 'support/solution_controller'
+require 'support/solutions_controller'
 RSpec.describe CodeforcesRoundSolutionsController, type: :controller do
 
-  it_behaves_like 'SolutionController',
+  it_behaves_like 'SolutionsController',
                   :codeforces_round_solution,
                   :codeforces_round_solutions_path
 
