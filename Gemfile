@@ -92,6 +92,9 @@ group :development, :test do
 
   # Strategies for cleaning databases. Can be used to ensure a clean state for testing.
   gem 'database_cleaner', '1.5.1'
+
+  # Easily test email in RSpec, Cucumber, and MiniTest
+  gem 'email_spec', '1.6.0'
 end
 
 group :production do
