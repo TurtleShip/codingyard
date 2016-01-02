@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/solution'
 
 RSpec.describe UvaSolution, type: :model do
 
@@ -9,9 +10,7 @@ RSpec.describe UvaSolution, type: :model do
     expect(solution).to be_valid
   end
 
-  it { should belong_to(:user) }
-  it { should belong_to(:contest) }
-  it { should belong_to(:language) }
+  it_behaves_like 'a solution'
 
   it { should validate_presence_of(:user_id) }
   it { should validate_presence_of(:contest_id) }

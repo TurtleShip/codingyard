@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/solution'
 
 RSpec.describe TopCoderSrmSolution, type: :model do
 
@@ -11,6 +12,8 @@ RSpec.describe TopCoderSrmSolution, type: :model do
   it 'has a valid factory' do
     expect(@solution).to be_valid
   end
+
+  it_behaves_like 'a solution'
 
   it { should belong_to(:user) }
   it { should belong_to(:contest) }

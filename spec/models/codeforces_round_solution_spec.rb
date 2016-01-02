@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/solution'
 
 RSpec.describe CodeforcesRoundSolution, type: :model do
 
@@ -12,13 +13,7 @@ RSpec.describe CodeforcesRoundSolution, type: :model do
     expect(@solution).to be_valid
   end
 
-  it { should belong_to(:user) }
-  it { should belong_to(:contest) }
-  it { should belong_to(:language) }
-
-  it { should validate_presence_of(:user_id) }
-  it { should validate_presence_of(:contest_id) }
-  it { should validate_presence_of(:language_id) }
+  it_behaves_like 'a solution'
 
   it { should validate_presence_of(:round_number) }
   it { should validate_numericality_of(:round_number).is_greater_than(0) }
