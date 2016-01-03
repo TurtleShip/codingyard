@@ -15,77 +15,6 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
     @other_solution.save
   end
 
-  test 'a user must login to upload a solution' do
-    get :new
-    assert_redirected_to login_path
-    assert_not_nil flash[:danger], 'redirected page should explain why the user got there'
-  end
-
-  test 'a member can upload a solution' do
-    log_in_as @member
-    get :new
-    assert_response :success
-  end
-
-  test 'an admin can upload a solution' do
-    log_in_as @admin
-    get :new
-    assert_response :success
-  end
-
-  test 'a guest cannot delete a solution' do
-    delete :destroy, id: @solution.id
-    assert_redirected_to codeforces_round_solutions_path
-    assert_not_nil flash[:danger]
-  end
-
-  test 'a user cannot delete another users solution' do
-    log_in_as @other_member
-    delete :destroy, id: @solution.id
-    assert_redirected_to codeforces_round_solutions_path
-    assert_not_nil flash[:danger]
-  end
-
-  test 'the author can delete its solution' do
-    log_in_as @member
-    delete :destroy, id: @solution.id
-    assert_redirected_to codeforces_round_solutions_url
-    assert_not_nil flash[:success]
-  end
-
-  test 'An admin can delete member\'s solution' do
-    log_in_as @admin
-    delete :destroy, id: @solution.id
-    assert_redirected_to codeforces_round_solutions_url
-    assert_not_nil flash[:success]
-  end
-
-  test 'a guest cannot edit solution' do
-    get :edit, id: @solution.id
-    assert_redirected_to codeforces_round_solutions_path
-    assert_not_nil flash[:danger]
-  end
-
-  test 'non-author cannot edit solution' do
-    log_in_as @other_member
-    get :edit, id: @solution.id
-    assert_redirected_to codeforces_round_solutions_path
-    assert_not_nil flash[:danger]
-  end
-
-  test 'the author can edit solution' do
-    log_in_as @member
-    get :edit, id: @solution.id
-    assert_response :success
-  end
-
-  test 'an admin can edit solution' do
-    log_in_as @admin
-    get :edit, id: @solution.id
-    assert_response :success
-  end
-
-
   test 'anyone can view a solution' do
     get :show, id: @solution.id
     assert_response :success
@@ -182,78 +111,12 @@ class CodeforcesRoundSolutionsControllerTest < ActionController::TestCase
                  assigns[:codeforces_round_solutions].count
   end
 
-  test 'user need to login to vote' do
-    assert_no_difference '@solution.votes_for.size', 'A guest cannot make a vote' do
-      post :like, {id: @solution}
-    end
-    assert_not_empty flash[:danger]
-    assert_redirected_to @solution
-  end
-
   test 'logged in user should see links to vote' do
     log_in_as @member
     get :show, id: @solution
     assert_select 'a[href=?]', like_codeforces_round_solution_path
     assert_select 'a[href=?]', dislike_codeforces_round_solution_path
     assert_select 'a[href=?]', cancel_vote_codeforces_round_solution_path
-  end
-
-  test 'user can like a solution' do
-    log_in_as @member
-    assert_difference '@solution.get_likes.size', 1, 'User can like' do
-      post :like, {id: @solution}
-    end
-    assert_not_empty flash[:success]
-    assert_redirected_to @solution
-  end
-
-  test 'user can dislike a solution' do
-    log_in_as @member
-    assert_difference '@solution.get_dislikes.size', 1, 'User can dislike' do
-      post :dislike, {id: @solution}
-    end
-    assert_not_empty flash[:success]
-    assert_redirected_to @solution
-  end
-
-  test 'user can cancel its vote' do
-    log_in_as @member
-    assert_difference '@solution.get_likes.size', 1, 'User can like' do
-      post :like, {id: @solution}
-    end
-    assert_not_empty flash[:success]
-    assert_redirected_to @solution
-
-    assert_difference '@solution.get_likes.size', -1, 'User can cancel like' do
-      post :cancel_vote, {id: @solution}
-    end
-    assert_not_empty flash[:success]
-    assert_redirected_to @solution
-
-
-    assert_difference '@solution.get_dislikes.size', 1, 'User can dislike' do
-      post :dislike, {id: @solution}
-    end
-    assert_not_empty flash[:success]
-    assert_redirected_to @solution
-
-    assert_difference '@solution.get_dislikes.size', -1, 'User can cancel dislike' do
-      post :cancel_vote, {id: @solution}
-    end
-    assert_not_empty flash[:success]
-    assert_redirected_to @solution
-  end
-
-  test 'user can vote only once' do
-    log_in_as @member
-
-    assert_difference '@solution.get_likes.size', 1, 'User can like only once' do
-      10.times {post :like, {id: @solution}}
-    end
-
-    assert_difference '@solution.get_dislikes.size', 1, 'User can dislike only once' do
-      10.times {post :dislike, {id: @solution}}
-    end
   end
 
 end

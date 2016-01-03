@@ -57,9 +57,10 @@ gem 'seedbank', '0.3.0'
 # Loads environment variables from `.env`.
 gem 'dotenv-rails', '2.0.2'
 
-#
+# allows records to be votable
 gem 'acts_as_votable', '0.10.0'
 
+# client for Codeforces
 gem 'codeforces', '0.0.13'
 
 group :development, :test do
@@ -75,6 +76,25 @@ group :development, :test do
 
   # Preloads your application so things like console, rake and tests run faster
   gem 'spring', '1.4.0'
+
+  # Testing framework for rails 4
+  gem 'rspec-rails', '3.4.0'
+
+  # provides integration between factory_girl and rails 3
+  gem 'factory_girl_rails', '4.5.0'
+
+  # Making tests easy on the fingers and eyes
+  gem 'shoulda-matchers', '3.0.1'
+
+  # an integration testing tool for rack based web applications.
+  # It simulates how a user would interact with a website
+  gem 'capybara', '2.5.0'
+
+  # Strategies for cleaning databases. Can be used to ensure a clean state for testing.
+  gem 'database_cleaner', '1.5.1'
+
+  # Easily test email in RSpec, Cucumber, and MiniTest
+  gem 'email_spec', '1.6.0'
 end
 
 group :production do

@@ -31,4 +31,8 @@ class UvaSolutionsController < SolutionsController
     @uva_solutions = solutions
   end
 
+  def index_path
+    uva_solutions_path
+  end
+
 end
