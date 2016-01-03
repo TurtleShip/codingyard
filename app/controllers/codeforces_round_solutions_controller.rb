@@ -33,6 +33,6 @@ class CodeforcesRoundSolutionsController < SolutionsController
     end
 
     def index_path
-      codeforces_round_solutions_path
+      @index_path ||= codeforces_round_solutions_path
     end
 end
