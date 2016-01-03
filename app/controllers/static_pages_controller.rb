@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
     @codeforces_total = CodeforcesRoundSolution.count
     @topcoder_srm_total = TopCoderSrmSolution.count
     @uva_total = UvaSolution.count
+    @activated_user_total = User.where(activated: true).count
 
     # Top 3 users who uploaded the most solutions
     @top_uploaders = User.order(solutions_count: :desc).limit(3)
