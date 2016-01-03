@@ -79,11 +79,11 @@ class UsersController < ApplicationController
   end
 
   def required_fields
-    @required_fields ||= [:username, :email, :firstname, :lastname, :password, :password_confirmation]
+    @required_fields ||= [:username, :email, :password, :password_confirmation]
   end
 
   def optional_fields
-    @optional_fields ||= [:codeforces_handle, :topcoder_handle, :uva_handle]
+    @optional_fields ||= [:firstname, :lastname, :codeforces_handle, :topcoder_handle, :uva_handle]
   end
 
     def check_edit_perm
