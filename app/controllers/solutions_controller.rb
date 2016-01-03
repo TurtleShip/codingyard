@@ -2,7 +2,7 @@ class SolutionsController < ApplicationController
   # This class contains controller actions common to Controllers that handle solutions.
   # Take a look at CodeforcesRoundSolutionsController for a use case of this controller.
 
-  PER_PAGE = 15 # Number of solutions to display per page during pagination
+  PER_PAGE = 10 # Number of solutions to display per page during pagination
   UPLOAD_SIZE_LIMIT = 1.megabytes
 
   before_action :find_solution, only: [:show, :edit, :update, :destroy, :download, :like, :dislike, :cancel_vote]
