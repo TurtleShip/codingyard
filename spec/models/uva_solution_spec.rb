@@ -10,7 +10,7 @@ RSpec.describe UvaSolution, type: :model do
     expect(solution).to be_valid
   end
 
-  it_behaves_like 'a solution'
+  it_behaves_like 'a solution', :uva_solution
 
   it { should validate_presence_of(:user_id) }
   it { should validate_presence_of(:contest_id) }

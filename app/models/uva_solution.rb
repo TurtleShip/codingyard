@@ -1,17 +1,9 @@
 class UvaSolution < ActiveRecord::Base
 
-  belongs_to :user
-  belongs_to :contest
-  belongs_to :language
-
-  validates :user_id, presence: true
-  validates :contest_id, presence: true
-  validates :language_id, presence: true
+  include Solution
   validates :problem_number, presence: true, numericality: {greater_than: 0}
   validates :original_link, length: {maximum: 255}
   validates :title, length: {maximum: 255}
-
-  acts_as_votable
 
   def UvaSolution.new_with_relations(params, user, language)
     solution = new(params)
