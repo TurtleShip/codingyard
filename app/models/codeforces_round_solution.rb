@@ -1,20 +1,13 @@
 class CodeforcesRoundSolution < ActiveRecord::Base
 
-  belongs_to :user
-  belongs_to :contest
-  belongs_to :language
+  include Solution
 
-  validates :user_id, presence: true
-  validates :contest_id, presence: true
-  validates :language_id, presence: true
   validates :round_number, presence: true, numericality: {greater_than: 0}
   validates :division_number, presence: true, inclusion: {in: 1..2}
   validates :level, presence: true, inclusion: %w(A B C D E)
   validates :original_link, length: {maximum: 255}
 
   before_validation :upcase_level
-
-  acts_as_votable
 
   def CodeforcesRoundSolution.new_with_relations(params, user, language)
     solution = new(params)
