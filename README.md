@@ -21,6 +21,15 @@ AWS_REGION='your AWS region'
 MASTER_BUCKET='your AWS S3 bucket name where solutions will be stored.'
 ```
 
+# How to run tests
+
+Currently I have tests in both ```spec``` and ```rspec```. Eventually I plan to move all ```spec``` tests to ```rspec```
+
+Run the below commands to run tests.
+```
+bundle exec rake test
+bundle exec rspec spec
+```
 
 # Contribution guide
 1. Fork me.
