@@ -16,7 +16,12 @@
             <% @required_fields.each do |field| %>
                 <div class="form-inline">
                   <%= form.label field, class: 'user_new_form_label text-right' %>
-                  <%= form.text_field field, required: true, class: 'form-control form_value' %>
+                  <% if field.to_s.include? 'password' %>
+                      <%= form.password_field field, required: true, class: 'form-control form_value' %>
+                  <% else %>
+                      <%= form.text_field field, required: true, class: 'form-control form_value' %>
+                  <% end %>
+
                 </div>
             <% end %>
           </div>
