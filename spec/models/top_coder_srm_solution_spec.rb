@@ -13,15 +13,7 @@ RSpec.describe TopCoderSrmSolution, type: :model do
     expect(@solution).to be_valid
   end
 
-  it_behaves_like 'a solution', :top_coder_srm_solution
-
-  it { should belong_to(:user) }
-  it { should belong_to(:contest) }
-  it { should belong_to(:language) }
-
-  it { should validate_presence_of(:user_id) }
-  it { should validate_presence_of(:contest_id) }
-  it { should validate_presence_of(:language_id) }
+  it_behaves_like 'a solution', :top_coder_srm_solution, TopCoderSrmSolution
 
   it { should validate_presence_of(:srm_number) }
   it { should validate_numericality_of(:srm_number).is_greater_than(0) }

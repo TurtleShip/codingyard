@@ -5,12 +5,8 @@ class UvaSolution < ActiveRecord::Base
   validates :original_link, length: {maximum: 255}
   validates :title, length: {maximum: 255}
 
-  def UvaSolution.new_with_relations(params, user, language)
-    solution = new(params)
-    solution.user = user
-    solution.contest = Contest.codeforces
-    solution.language = language
-    solution
+  def self.default_contest
+    Contest.uva
   end
 
   def create_save_path(file)

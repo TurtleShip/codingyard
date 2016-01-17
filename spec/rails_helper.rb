@@ -68,6 +68,13 @@ RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
 
+  # Prepare default factories
+  config.before(:all) do
+    find_or_create(:topcoder)
+    find_or_create(:uva)
+    find_or_create(:codeforces)
+  end
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.

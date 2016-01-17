@@ -9,12 +9,8 @@ class TopCoderSrmSolution < ActiveRecord::Base
 
   before_validation :downcase_difficulty
 
-  def TopCoderSrmSolution.new_with_relations(params, user, language)
-    solution = new(params)
-    solution.user = user
-    solution.contest = Contest.topcoder
-    solution.language = language
-    solution
+  def self.default_contest
+    Contest.topcoder
   end
 
   def create_save_path(file)

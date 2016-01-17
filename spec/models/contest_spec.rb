@@ -2,13 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Contest, type: :model do
 
-  before(:each) do
-    # Need to create one for validate_uniqueness_of.
-    # It tests by trying to create a new record with the same attribute
-    # of a record that already exists in database.
-    @contest = create(:uva)
-  end
-
   it { should have_many(:top_coder_srm_solutions).dependent(:destroy) }
   it { should have_many(:codeforces_round_solutions).dependent(:destroy) }
   it { should have_many(:uva_solutions).dependent(:destroy) }

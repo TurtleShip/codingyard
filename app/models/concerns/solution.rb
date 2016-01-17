@@ -10,26 +10,37 @@ module Solution
     validates :contest_id, presence: true
     validates :language_id, presence: true
 
+    before_validation :assign_contest
+
     after_create :increment_solutions_counter
     after_destroy :decrement_solutions_counter
 
     acts_as_votable
   end
 
-  def self.new_with_relations(params, user, language)
-    raise NotImplementedError
+  class_methods do
+    def self.default_contest
+      raise NotImplementedError
+    end
   end
 
+  # TODO: Change my name to save_path
   def create_save_path(file)
     raise NotImplementedError
   end
 
-  def increment_solutions_counter
-    user.solutions_count += 1
-  end
+  private
 
-  def decrement_solutions_counter
-    user.solutions_count -= 1
-  end
+    def assign_contest
+      self.contest = self.class.default_contest
+    end
+
+    def increment_solutions_counter
+      user.solutions_count += 1
+    end
+
+    def decrement_solutions_counter
+      user.solutions_count -= 1
+    end
 
 end

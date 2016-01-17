@@ -9,12 +9,8 @@ class CodeforcesRoundSolution < ActiveRecord::Base
 
   before_validation :upcase_level
 
-  def CodeforcesRoundSolution.new_with_relations(params, user, language)
-    solution = new(params)
-    solution.user = user
-    solution.contest = Contest.codeforces
-    solution.language = language
-    solution
+  def CodeforcesRoundSolution.default_contest
+    Contest.codeforces
   end
 
   def create_save_path(file)

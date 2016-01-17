@@ -13,7 +13,7 @@ RSpec.describe CodeforcesRoundSolution, type: :model do
     expect(@solution).to be_valid
   end
 
-  it_behaves_like 'a solution', :codeforces_round_solution
+  it_behaves_like 'a solution', :codeforces_round_solution, CodeforcesRoundSolution
 
   it { should validate_presence_of(:round_number) }
   it { should validate_numericality_of(:round_number).is_greater_than(0) }

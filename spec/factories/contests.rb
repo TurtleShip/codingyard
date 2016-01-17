@@ -19,5 +19,11 @@ FactoryGirl.define do
       description 'The only programming contests on Web 2.0 platform.'
     end
 
+    factory :fake_contest do
+      name 'A fake contest'
+      url 'http://so-fake.com'
+      description 'A fake contest to represent random contests'
+    end
+
   end
 end

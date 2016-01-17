@@ -9,9 +9,6 @@ FactoryGirl.define do
     sequence(:division_number) { |n| (n%2) + 1 }
     sequence(:level) { |idx| levels[idx % 5] }
 
-    callback(:after_build, :before_create) do |solution|
-      solution.contest = find_or_create(:topcoder)
-    end
   end
 
 end
