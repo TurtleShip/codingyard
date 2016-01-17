@@ -47,7 +47,7 @@ class SolutionsController < ApplicationController
   end
 
   def create
-    @solution = solution_class.new_with_relations(solution_params, current_user, @language)
+    @solution = solution_class.new(solution_params.merge!(user: current_user, language: @language))
 
     # Check for attachment
     attachment = attachment_param
