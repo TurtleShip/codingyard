@@ -24,7 +24,6 @@ module Solution
     end
   end
 
-  # TODO: Change my name to save_path
   def create_save_path(file)
     raise NotImplementedError
   end
