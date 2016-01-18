@@ -4,10 +4,7 @@ require 'support/shared_examples/solution'
 RSpec.describe UvaSolution, type: :model do
 
   it 'has a valid factory' do
-    user = create(:user)
-    cpp = create(:cpp)
-    solution = build(:uva_solution, user: user, language: cpp)
-    expect(solution).to be_valid
+    expect(build(:uva_solution)).to be_valid
   end
 
   it_behaves_like 'a solution', :uva_solution, UvaSolution

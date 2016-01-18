@@ -4,9 +4,7 @@ require 'support/shared_examples/solution'
 RSpec.describe TopCoderSrmSolution, type: :model do
 
   before(:each) do
-    user = create(:user)
-    cpp = create(:cpp)
-    @solution = build(:top_coder_srm_solution, user: user, language: cpp)
+    @solution = build(:top_coder_srm_solution)
   end
 
   it 'has a valid factory' do

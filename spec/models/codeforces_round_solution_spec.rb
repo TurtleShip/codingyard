@@ -3,14 +3,8 @@ require 'support/shared_examples/solution'
 
 RSpec.describe CodeforcesRoundSolution, type: :model do
 
-  before(:each) do
-    user = create(:user)
-    cpp = create(:cpp)
-    @solution = build(:codeforces_round_solution, user: user, language: cpp)
-  end
-
   it 'has a valid factory' do
-    expect(@solution).to be_valid
+    expect(build(:codeforces_round_solution)).to be_valid
   end
 
   it_behaves_like 'a solution', :codeforces_round_solution, CodeforcesRoundSolution
