@@ -12,8 +12,8 @@ module Solution
 
     before_validation :assign_contest
 
-    after_create :increment_solutions_counter
-    after_destroy :decrement_solutions_counter
+    after_create :sync_solutions_count
+    after_destroy :sync_solutions_count
 
     acts_as_votable
   end
@@ -34,12 +34,8 @@ module Solution
       self.contest = self.class.default_contest
     end
 
-    def increment_solutions_counter
-      user.solutions_count += 1
-    end
-
-    def decrement_solutions_counter
-      user.solutions_count -= 1
+    def sync_solutions_count
+      self.user.sync_solution_count
     end
 
 end

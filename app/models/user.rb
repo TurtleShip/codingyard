@@ -94,4 +94,9 @@ class User < ActiveRecord::Base
     self.update_attribute(:activation_digest, User.digest(activation_token))
   end
 
+  def sync_solution_count
+    self.update_attribute(:solutions_count,
+                          top_coder_srm_solutions.count + uva_solutions.count + codeforces_round_solutions.count)
+  end
+
 end
