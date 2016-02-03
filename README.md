@@ -27,7 +27,6 @@ Currently I have tests in both ```spec``` and ```rspec```. Eventually I plan to 
 
 Run the below commands to run tests.
 ```
-bundle exec rake test
 bundle exec rspec spec
 ```
 
