@@ -1,0 +1,14 @@
+/*
+  Defines styles for displaying statistics.
+*/
+@import 'modules/all';
+
+@mixin stat-basic {
+  font-family: $default_font;
+}
+
+.stat-box {
+  width: 45%;
+  height: 300px;
+  @include stat-basic;
+}

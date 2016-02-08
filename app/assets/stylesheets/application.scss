@@ -18,142 +18,21 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "bootstrap/theme";
-
-/* Variables */
-$font_default: Helvatica, Consolas, monospace;
-$font_indie_flower: "Indie Flower", $font_default;
-$font_kaushan_script: "Kaushan Script", $font_default;
-$font_architects_daughter: "Architects Daughter", $font_default;
-$font_shadows_into_light: "Shadows Into Light", $font_default;
-$footer_height: 3em;
-
-/* Mixins */
-@mixin box_sizing {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-@mixin main_header {
-  font-family: $font_kaushan_script;
-  text-align: center;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: $footer_height;
-}
-/* Sticky footer */
-.footer {
-  //font-family: $font_kaushan_script;
-  font-size: 1.2em;
-  position: absolute;
-  padding-top: 0.9em;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: $footer_height;
-  background-color: #f5f5f5;
-  color: #777;
-  a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
-}
-
-/* font class */
-.font_kaushan_script {
-  font-family: $font_kaushan_script;
-}
-
-.font_indie_flower {
-  font-family: $font_indie_flower;
-}
-
-.font_architects_daughter {
-  font-family: $font_architects_daughter;
-}
-
-.font_shadows_into_light {
-  font-family: $font_shadows_into_light;
-}
-
-/* font size class */
-.one_point_two_em {
-  font-size: 1.2em;
-}
-
-/* forms */
-#error_explanation {
-  color: red;
-  ul {
-    color: red;
-    margin: 0 0 30px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .has-error;
-  .form-control {
-    color: $state-danger-text;
-  }
-}
-
-/* Form for user signup / edit, password forgot/reset */
-.form_label {
-  font-family: $font_kaushan_script;
-  font-size: 1.4em;
-  width: 15%;
-  padding-right: 1em;
-  padding-bottom: 0.5em;
-}
-
-.user_new_form_label {
-  font-family: $font_kaushan_script;
-  font-size: 1.4em;
-  width: 40%;
-  padding-right: 1em;
-  padding-bottom: 0.5em;
-}
-
-.user_edit_form_label {
-  font-family: $font_kaushan_script;
-  font-size: 1.4em;
-  width: 20%;
-  padding-right: 1em;
-  padding-bottom: 0.5em;
-}
+@import "layouts/global_layout";
+@import "layouts/footer";
 
 
-.form_value {
-  font-family: $font_architects_daughter;
-  font-size: 1.4em;
-}
-
-.form_submit {
-  margin-top: 1em;
-  font-family: $font_kaushan_script;
-  font-size: 1.4em !important;
-}
-
-.user_form_wrapper {
-  width: 60%;
-  margin: auto;
-}
-
-
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
+///* Mixins */
+//@mixin box_sizing {
+//  -moz-box-sizing: border-box;
+//  -webkit-box-sizing: border-box;
+//  box-sizing: border-box;
+//}
+//
+//@mixin main_header {
+//  font-family: $font_kaushan_script;
+//  text-align: center;
+//}
 
 /* display debug info in a more visually pleasing way */
 .debug_dump {
@@ -161,5 +40,13 @@ body {
   float: left;
   width: 100%;
   margin-top: 45px;
-  @include box_sizing;
+}
+  //@include box_sizing;
+
+
+
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
 }
