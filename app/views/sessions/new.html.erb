@@ -1,28 +1,28 @@
-<h1 class="text-center" id="login_header">Log in</h1>
+<h1 class="text-center title">Log in</h1>
 
-<div class="text-center">
+<%= form_for(:session, url: login_path, html: {class: 'form-horizontal text-center'}) do |form| %>
 
-  <%= form_for(:session, url: login_path) do |form| %>
-
-      <div class="form-inline">
-        <%= form.label :username, class: 'form_label text-right' %>
-        <%= form.text_field :username, class: 'form-control form_value' %>
+    <div class="form-group">
+      <%= form.label :username, class: 'control-label col-sm-offset-3 col-sm-2 col-xs-2' %>
+      <div class="col-sm-offset-0 col-sm-3 col-xs-offset-1 col-xs-8">
+        <%= form.text_field :username, class: 'form-control ' %>
       </div>
+    </div>
 
-      <div class="form-inline">
-        <%= form.label :password, class: 'form_label text-right' %>
-        <%= form.password_field :password, class: 'form-control form_value' %>
+    <div class="form-group">
+      <%= form.label :password, class: 'control-label col-sm-offset-3 col-sm-2 col-xs-2' %>
+      <div class="col-sm-offset-0 col-sm-3 col-xs-offset-1 col-xs-8">
+        <%= form.password_field :password, class: 'form-control' %>
       </div>
-      <%= link_to '(forgot password)', new_password_reset_path, class: 'font_architects_daughter' %> <br/>
-      <%= link_to '(resend activation link)', new_account_activation_path, class: 'font_architects_daughter' %>
-      <br/>
+    </div>
+    <%= link_to '(forgot password)', new_password_reset_path %> <br/>
+    <%= link_to '(resend activation link)', new_account_activation_path %>
+    <br/>
 
-      <%= form.submit 'Log in', class: 'btn btn-success', id: 'login_button' %>
+    <%= form.submit 'Log in', class: 'btn btn-success margin-top-sm' %>
 
-      <%= form.label :remember_me, class: 'checkbox inline' do %>
-          <%= form.check_box :remember_me %>
-          <span id="remember_me">Remember me on this computer</span>
-      <% end %>
-  <% end %>
-
-</div>
+    <%= form.label :remember_me, class: 'checkbox inline' do %>
+        <%= form.check_box :remember_me %>
+        Remember me on this computer
+    <% end %>
+<% end %>
