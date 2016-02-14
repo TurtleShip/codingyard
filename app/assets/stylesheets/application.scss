@@ -20,33 +20,3 @@
 @import "bootstrap";
 @import "layouts/global_layout";
 @import "layouts/footer";
-
-
-///* Mixins */
-//@mixin box_sizing {
-//  -moz-box-sizing: border-box;
-//  -webkit-box-sizing: border-box;
-//  box-sizing: border-box;
-//}
-//
-//@mixin main_header {
-//  font-family: $font_kaushan_script;
-//  text-align: center;
-//}
-
-/* display debug info in a more visually pleasing way */
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-}
-  //@include box_sizing;
-
-
-
-
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}

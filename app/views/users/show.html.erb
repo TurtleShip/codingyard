@@ -1,22 +1,22 @@
-<div class="profile row">
+<div class="row">
 
-  <p class="col-md-12 text-center" id="username">
+  <h1 class="text-center title">
     <%= @user.username %>
-  </p>
-  <aside class="col-md-4" id="user_avatar">
-
-    <%= gravatar_for @user, {size: 150} %>
+  </h1>
+  <aside class="col-sm-4 col-xs-12">
+<!-- center-block img-responsive -->
+    <%= gravatar_for @user, {size: 150, class: 'center-block img-responsive'} %>
   </aside>
 
-  <section class="col-md-8" id="user_info">
+  <section class="col-sm-8 col-xs-12">
 
     <% @user_basic_info.each do |attr_name, value| %>
 
         <div class="row">
-          <div class="col-md-3 text-right user_info_label">
-            <%= attr_name %>
+          <div class="col-sm-4 col-xs-6 text-right">
+            <b><%= attr_name %></b>
           </div>
-          <div class="text-left user_info_value">
+          <div class="col-sm-4 col-xs-6 text-left">
             <%= value %>
           </div>
         </div>
@@ -24,21 +24,21 @@
     <% end %>
 
     <div class="row">
-      <div class="col-md-3 text-right user_info_label">
+      <div class="col-sm-4 col-xs-6 text-right">
         <%= link_to 'Codeforces solutions', codeforces_round_solutions_path({author: @user.username}), target: '_blank' %></div>
-      <div class="text-left user_info_value"><%= @user.codeforces_round_solutions.count %></div>
+      <div class="col-sm-4 col-xs-6 text-left"><%= @user.codeforces_round_solutions.count %></div>
     </div>
 
     <div class="row">
-      <div class="col-md-3 text-right user_info_label">
+      <div class="col-sm-4 col-xs-6 text-right">
         <%= link_to 'TopCoder solutions', top_coder_srm_solutions_path({author: @user.username}), target: '_blank' %></div>
-      <div class="text-left user_info_value"><%= @user.top_coder_srm_solutions.count %></div>
+      <div class="col-sm-4 col-xs-6 text-left"><%= @user.top_coder_srm_solutions.count %></div>
     </div>
 
     <div class="row">
-      <div class="col-md-3 text-right user_info_label">
+      <div class="col-sm-4 col-xs-6 text-right">
         <%= link_to 'UVa solutions', uva_solutions_path({author: @user.username}), target: '_blank' %></div>
-      <div class="text-left user_info_value"><%= @user.uva_solutions.count %></div>
+      <div class="col-sm-4 col-xs-6 text-left"><%= @user.uva_solutions.count %></div>
     </div>
 
   </section>
