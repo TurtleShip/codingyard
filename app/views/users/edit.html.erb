@@ -1,14 +1,11 @@
 <% provide(:button_text, 'Save changes') %>
 
-<h1 class="text-center" id="update_profile_header">Update your profile</h1>
+<h1 class="text-center title">Update your profile</h1>
 
-<div class="text-center">
-  <div class="gravatar_edit">
-
-    <%= gravatar_for @user %>
-    <br/>
-    <a href="http://gravatar.com/emails" target="_blank">change</a>
-  </div>
-
-  <%= render 'form' %>
+<div class="text-center margin-bottom-sm">
+  <%= gravatar_for @user %>
+  <br/>
+  <a href="http://gravatar.com/emails" target="_blank">change</a>
 </div>
+
+<%= render 'form' %>

@@ -16,7 +16,7 @@
         </div>
     <% end %>
 
-    <%= link_to '(resend activation link)', new_account_activation_path %><br/>
+    <%= (link_to '(resend activation link)', new_account_activation_path) unless @user.id %><br/>
 
     <%= form.submit yield(:button_text), class: 'btn btn-success' %>
 <% end %>
