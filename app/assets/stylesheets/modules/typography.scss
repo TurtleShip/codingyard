@@ -1,5 +1,5 @@
 /*
-  Defines font styles.
+  Defines commonly used font styles.
 */
 @import "bootstrap/theme";
 
@@ -17,4 +17,9 @@ $default_font_size: 14px;
 
 .sub-headline {
   font-family: $font_architects_daughter;
+}
+
+.title {
+  margin-bottom: 1em;
+  text-align: center;
 }

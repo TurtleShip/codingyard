@@ -1,48 +1,22 @@
-<%= form_for(@user) do |form| %>
+<%= form_for @user, html: {class: 'form-horizontal text-center'} do |form| %>
     <%= render 'shared/error_messages', object: form.object %>
 
-    <% if @is_edit %>
-        <% @user_fields.each do |field| %>
-            <div class="form-inline">
-              <%= form.label field, class: 'user_edit_form_label text-right' %>
-              <%= form.text_field field, class: 'form-control form_value', size: 40 %>
-            </div>
-        <% end %>
-    <% else %>
-        <div class="panel panel-success user_form_wrapper">
-          <div class="panel-heading">Required</div>
-
-          <div class="panel-body">
-            <% @required_fields.each do |field| %>
-                <div class="form-inline">
-                  <%= form.label field, class: 'user_new_form_label text-right' %>
-                  <% if field.to_s.include? 'password' %>
-                      <%= form.password_field field, required: true, class: 'form-control form_value' %>
-                  <% else %>
-                      <%= form.text_field field, required: true, class: 'form-control form_value' %>
-                  <% end %>
-
-                </div>
+    <% user_fields.each do |field| %>
+        <div class="form-group">
+          <%= form.label field, class: 'control-label col-sm-offset-3 col-sm-2 col-xs-offset-1 col-xs-2' %>
+          <div class="col-sm-4 col-xs-8">
+            <% if password_field? field %>
+                <%= form.password_field field, required: required_field?(field), class: 'form-control' %>
+            <% elsif email_field? field %>
+                <%= form.email_field field, required: required_field?(field), class: 'form-control' %>
+            <% else %>
+                <%= form.text_field field, required: required_field?(field), class: 'form-control' %>
             <% end %>
           </div>
         </div>
-
-        <div class="panel panel-warning user_form_wrapper">
-          <div class="panel-heading">Optional</div>
-
-          <div class="panel-body">
-            <% @optional_fields.each do |field| %>
-                <div class="form-inline">
-                  <%= form.label field, class: 'user_new_form_label text-right' %>
-                  <%= form.text_field field, class: 'form-control form_value' %>
-                </div>
-            <% end %>
-          </div>
-        </div>
-
     <% end %>
 
-    <%= link_to '(resend activation link)', new_account_activation_path, class: 'font_architects_daughter' %><br/>
+    <%= link_to '(resend activation link)', new_account_activation_path %><br/>
 
-    <%= form.submit yield(:button_text), class: 'btn btn-success form_submit' %>
+    <%= form.submit yield(:button_text), class: 'btn btn-success' %>
 <% end %>

@@ -1,11 +1,9 @@
 class UsersController < ApplicationController
 
-  before_action :required_fields, only: [:new]
-  before_action :optional_fields, only: [:new]
-  before_action :user_fields, only: [:edit]
+  helper_method :required_field?, :password_field?, :email_field?, :user_fields
+
   before_action :check_edit_perm, only: [:edit, :update]
   before_action :check_delete_perm, only: [:destroy]
-
 
   def index
     @users = User.where(activated: true)
@@ -16,20 +14,18 @@ class UsersController < ApplicationController
     @user = target_user
     redirect_to root_url unless @user.activated?
 
-    @user_basic_info = {}
-
-    # A user's email will be only visible to itself and the admin for privacy reasons.
-    if logged_in? && (current_user?(@user) || current_user.admin?)
-      @user_basic_info[:email] = @user.email
-    end
-
-    @user_basic_info.merge!({
+    @user_basic_info = {
         firstname: @user.firstname,
         lastname: @user.lastname,
         'Codeforces Handle': @user.codeforces_handle,
         'TopCoder Handle': @user.topcoder_handle,
         'UVa Handle': @user.uva_handle
-    })
+    }
+
+    # A user's email will be only visible to itself and the admin for privacy reasons.
+    if logged_in? && (current_user?(@user) || current_user.admin?)
+      @user_basic_info[:email] = @user.email
+    end
   end
 
   def new
@@ -49,7 +45,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = target_user
-    @is_edit = true
   end
 
   def update
@@ -68,50 +63,71 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  private
-    def user_params
-      params.require(:user)
-          .permit(user_fields)
-    end
-
   def user_fields
     @user_fields ||= required_fields + optional_fields
+    @user_fields.to_a
+  end
+
+  def required_field?(form_field)
+    required_fields.include? form_field
+  end
+
+  def password_field?(form_field)
+    password_fields.include? form_field
+  end
+
+  def email_field?(form_field)
+    email_fields.include? form_field
+  end
+
+  private
+  def user_params
+    params.require(:user)
+        .permit(user_fields)
   end
 
   def required_fields
-    @required_fields ||= [:username, :email, :password, :password_confirmation]
+    @required_fields ||= Set.new [:username, :email, :password, :password_confirmation]
   end
 
   def optional_fields
-    @optional_fields ||= [:firstname, :lastname, :codeforces_handle, :topcoder_handle, :uva_handle]
+    @optional_fields ||= Set.new [:firstname, :lastname, :codeforces_handle, :topcoder_handle, :uva_handle]
   end
 
-    def check_edit_perm
-      unless can_edit_user target_user
-        flash[:error] = "You don't have permission to edit #{target_user.username}"
-        if current_user
-          redirect_back_or(users_path)
-        else # Not logged in, so redirect to login page
-          store_location
-          redirect_to login_path
-        end
+  def password_fields
+    @password_fields ||= Set.new [:password, :password_confirmation]
+  end
+
+  def email_fields
+    @email_fields ||= Set.new [:email]
+  end
+
+  def check_edit_perm
+    unless can_edit_user target_user
+      flash[:error] = "You don't have permission to edit #{target_user.username}"
+      if current_user
+        redirect_back_or(users_path)
+      else # Not logged in, so redirect to login page
+        store_location
+        redirect_to login_path
       end
     end
+  end
 
-    def check_delete_perm
-      unless can_delete_user target_user
-        flash[:error] = "You don't have permission to delete #{target_user.username}"
-        if current_user
-          redirect_back_or(users_path)
-        else
-          store_location
-          redirect_back_or(login_path)
-        end
+  def check_delete_perm
+    unless can_delete_user target_user
+      flash[:error] = "You don't have permission to delete #{target_user.username}"
+      if current_user
+        redirect_back_or(users_path)
+      else
+        store_location
+        redirect_back_or(login_path)
       end
     end
+  end
 
-    def target_user
-      @user ||= User.find(params[:id])
-    end
+  def target_user
+    @user ||= User.find(params[:id])
+  end
 
 end
