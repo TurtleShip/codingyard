@@ -1,62 +1,51 @@
-<%= form_for(@solution) do |form| %>
+<%= form_for @solution, html: {class: 'form-horizontal text-center'} do |form| %>
     <%= render 'shared/error_messages', object: form.object %>
 
-    <div class="text-center">
 
-      <div class="form-inline">
-        <div class="panel panel-success">
-
-          <div class="panel-heading solution_sub_header">Required</div>
-
-          <div class="panel-body">
-            <div class="form-group">
-              <%= form.label :round_number, 'Round number :', class: 'solution_form_label' %>
-              <%= form.number_field :round_number, required: true, class: 'form-control solution_form_value solution_number_input' %>
-            </div>
-
-            <div class="form-group solution_add_margin">
-              <%= form.label :division_number, 'Division number :', class: 'solution_form_label' %>
-              <%= form.select(:division_number, {'1' => 1, '2' => 2}, {required: true}, class: 'form-control solution_form_value') %>
-            </div>
-
-            <div class="form-group solution_add_margin">
-              <%= form.label :level, 'Level :', class: 'solution_form_label' %>
-              <%= form.select(:level, {A: 'A', B: 'B', C: 'C', D: 'D', E: 'E'}, {required: true},
-                              class: 'form-control solution_form_value') %>
-            </div>
-
-            <div class="form-group solution_add_margin">
-              <%= form.label :language, 'Language :', class: 'solution_form_label' %>
-              <%= select_tag(:language,
-                             options_from_collection_for_select(@languages, :name, :name),
-                             required: true, class: 'form-control solution_form_value') %>
-            </div>
-
-            <% if @is_new %>
-                <div class="form-group">
-                  <%= form.file_field :attachment, required: true, accept: @supported_file_types, class: 'font_architects_daughter' %>
-                </div>
-            <% end %>
-          </div>
-        </div>
+    <div class="form-group">
+      <%= form.label :round_number, 'Round number', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
+      <div class="col-sm-4 col-xs-6">
+        <%= form.number_field :round_number, required: true, class: 'form-control' %>
       </div>
-
-
-      <div class="form-inline">
-        <div class="panel panel-warning">
-
-          <div class="panel-heading solution_sub_header">Optional</div>
-
-          <div class="panel-body">
-            <div class="form-group">
-              <%= form.label :original_link, 'Link to the problem : ', class: 'solution_form_label' %>
-              <%= form.url_field(:original_link, class: 'form-control', size: 50) %>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <%= form.submit yield(:button_text), class: 'btn btn-success' %>
     </div>
+    <div class="form-group">
+
+      <%= form.label :division_number, 'Division number', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
+      <div class="col-sm-4 col-xs-6">
+        <%= form.select(:division_number, {'1' => 1, '2' => 2}, {required: true}, class: 'form-control') %>
+      </div>
+    </div>
+
+    <div class="form-group">
+
+      <%= form.label :level, 'Level', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
+      <div class="col-sm-4 col-xs-6">
+        <%= form.select(:level, {A: 'A', B: 'B', C: 'C', D: 'D', E: 'E'}, {required: true},
+                        class: 'form-control') %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :language, 'Language', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
+      <div class="col-sm-4 col-xs-6">
+        <%= select_tag(:language, options_from_collection_for_select(@languages, :name, :name),
+                       required: true, class: 'form-control') %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :original_link, 'Link to the problem', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
+      <div class="col-sm-4 col-xs-6">
+        <%= form.url_field(:original_link, class: 'form-control') %>
+      </div>
+    </div>
+
+    <% unless @solution.id %>
+        <div class="form-group">
+          <%= form.file_field :attachment, required: true, accept: @supported_file_types, class: 'col-sm-offset-5 col-xs-offset-3' %>
+        </div>
+    <% end %>
+
+    <%= form.submit yield(:button_text), class: 'btn btn-success' %>
+
 <% end %>
