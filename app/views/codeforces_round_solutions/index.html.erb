@@ -1,32 +1,32 @@
-<h1 class="solution_header">Codeforces Round Solutions</h1>
+<h1 class="title">Codeforces Round Solutions</h1>
 
 <%= will_paginate %>
 
 <%= form_tag codeforces_round_solutions_path, method: :get, class: 'form-inline text-center' do %>
     <div class="form-group">
-      <%= label_tag :round_number, 'Round:', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :round_number, 'Round:' %>&nbsp;
       <%= number_field_tag :round_number, nil, min: 1, class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :division_number, 'Division:', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :division_number, 'Division:' %>&nbsp;
       <%= select_tag :division_number, options_for_select([['N/A', nil], [1, 1], [2, 2]]), class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :level, 'Level:', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :level, 'Level: ' %>&nbsp;
       <%= select_tag :level,
                      options_for_select([['N/A', nil], %w(A A), %w(B B), %w(C C), %w(D D), %w(E E)]),
                      class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :author, 'Author: ', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :author, 'Author: ' %>&nbsp;
       <%= search_field_tag :author, nil, class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :Language, 'Language: ', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :Language, 'Language: ' %>&nbsp;
       <%= select_tag(:language, options_for_select([['N/A', nil]]) +
                                       options_from_collection_for_select(@languages, :name, :name),
                      class: 'form-control') %>
@@ -37,17 +37,15 @@
     </div>
 <% end %>
 
-<div id="cf_index_warning">
 <ul>
   <% @warnings.each do |warning| %>
       <li><%= warning %></li>
   <% end %>
 </ul>
-</div>
 
 <table class="table table-striped">
   <thead>
-  <tr class="solution_index_header">
+  <tr>
     <th>Round</th>
     <th>Division</th>
     <th>Level</th>
