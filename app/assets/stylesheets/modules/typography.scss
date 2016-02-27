@@ -4,20 +4,7 @@
 @import "bootstrap/theme";
 
 $default_font: sans-serif, Arial, Tahoma;
-$font_indie_flower: "Indie Flower", $default_font;
-$font_kaushan_script: "Kaushan Script", $default_font;
-$font_architects_daughter: "Architects Daughter", $default_font;
-$font_shadows_into_light: "Shadows Into Light", $default_font;
 $default_font_size: 14px;
-
-
-.headline {
-  font-family: $font_kaushan_script;
-}
-
-.sub-headline {
-  font-family: $font_architects_daughter;
-}
 
 .title {
   margin-bottom: 1em;
