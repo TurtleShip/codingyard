@@ -3,8 +3,8 @@
 
     <% user_fields.each do |field| %>
         <div class="form-group">
-          <%= form.label field, class: 'control-label col-sm-offset-3 col-sm-2 col-xs-offset-1 col-xs-2' %>
-          <div class="col-sm-4 col-xs-8">
+          <%= form.label field, class: 'control-label user-form-label' %>
+          <div class="user-form-field">
             <% if password_field? field %>
                 <%= form.password_field field, required: required_field?(field), class: 'form-control' %>
             <% elsif email_field? field %>
