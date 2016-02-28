@@ -1,44 +1,44 @@
-<%= link_to 'Upload more solutions', yield(:upload_path), class: 'solution_nav_links' %><span class="solution_nav_divider">|</span>
-<%= link_to 'See other solutions', yield(:index_path), class: 'solution_nav_links' %>
+<%= link_to 'Upload more solutions', yield(:upload_path) %>&nbsp;|&nbsp;
+<%= link_to 'See other solutions', yield(:index_path) %>
 
 <div class="panel panel-success">
-  <div class="panel-heading solution_sub_header">
+  <div class="panel-heading">
     Solution info
   </div>
   <div class="panel-body">
     <% @solution_info.each do |attr_name, value| %>
         <div class="row">
-          <div class="col-md-2 text-right solution_display_label">
+          <div class="col-xs-3 col-sm-2 text-right">
             <%= attr_name %>
           </div>
-          <div class="text-left solution_display_value">
+          <div class="col-xs-5">
             <%= value %>
           </div>
         </div>
     <% end %>
-    <div class="row">
-      <div class="col-md-2 text-right solution_display_label">
+    <div class="row margin-bottom-sm">
+      <div class="col-xs-3 col-sm-2 text-right">
         Author
       </div>
-      <div class="text-left solution_display_value">
+      <div class="col-xs-5">
         <%= link_to @solution.user.username, user_path(@solution.user), target: '_blank' %>
       </div>
     </div>
 
-    <%= link_to "#{@solution.get_likes.size} Like", yield(:like_path), method: :post, class: "btn btn-success vote_button #{'disabled' unless can_like(@solution)}" %>
-    <%= link_to "#{@solution.get_dislikes.size} Dislike", yield(:dislike_path), method: :post, class: "btn btn-danger vote_button #{'disabled' unless can_dislike(@solution)}" %>
-    <%= link_to 'Cancel my vote', yield(:cancel_path), method: :post, class: "btn btn-info vote_button #{'disabled' unless can_cancel(@solution)}" %>
+    <%= link_to "#{@solution.get_likes.size} Like", yield(:like_path), method: :post, class: "btn btn-success #{'disabled' unless can_like(@solution)}" %>
+    <%= link_to "#{@solution.get_dislikes.size} Dislike", yield(:dislike_path), method: :post, class: "btn btn-danger #{'disabled' unless can_dislike(@solution)}" %>
+    <%= link_to 'Cancel my vote', yield(:cancel_path), method: :post, class: "btn btn-info #{'disabled' unless can_cancel(@solution)}" %>
 
   </div>
 </div>
 
 <div class="panel panel-info">
-  <div class="panel-heading solution_sub_header">
+  <div class="panel-heading">
     Solution
   </div>
 
   <div class="panel-body">
-    <%= link_to 'Download', yield(:download_path), id: 'solution_download_link' %>
+    <%= link_to 'Download', yield(:download_path) %>
     <div id="editor" style="height: 500px"><%= @content %></div>
   </div>
 </div>
