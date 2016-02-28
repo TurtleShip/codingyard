@@ -12,7 +12,7 @@
 
 <div class="jumbotron">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-sm-5">
       <h3 class="text-center">Top <%= @top_uploaders.size %> uploaders</h3>
 
       <table class="table table-striped table-condensed">
@@ -40,11 +40,7 @@
       </table>
     </div>
 
-    <div class="col-md-2">
-      <!-- Place holder to separate the two different sections -->
-    </div>
-
-    <div class="col-md-5">
+    <div class="col-sm-offset-2 col-sm-5 text-center">
       <h3>Currently hosting</h3>
 
       <%= link_to "#{@codeforces_total} Codeforces solutions", codeforces_round_solutions_path %><br/>
@@ -52,7 +48,7 @@
       <%= link_to "#{@uva_total} UVa solutions", uva_solutions_path %><br/>
 
 
-      Powered by <%= link_to "#{@activated_user_total} users", users_path %>
+      <b>Powered by <%= link_to "#{@activated_user_total} users", users_path %></b>
     </div>
 
   </div>
