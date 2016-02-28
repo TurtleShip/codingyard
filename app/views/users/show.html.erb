@@ -1,45 +1,39 @@
-<div class="row">
+<h1 class="title">
+  <%= @user.username %>
+</h1>
 
-  <h1 class="title">
-    <%= @user.username %>
-  </h1>
-  <aside class="col-sm-4 col-xs-12">
-    <%= gravatar_for @user, {size: 150, class: 'center-block img-responsive'} %>
-  </aside>
+<%= gravatar_for @user, {size: 150, class: 'center-block img-responsive margin-bottom-sm'} %>
 
-  <section class="col-sm-8 col-xs-12">
 
-    <% @user_basic_info.each do |attr_name, value| %>
+<div class="default-font">
+  <% @user_basic_info.each do |attr_name, value| %>
 
-        <div class="row">
-          <div class="col-sm-4 col-xs-6 text-right">
-            <b><%= attr_name %></b>
-          </div>
-          <div class="col-sm-4 col-xs-6 text-left">
-            <%= value %>
-          </div>
+      <div class="row margin-bottom-sm">
+        <div class="col-xs-offset-1 col-xs-4 col-sm-5 text-right">
+          <b><%= attr_name %></b>
         </div>
+        <div class="col-sm-6 col-xs-7 text-left">
+          <%= value %>
+        </div>
+      </div>
 
-    <% end %>
+  <% end %>
 
-    <div class="row">
-      <div class="col-sm-4 col-xs-6 text-right">
-        <%= link_to 'Codeforces solutions', codeforces_round_solutions_path({author: @user.username}), target: '_blank' %></div>
-      <div class="col-sm-4 col-xs-6 text-left"><%= @user.codeforces_round_solutions.count %></div>
-    </div>
+  <div class="row margin-bottom-sm">
+    <div class="col-xs-offset-1 col-xs-4 col-sm-5 text-right">
+      <%= link_to 'Codeforces solutions', codeforces_round_solutions_path({author: @user.username}), target: '_blank' %></div>
+    <div class="col-sm-4 col-xs-6 text-left"><%= @user.codeforces_round_solutions.count %></div>
+  </div>
 
-    <div class="row">
-      <div class="col-sm-4 col-xs-6 text-right">
-        <%= link_to 'TopCoder solutions', top_coder_srm_solutions_path({author: @user.username}), target: '_blank' %></div>
-      <div class="col-sm-4 col-xs-6 text-left"><%= @user.top_coder_srm_solutions.count %></div>
-    </div>
+  <div class="row margin-bottom-sm">
+    <div class="col-xs-offset-1 col-xs-4 col-sm-5 text-right">
+      <%= link_to 'TopCoder solutions', top_coder_srm_solutions_path({author: @user.username}), target: '_blank' %></div>
+    <div class="col-sm-4 col-xs-6 text-left"><%= @user.top_coder_srm_solutions.count %></div>
+  </div>
 
-    <div class="row">
-      <div class="col-sm-4 col-xs-6 text-right">
-        <%= link_to 'UVa solutions', uva_solutions_path({author: @user.username}), target: '_blank' %></div>
-      <div class="col-sm-4 col-xs-6 text-left"><%= @user.uva_solutions.count %></div>
-    </div>
-
-  </section>
+  <div class="row margin-bottom-sm">
+    <div class="col-xs-offset-1 col-xs-4 col-sm-5 text-right">
+      <%= link_to 'UVa solutions', uva_solutions_path({author: @user.username}), target: '_blank' %></div>
+    <div class="col-sm-4 col-xs-6 text-left"><%= @user.uva_solutions.count %></div>
+  </div>
 </div>
-

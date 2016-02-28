@@ -20,7 +20,6 @@
 /*
   The below defines form styling for uploading solutions.
 */
-// Style for solution form label
 .solution-form-label {
   @include make-xs-column-offset(1);
   @include make-xs-column(4);
@@ -28,23 +27,20 @@
   @include make-sm-column(3);
 }
 
-// Style for solution form field
 .solution-form-field {
   @include make-xs-column(6);
   @include make-sm-column(4);
 }
 
-// Style for solution form attachment
 .solution-form-attachment {
   @include make-xs-column-offset(3);
   @include make-sm-column-offset(5);
 }
-
 //-------------------------------
 
 //-------------------------------
 /*
-  The below defines form styling for user signup / login / display.
+  The below defines form styling for user signup.
 */
 .user-form-label {
   @include make-xs-column-offset(1);
@@ -57,5 +53,4 @@
   @include make-xs-column(8);
   @include make-sm-column(4);
 }
-
 //-------------------------------

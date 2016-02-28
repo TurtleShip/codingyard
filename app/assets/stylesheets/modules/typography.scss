@@ -4,9 +4,22 @@
 @import "bootstrap/theme";
 
 $default_font: sans-serif, Arial, Tahoma;
-$default_font_size: 14px;
+$default_font_size: 1.2em;
 
 .title {
   margin-bottom: 1em;
   text-align: center;
+}
+
+.default-font {
+  font-style: $default_font;
+  font-size: $default_font_size;
+}
+
+.default-font-style {
+  font-style: $default_font;
+}
+
+.default-font-size {
+  font-size: $default_font_size;
 }
