@@ -42,7 +42,6 @@ class SolutionsController < ApplicationController
 
   def new
     @solution = solution_class.new
-    @is_new = true
     @supported_file_types = Language.get_all_extensions_concat
   end
 
