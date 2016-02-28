@@ -1,46 +1,46 @@
 <%= form_for @solution, html: {class: 'form-horizontal text-center'} do |form| %>
     <%= render 'shared/error_messages', object: form.object %>
     <div class="form-group">
-      <%= form.label :round_number, 'Round number', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
-      <div class="col-sm-4 col-xs-6">
+      <%= form.label :round_number, 'Round number', class: 'control-label solution-form-label' %>
+      <div class="solution-form-field">
         <%= form.number_field :round_number, required: true, class: 'form-control' %>
       </div>
     </div>
     <div class="form-group">
 
-      <%= form.label :division_number, 'Division number', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
-      <div class="col-sm-4 col-xs-6">
+      <%= form.label :division_number, 'Division number', class: 'control-label solution-form-label' %>
+      <div class="solution-form-field">
         <%= form.select(:division_number, {'1' => 1, '2' => 2}, {required: true}, class: 'form-control') %>
       </div>
     </div>
 
     <div class="form-group">
 
-      <%= form.label :level, 'Level', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
-      <div class="col-sm-4 col-xs-6">
+      <%= form.label :level, 'Level', class: 'control-label solution-form-label' %>
+      <div class="solution-form-field">
         <%= form.select(:level, {A: 'A', B: 'B', C: 'C', D: 'D', E: 'E'}, {required: true},
                         class: 'form-control') %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= form.label :language, 'Language', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
-      <div class="col-sm-4 col-xs-6">
+      <%= form.label :language, 'Language', class: 'control-label solution-form-label' %>
+      <div class="solution-form-field">
         <%= select_tag(:language, options_from_collection_for_select(@languages, :name, :name),
                        required: true, class: 'form-control') %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= form.label :original_link, 'Link to the problem', class: 'control-label col-sm-offset-2 col-sm-3 col-xs-offset-1 col-xs-4' %>
-      <div class="col-sm-4 col-xs-6">
+      <%= form.label :original_link, 'Link to the problem', class: 'control-label solution-form-label' %>
+      <div class="solution-form-field">
         <%= form.url_field(:original_link, class: 'form-control') %>
       </div>
     </div>
 
     <% unless @solution.id %>
         <div class="form-group">
-          <%= form.file_field :attachment, required: true, accept: @supported_file_types, class: 'col-sm-offset-5 col-xs-offset-3' %>
+          <%= form.file_field :attachment, required: true, accept: @supported_file_types, class: 'solution-form-attachment' %>
         </div>
     <% end %>
 
