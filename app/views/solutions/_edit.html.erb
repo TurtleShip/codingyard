@@ -1,13 +1,14 @@
-<%= link_to 'Show', @solution, class: 'solution_nav_links' %><span class="solution_nav_divider">|</span>
-<%= link_to 'See other solutions', yield(:index_path), class: 'solution_nav_links' %>
+<%= link_to 'Show', @solution %>&nbsp;|&nbsp;
+<%= link_to 'See other solutions', yield(:index_path) %>
 
-<h1 class="solution_header"><%= yield(:header_text) %></h1>
+<h1 class="title"><%= yield(:header_text) %></h1>
 
 <%= render yield(:form_location) %>
 
-<div id="note_on_edit">
-  Note that the content of the uploaded solution cannot be edited. Only its metadata can be edited.
-</div>
+<p class="text-center">
+  <i><b>Note that <span class="text-danger">the content of the uploaded solution cannot be edited</span>. Only its
+    metadata can be edited.</b></i>
+</p>
 
 <div id="editor" style="height: 500px"><%= @content %></div>
 
@@ -17,4 +18,3 @@
     editor.getSession().setMode('ace/mode/<%="#{@solution.language.ace_mode}"%>');
     editor.setReadOnly(true);
 </script>
-d

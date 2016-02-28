@@ -1,0 +1,56 @@
+/*
+  Defines styles related to forms.
+*/
+@import "bootstrap";
+
+//-------------------------------
+/*
+  field_with_errors is a class that rails automatically insert
+  when a form has error.
+  I am overriding the class with bootstrap 'has_error' class to
+  highlight forms that contain errors.
+*/
+.field_with_errors {
+  @extend .has-error;
+}
+
+//-------------------------------
+
+//-------------------------------
+/*
+  The below defines form styling for uploading solutions.
+*/
+.solution-form-label {
+  @include make-xs-column-offset(1);
+  @include make-xs-column(4);
+  @include make-sm-column-offset(2);
+  @include make-sm-column(3);
+}
+
+.solution-form-field {
+  @include make-xs-column(6);
+  @include make-sm-column(4);
+}
+
+.solution-form-attachment {
+  @include make-xs-column-offset(3);
+  @include make-sm-column-offset(5);
+}
+//-------------------------------
+
+//-------------------------------
+/*
+  The below defines form styling for user signup.
+*/
+.user-form-label {
+  @include make-xs-column-offset(1);
+  @include make-xs-column(3);
+  @include make-sm-column-offset(3);
+  @include make-sm-column(2);
+}
+
+.user-form-field {
+  @include make-xs-column(8);
+  @include make-sm-column(4);
+}
+//-------------------------------

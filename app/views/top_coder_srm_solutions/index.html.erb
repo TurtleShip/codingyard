@@ -1,32 +1,32 @@
-<h1 class="solution_header">TopCoder SRM Solutions</h1>
+<h1 class="title">TopCoder SRM Solutions</h1>
 
 <%= will_paginate %>
 
 <%= form_tag top_coder_srm_solutions_path, method: :get, class: 'form-inline text-center' do %>
     <div class="form-group">
-      <%= label_tag :srm_number, 'SRM:', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :srm_number, 'SRM: ', class: 'control-label' %>&nbsp;
       <%= number_field_tag :srm_number, nil, min: 1, class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :division_number, 'Division:', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :division_number, 'Division: ', class: 'control-label' %>&nbsp;
       <%= select_tag :division_number, options_for_select([['N/A', nil], [1, 1], [2, 2]]), class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :difficulty, 'Level:', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :difficulty, 'Level:', class: 'control-label' %>&nbsp;
       <%= select_tag :difficulty,
                      options_for_select([['N/A', nil], %w(easy easy), %w(medium medium), %w(hard hard)]),
                      class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :author, 'Author: ', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :author, 'Author: ', class: 'control-label' %>&nbsp;
       <%= search_field_tag :author, nil, class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :Language, 'Language: ', class: 'solution_search_label' %>&nbsp;
+      <%= label_tag :Language, 'Language: ', class: 'control-label' %>&nbsp;
       <%= select_tag(:language, options_for_select([['N/A', nil]]) +
                                       options_from_collection_for_select(@languages, :name, :name),
                      class: 'form-control') %>
@@ -37,17 +37,15 @@
     </div>
 <% end %>
 
-<div id="cf_index_warning">
-  <ul>
-    <% @warnings.each do |warning| %>
-        <li><%= warning %></li>
-    <% end %>
-  </ul>
-</div>
+<ul>
+  <% @warnings.each do |warning| %>
+      <li><%= warning %></li>
+  <% end %>
+</ul>
 
 <table class="table table-striped">
   <thead>
-  <tr class="solution_index_header">
+  <tr>
     <th>SRM</th>
     <th>Division</th>
     <th>Difficulty</th>

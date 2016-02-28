@@ -1,13 +1,15 @@
-<h1 id="send_activation_header">Send activation link</h1>
+<h1 class="title">Send activation link</h1>
 
 <div class="text-center">
-  <%= form_tag(account_activations_path) do %>
+  <%= form_tag(account_activations_path, class: 'form-horizontal') do %>
 
-      <div class="form-inline">
-        <%= label_tag(:email, nil, class: 'form_label text-right') %>
-        <%= email_field_tag(:email, nil, class: 'form-control form_value') %>
+      <div class="form-group">
+        <%= label_tag(:email, nil, class: 'control-label col-sm-offset-2 col-sm-2 col-xs-offset-1 col-xs-2') %>
+        <div class="col-sm-5 col-xs-8">
+          <%= email_field_tag(:email, nil, class: 'form-control') %>
+        </div>
       </div>
 
-      <%= submit_tag 'Send me activation link', class: 'btn btn-success', id: 'send_me_activation_link' %>
+      <%= submit_tag 'Send me activation link', class: 'btn btn-success' %>
   <% end %>
 </div>

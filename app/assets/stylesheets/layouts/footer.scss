@@ -1,0 +1,22 @@
+@import 'modules/all';
+
+$footer_height: 3em;
+
+/* Sticky footer */
+.footer {
+  position: absolute;
+  padding-top: 0.9em;
+  bottom: 0;
+  width: 100%;
+
+  /* Set the fixed height of the footer here */
+  height: $footer_height;
+  background-color: $gray-lighter;
+  color: $gray;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+}

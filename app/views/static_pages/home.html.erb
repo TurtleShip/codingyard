@@ -1,53 +1,57 @@
 <div class="jumbotron text-center">
-  <h1 id="welcome_title">Welcome to codingyard!</h1>
+  <h1>Welcome to codingyard!</h1>
 
-  <p id="welcome_subtitle">Share your solutions to coding competitions! :)</p>
+  <p>Share your solutions to coding competitions! :)</p>
   <br/>
-  <a id="fork_me" href="https://github.com/TurtleShip/codingyard" target="_blank" class="btn btn-success">Fork me on
+  <a href="https://github.com/TurtleShip/codingyard" target="_blank" class="btn btn-success">Fork me on
     Github</a>
-  <a id="report_issue" href="https://github.com/TurtleShip/codingyard/issues" target="_blank" class="btn btn-primary">Report
+  <a href="https://github.com/TurtleShip/codingyard/issues" target="_blank" class="btn btn-primary">Report
     an issue</a>
 
-
 </div>
 
-<div class="jumbotron" id="leaderboard">
-  <h3 class="font_kaushan_script">Top <%= @top_uploaders.size %> uploaders</h3>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-sm-5">
+      <h3 class="text-center">Top <%= @top_uploaders.size %> uploaders</h3>
 
-  <table class="table table-striped table-condensed">
-    <thead>
-    <tr>
-      <th></th>
-      <th>Total</th>
-      <th>Codeforces</th>
-      <th>TopCoder</th>
-      <th>UVa</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @top_uploaders.each do |user| %>
+      <table class="table table-striped table-condensed">
+        <thead>
         <tr>
-          <td><%= link_to(user.username, user_path(user)) %></td>
-          <td><%= user.solutions_count %></td>
-          <td><%= user.codeforces_round_solutions_count %></td>
-          <td><%= user.top_coder_srm_solutions_count %></td>
-          <td><%= user.uva_solutions_count %></td>
+          <th></th>
+          <th>Total</th>
+          <th>Codeforces</th>
+          <th>TopCoder</th>
+          <th>UVa</th>
         </tr>
-    <% end %>
-    </tbody>
-  </table>
+        </thead>
 
-</div>
+        <tbody>
+        <% @top_uploaders.each do |user| %>
+            <tr>
+              <td><%= link_to(user.username, user_path(user)) %></td>
+              <td><%= user.solutions_count %></td>
+              <td><%= user.codeforces_round_solutions_count %></td>
+              <td><%= user.top_coder_srm_solutions_count %></td>
+              <td><%= user.uva_solutions_count %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
 
-<div class="jumbotron" id="welcome_stats">
-  <h3 class="font_kaushan_script">Currently hosting</h3>
-  <ul>
-    <li><%= link_to "#{@codeforces_total} Codeforces solutions", codeforces_round_solutions_path %></li>
-    <li><%= link_to "#{@topcoder_srm_total} TopCoder SRM solutions", top_coder_srm_solutions_path %></li>
-    <li><%= link_to "#{@uva_total} UVa solutions", uva_solutions_path %></li>
-  </ul>
+    <div class="col-sm-offset-2 col-sm-5 text-center">
+      <h3>Currently hosting</h3>
 
-  Powered by <%= link_to "#{@activated_user_total} users", users_path %>
+      <%= link_to "#{@codeforces_total} Codeforces solutions", codeforces_round_solutions_path %><br/>
+      <%= link_to "#{@topcoder_srm_total} TopCoder SRM solutions", top_coder_srm_solutions_path %><br/>
+      <%= link_to "#{@uva_total} UVa solutions", uva_solutions_path %><br/>
+
+
+      <b>Powered by <%= link_to "#{@activated_user_total} users", users_path %></b>
+    </div>
+
+  </div>
+
 </div>
 

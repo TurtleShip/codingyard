@@ -1,0 +1,21 @@
+/*
+  Defines elements that gets applied globally.
+*/
+@import 'modules/all';
+@import 'footer';
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-size: $default_font_size;
+  font-family: $default_font;
+
+  /* Margin bottom by footer height */
+  margin-bottom: $footer_height;
+}
+
+
