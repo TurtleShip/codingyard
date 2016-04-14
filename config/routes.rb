@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     post :like, on: :member
     post :dislike, on: :member
     post :cancel_vote, on: :member
+    post :add_comment, on: :member
   end
 
   resources :top_coder_srm_solutions do

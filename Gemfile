@@ -63,6 +63,8 @@ gem 'acts_as_votable', '0.10.0'
 # client for Codeforces
 gem 'codeforces', '0.0.13'
 
+gem 'acts_as_commentable_with_threading', '2.0.1'
+
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine
   gem 'sqlite3', '1.3.11'

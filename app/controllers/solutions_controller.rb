@@ -5,10 +5,11 @@ class SolutionsController < ApplicationController
   PER_PAGE = 10 # Number of solutions to display per page during pagination
   UPLOAD_SIZE_LIMIT = 1.megabytes
 
-  before_action :find_solution, only: [:show, :edit, :update, :destroy, :download, :like, :dislike, :cancel_vote]
+  before_action :find_solution, only: [:show, :edit, :update, :destroy, :download, :like, :dislike, :cancel_vote, :add_comment]
   before_action :languages, only: [:new, :create, :show, :edit, :update, :index]
   before_action :find_language, only: [:create]
   before_action :has_required_params_for_create, only: [:create]
+  before_action :required_params_for_comment, only: [:add_comment]
   before_action :check_upload_perm, only: [:new, :create]
   before_action :check_delete_perm, only: [:destroy]
   before_action :check_edit_perm, only: [:edit, :update]
@@ -116,6 +117,11 @@ class SolutionsController < ApplicationController
     @solution.unvote_by current_user
     flash[:success] = "You canceled your vote for solution #{@solution.id}"
     redirect_back_or @solution
+  end
+
+  def add_comment
+    @solution.comment(current_user, params[:body], { is_reply: params[:is_reply], parent_id: params[:parent_id]})
+    redirect_to @solution
   end
 
   protected
@@ -261,6 +267,12 @@ class SolutionsController < ApplicationController
     end
 
     render :new unless @solution.errors.empty?
+  end
+
+  def required_params_for_comment
+    if params.blank? || params[:body].blank?
+      @solution.errors.add(:body, 'must be provided')
+    end
   end
 
 end

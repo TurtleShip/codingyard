@@ -16,6 +16,7 @@ module Solution
     after_destroy :sync_solutions_count
 
     acts_as_votable
+    acts_as_commentable
   end
 
   class_methods do
@@ -26,6 +27,15 @@ module Solution
 
   def create_save_path(file)
     raise NotImplementedError
+  end
+
+  def comment(commenter, body, opts = {})
+    comment = Comment.build_from(self, commenter.id, body)
+    comment.save!
+    if opts[:is_reply] && opts[:parent_id]
+      parent_comment = Comment.find(opts[:parent_id])
+      comment.move_to_child_of(parent_comment)
+    end
   end
 
   private

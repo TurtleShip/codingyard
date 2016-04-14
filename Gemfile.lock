@@ -37,12 +37,18 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_commentable_with_threading (2.0.1)
+      activerecord (>= 4.0)
+      activesupport (>= 4.0)
+      awesome_nested_set (>= 3.0)
     acts_as_votable (0.10.0)
     addressable (2.3.8)
     arel (6.0.3)
     autoprefixer-rails (6.1.0.1)
       execjs
       json
+    awesome_nested_set (3.0.3)
+      activerecord (>= 4.0.0, < 5)
     aws-sdk-core (2.2.3)
       jmespath (~> 1.0)
     aws-sdk-rails (1.0.0)
@@ -233,6 +239,7 @@ PLATFORMS
 
 DEPENDENCIES
   ace-rails-ap (= 4.0.1)
+  acts_as_commentable_with_threading (= 2.0.1)
   acts_as_votable (= 0.10.0)
   aws-sdk-rails (= 1.0.0)
   bcrypt (= 3.1.10)
