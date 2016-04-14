@@ -41,4 +41,8 @@ module PermissionHelper
     logged_in? && current_user.voted_on?(solution)
   end
 
+  def can_comment?
+    logged_in?
+  end
+
 end
