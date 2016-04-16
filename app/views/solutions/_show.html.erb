@@ -72,21 +72,23 @@
 <% end %>
 
 
-<button type="button" id="comment-button" class="btn btn-success" data-toggle="collapse" data-target="#new-comment" aria-expanded="false">
-  Add comment
-</button>
+<% if can_comment? %>
+    <button type="button" id="comment-button" class="btn btn-success" data-toggle="collapse" data-target="#new-comment" aria-expanded="false">
+      Add comment
+    </button>
 
-<div class="collapse" id="new-comment">
-  <%= form_tag(yield(:comment_path)) %>
-  <div class="form-group">
-    <%= label_tag(:body, 'Your comment can be at most 256 characters long') %>
-    <!-- Put disabled if user is not logged in -->
-    <%= text_area_tag(:body, nil, rows: 3, cols: 100, class: 'form-control', maxlength: 256) %>
-  </div>
+    <div class="collapse" id="new-comment">
+      <%= form_tag(yield(:comment_path)) %>
+      <div class="form-group">
+        <%= label_tag(:body, 'Your comment can be at most 256 characters long') %>
+        <!-- Put disabled if user is not logged in -->
+        <%= text_area_tag(:body, nil, rows: 3, cols: 100, class: 'form-control', maxlength: 256) %>
+      </div>
 
-  <%= submit_tag 'Submit', class: 'btn btn-success' %>
-</div>
+      <%= submit_tag 'Submit', class: 'btn btn-success' %>
+    </div>
 
+<% end %>
 <script>
     var editor = ace.edit('editor');
     editor.setTheme('ace/theme/twilight');
