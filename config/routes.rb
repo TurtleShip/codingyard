@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     post :like, on: :member
     post :dislike, on: :member
     post :cancel_vote, on: :member
+    post :add_comment, on: :member
   end
 
   resources :uva_solutions do
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
     post :like, on: :member
     post :dislike, on: :member
     post :cancel_vote, on: :member
+    post :add_comment, on: :member
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
