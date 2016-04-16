@@ -13,9 +13,9 @@ html {
 body {
   font-size: $default_font_size;
   font-family: $default_font;
-
-  /* Margin bottom by footer height */
-  margin-bottom: $footer_height;
 }
 
-
+.main-content {
+  /* pad bottom by footer height and then some */
+  padding-bottom: $footer_height + 1em;
+}
