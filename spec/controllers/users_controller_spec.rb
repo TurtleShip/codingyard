@@ -21,14 +21,14 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#edit' do
     it 'should not allow guest' do
-      get :edit, id: member.id
+      get :edit, params: {id: member.id}
       expect(flash[:error]).to be_present
       expect(response).to redirect_to login_url
     end
 
     it 'should not allow guest wrong user' do
       log_in_as(other_member)
-      get :edit, id: member.id
+      get :edit, params: {id: member.id}
       expect(flash[:error]).to be_present
       expect(response).to redirect_to users_path
     end
@@ -36,14 +36,14 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#update' do
     it 'should not allow guest guest' do
-      patch :update, id: member.id, user: {username: 'valid_new_name'}
+      patch :update, params: {id: member.id, user: {username: 'valid_new_name'}}
       expect(flash[:error]).to be_present
       expect(response).to redirect_to login_url
     end
 
     it 'should not allow guest wrong user' do
       log_in_as(other_member)
-      patch :update, id: member.id, user: {username: 'valid_new_name'}
+      patch :update, params: {id: member.id, user: {username: 'valid_new_name'}}
       expect(flash[:error]).to be_present
       expect(response).to redirect_to users_path
     end
@@ -51,14 +51,14 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#destroy' do
     it 'should not allow guest guest' do
-      expect { delete :destroy, id: member.id }.not_to change { User.count }
+      expect { delete :destroy, params: {id: member.id} }.not_to change { User.count }
       expect(flash[:error]).to be_present
       expect(response).to redirect_to login_url
     end
 
     it 'should not allow member' do
       log_in_as(member)
-      expect { delete :destroy, id: member.id }.not_to change { User.count }
+      expect { delete :destroy, params: {id: member.id} }.not_to change { User.count }
       expect(flash[:error]).to be_present
       expect(response).to redirect_to users_path
     end
@@ -66,25 +66,25 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#show' do
     it 'should not show a member\'s email to guest' do
-      get :show, id: member.id
+      get :show, params: {id: member.id}
       expect(assigns(:user_basic_info)[:email]).to be_nil
     end
 
     it 'should not show a member\'s email to other member.' do
       log_in_as other_member
-      get :show, id: member.id
+      get :show, params: {id: member.id}
       expect(assigns(:user_basic_info)[:email]).to be_nil
     end
 
     it 'should show a member\'s email to itself' do
       log_in_as member
-      get :show, id: member.id
+      get :show, params: {id: member.id}
       expect(assigns(:user_basic_info)[:email]).to_not be_nil
     end
 
     it 'a member\'s email to admin' do
       log_in_as admin
-      get :show, id: member.id
+      get :show, params: {id: member.id}
       expect(assigns(:user_basic_info)[:email]).to_not be_nil
     end
 

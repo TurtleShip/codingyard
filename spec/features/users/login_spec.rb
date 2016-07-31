@@ -37,11 +37,11 @@ RSpec.feature 'Login', type: :feature do
 end
 
 def sees_forgot_password_link
-  expect(page).to have_link('(forgot password)', new_password_reset_path)
+  expect(page).to have_link('(forgot password)', href: new_password_reset_path)
 end
 
 def sees_resend_activation_link
-  expect(page).to have_link('(resend activation link)', new_account_activation_path)
+  expect(page).to have_link('(resend activation link)', href: new_account_activation_path)
 end
 
 def sees_remember_me_checkbox

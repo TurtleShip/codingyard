@@ -31,28 +31,28 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
   describe '#delete' do
 
     it 'should not let a guest delete solution' do
-      delete :destroy, id: solution.id
+      delete :destroy, params: {id: solution.id}
       expect(response).to redirect_to send(index_path)
       expect(flash[:danger]).not_to be_nil
     end
 
     it 'should not let user delete other user\'s solution' do
       log_in_as(other_member)
-      delete :destroy, id: solution.id
+      delete :destroy, params: {id: solution.id}
       expect(response).to redirect_to send(index_path)
       expect(flash[:danger]).not_to be_nil
     end
 
     it 'should let the author delete its solution' do
       log_in_as(member)
-      delete :destroy, id: solution.id
+      delete :destroy, params: {id: solution.id}
       expect(response).to redirect_to send(index_path)
       expect(flash[:success]).not_to be_nil
     end
 
     it 'should let the admin delete a member\'s solution' do
       log_in_as(admin)
-      delete :destroy, id: solution.id
+      delete :destroy, params: {id: solution.id}
       expect(response).to redirect_to send(index_path)
       expect(flash[:success]).not_to be_nil
     end
@@ -62,53 +62,53 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
   describe '#edit' do
 
     it 'should not let a guest edit solution' do
-      get :edit, id: solution.id
+      get :edit, params: {id: solution.id}
       expect(response).to redirect_to send(index_path)
       expect(flash[:danger]).not_to be_nil
     end
 
     it 'should not let user edit other user\'s solution' do
       log_in_as(other_member)
-      get :edit, id: solution.id
+      get :edit, params: {id: solution.id}
       expect(response).to redirect_to send(index_path)
       expect(flash[:danger]).not_to be_nil
     end
 
     it 'should let the author its solution' do
       log_in_as(member)
-      get :edit, id: solution.id
+      get :edit, params: {id: solution.id}
       expect(response.status).to eq(200)
     end
 
     it 'should let the admin edit solution' do
       log_in_as(admin)
-      get :edit, id: solution.id
+      get :edit, params: {id: solution.id}
       expect(response.status).to eq(200)
     end
   end
 
   describe '#show' do
     it 'should let anyone view a solution' do
-      get :show, id: solution.id
+      get :show, params: {id: solution.id}
       expect(response.status).to eq(200)
 
       log_in_as(member)
-      get :show, id: solution.id
+      get :show, params: {id: solution.id}
       expect(response.status).to eq(200)
 
       log_in_as(other_member)
-      get :show, id: solution.id
+      get :show, params: {id: solution.id}
       expect(response.status).to eq(200)
 
       log_in_as(admin)
-      get :show, id: solution.id
+      get :show, params: {id: solution.id}
       expect(response.status).to eq(200)
     end
   end
 
   describe '#like' do
     it 'should not allow guest to vote' do
-      expect { post :like, {id: solution.id} }.to_not change { solution.get_likes.size }
+      expect { post :like, params: {id: solution.id} }.to_not change { solution.get_likes.size }
       expect(flash[:danger]).not_to be_nil
       expect(response).to redirect_to solution
     end
@@ -117,14 +117,14 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
       before(:each) { log_in_as(member) }
 
       it 'should allow voting' do
-        expect { post :like, {id: solution.id} }.to change { solution.get_likes.size }.by(1)
+        expect { post :like, params: {id: solution.id} }.to change { solution.get_likes.size }.by(1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
       end
 
       it 'should allow voting only once' do
         expect do
-          10.times { post :like, {id: solution.id} }
+          10.times { post :like, params: {id: solution.id} }
         end.to change { solution.get_likes.size }.by(1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
@@ -135,14 +135,14 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
       before(:each) { log_in_as(admin) }
 
       it 'should allow voting' do
-        expect { post :like, {id: solution.id} }.to change { solution.get_likes.size }.by(1)
+        expect { post :like, params: {id: solution.id} }.to change { solution.get_likes.size }.by(1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
       end
 
       it 'should allow voting only once' do
         expect do
-          10.times { post :like, {id: solution.id} }
+          10.times { post :like, params: {id: solution.id} }
         end.to change { solution.get_likes.size }.by(1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
@@ -152,7 +152,7 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
 
   describe '#dislike' do
     it 'should not allow guest to vote' do
-      expect { post :dislike, {id: solution.id} }.to_not change { solution.get_dislikes.size }
+      expect { post :dislike, params: {id: solution.id} }.to_not change { solution.get_dislikes.size }
       expect(flash[:danger]).not_to be_nil
       expect(response).to redirect_to solution
     end
@@ -161,14 +161,14 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
       before(:each) { log_in_as(member) }
 
       it 'should allow voting' do
-        expect { post :dislike, {id: solution.id} }.to change { solution.get_dislikes.size }.by(1)
+        expect { post :dislike, params: {id: solution.id} }.to change { solution.get_dislikes.size }.by(1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
       end
 
       it 'should allow voting only once' do
         expect do
-          10.times { post :dislike, {id: solution.id} }
+          10.times { post :dislike, params: {id: solution.id} }
         end.to change { solution.get_dislikes.size }.by(1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
@@ -179,14 +179,14 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
       before(:each) { log_in_as(admin) }
 
       it 'should allow voting' do
-        expect { post :dislike, {id: solution.id} }.to change { solution.get_dislikes.size }.by(1)
+        expect { post :dislike, params: {id: solution.id} }.to change { solution.get_dislikes.size }.by(1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
       end
 
       it 'should allow voting only once' do
         expect do
-          10.times { post :dislike, {id: solution.id} }
+          10.times { post :dislike, params: {id: solution.id} }
         end.to change { solution.get_dislikes.size }.by(1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
@@ -201,15 +201,15 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
       before(:each) { log_in_as(member) }
 
       it 'should allow cancel after like' do
-        expect { post :like, {id: solution.id} }.to change { solution.get_likes.size }.by(1)
-        expect { post :cancel_vote, {id: solution.id} }.to change { solution.get_likes.size }.by(-1)
+        expect { post :like, params: {id: solution.id} }.to change { solution.get_likes.size }.by(1)
+        expect { post :cancel_vote, params: {id: solution.id} }.to change { solution.get_likes.size }.by(-1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
       end
 
       it 'should allow cancel after dislike' do
-        expect { post :dislike, {id: solution.id} }.to change { solution.get_dislikes.size }.by(1)
-        expect { post :cancel_vote, {id: solution.id} }.to change { solution.get_dislikes.size }.by(-1)
+        expect { post :dislike, params: {id: solution.id} }.to change { solution.get_dislikes.size }.by(1)
+        expect { post :cancel_vote, params: {id: solution.id} }.to change { solution.get_dislikes.size }.by(-1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
       end
@@ -220,15 +220,15 @@ RSpec.shared_examples 'SolutionsController' do |solution_factory_name, index_pat
       before(:each) { log_in_as(admin) }
 
       it 'should allow cancel after like' do
-        expect { post :like, {id: solution.id} }.to change { solution.get_likes.size }.by(1)
-        expect { post :cancel_vote, {id: solution.id} }.to change { solution.get_likes.size }.by(-1)
+        expect { post :like, params: {id: solution.id} }.to change { solution.get_likes.size }.by(1)
+        expect { post :cancel_vote, params: {id: solution.id} }.to change { solution.get_likes.size }.by(-1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
       end
 
       it 'should allow cancel after dislike' do
-        expect { post :dislike, {id: solution.id} }.to change { solution.get_dislikes.size }.by(1)
-        expect { post :cancel_vote, {id: solution.id} }.to change { solution.get_dislikes.size }.by(-1)
+        expect { post :dislike, params: {id: solution.id} }.to change { solution.get_dislikes.size }.by(1)
+        expect { post :cancel_vote, params: {id: solution.id} }.to change { solution.get_dislikes.size }.by(-1)
         expect(flash[:success]).not_to be_nil
         expect(response).to redirect_to solution
       end

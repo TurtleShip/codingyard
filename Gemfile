@@ -62,16 +62,18 @@ gem 'codeforces', '0.0.13'
 
 gem 'acts_as_commentable_with_threading', '2.0.1'
 
+# A debugging tool for your Ruby on Rails applications.
+# Access an IRB console on exception pages or by using <%= console %> in views
+gem 'web-console', '~> 3.0', group: :development
+
+gem 'rails-controller-testing', '0.1.1', group: :test
+
 group :development, :test do
   # This module allows Ruby programs to interface with the SQLite3 database engine
   gem 'sqlite3', '1.3.11'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '6.0.2'
-
-  # A debugging tool for your Ruby on Rails applications.
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '2.2.1'
 
   # Preloads your application so things like console, rake and tests run faster
   gem 'spring', '1.4.0'
@@ -87,10 +89,10 @@ group :development, :test do
 
   # an integration testing tool for rack based web applications.
   # It simulates how a user would interact with a website
-  gem 'capybara', '2.5.0'
+  gem 'capybara', '2.7.1'
 
   # Strategies for cleaning databases. Can be used to ensure a clean state for testing.
-  gem 'database_cleaner', '1.5.1'
+  gem 'database_cleaner', '1.5.3'
 
   # Easily test email in RSpec, Cucumber, and MiniTest
   gem 'email_spec', '1.6.0'
