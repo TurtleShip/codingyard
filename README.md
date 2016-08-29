@@ -7,7 +7,7 @@ This is source code for [Codingyard website](http://codingyard.com). The website
 # Dependencies
 
 - Ruby (2.2.3)
-- Rails (4.2.4)
+- Rails (5.0.0)
 - AWS account (S3, Simple Email Service)
 
 # Environmental variables
